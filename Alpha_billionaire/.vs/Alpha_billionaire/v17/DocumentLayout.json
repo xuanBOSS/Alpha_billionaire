@@ -1,0 +1,369 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\BOSS0\\Desktop\\github_repository2\\Alpha_billionaire\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}|Alpha_billionaire.csproj|c:\\users\\boss0\\desktop\\github_repository2\\alpha_billionaire\\alpha_billionaire.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}|Alpha_billionaire.csproj|solutionrelative:alpha_billionaire.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}|Alpha_billionaire.csproj|c:\\users\\boss0\\desktop\\github_repository2\\alpha_billionaire\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}|Alpha_billionaire.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}|Alpha_billionaire.csproj|c:\\users\\boss0\\desktop\\github_repository2\\alpha_billionaire\\pages\\error.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}|Alpha_billionaire.csproj|solutionrelative:pages\\error.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Client\\ChessGame.Client.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Database\\ChessGame.Database.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\AlphaBetaAI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\AIHelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\Move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\Board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\MinimaxAI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\ChessGame.AI.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Services\\AIService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Services\\GameService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Hubs\\GameHub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Controllers\\AIController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Controllers\\GameController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Controllers\\WeatherForecastController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\ChessGame.Server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ChessGame.Client.csproj",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Client\\ChessGame.Client.csproj",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.Client\\ChessGame.Client.csproj",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Client\\ChessGame.Client.csproj",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.Client\\ChessGame.Client.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-05T06:36:18.251Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Alpha_billionaire.csproj",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\github_repository2\\Alpha_billionaire\\Alpha_billionaire.csproj",
+              "RelativeDocumentMoniker": "Alpha_billionaire.csproj",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\github_repository2\\Alpha_billionaire\\Alpha_billionaire.csproj",
+              "RelativeToolTip": "Alpha_billionaire.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwMAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-05T06:14:32.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\github_repository2\\Alpha_billionaire\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\github_repository2\\Alpha_billionaire\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAABcAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-05T06:07:22.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChessGame.Database.csproj",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Database\\ChessGame.Database.csproj",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.Database\\ChessGame.Database.csproj",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Database\\ChessGame.Database.csproj",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.Database\\ChessGame.Database.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-05T06:01:46.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Error.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\github_repository2\\Alpha_billionaire\\Pages\\Error.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Error.cshtml.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\github_repository2\\Alpha_billionaire\\Pages\\Error.cshtml.cs",
+              "RelativeToolTip": "Pages\\Error.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T05:36:21.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\appsettings.json",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.AI\\appsettings.json",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\appsettings.json",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.AI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-05T04:20:05.921Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AlphaBetaAI.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\AlphaBetaAI.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.AI\\AlphaBetaAI.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\AlphaBetaAI.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.AI\\AlphaBetaAI.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T04:20:05.147Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AIHelper.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\AIHelper.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.AI\\AIHelper.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\AIHelper.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.AI\\AIHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T04:20:04.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Move.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\Move.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.GameLogic\\Move.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\Move.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.GameLogic\\Move.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T04:09:12.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Board.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\Board.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.GameLogic\\Board.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\Board.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.GameLogic\\Board.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAwBgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T04:09:00.66Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MinimaxAI.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\MinimaxAI.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.AI\\MinimaxAI.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\MinimaxAI.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.AI\\MinimaxAI.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAwB4AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T04:04:43.37Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\Program.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.AI\\Program.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\Program.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.AI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T04:02:09.747Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ChessGame.AI.csproj",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\ChessGame.AI.csproj",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.AI\\ChessGame.AI.csproj",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.AI\\ChessGame.AI.csproj",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.AI\\ChessGame.AI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwQAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-05T04:02:06.921Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "GameManager.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\GameManager.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.GameLogic\\GameManager.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\GameManager.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.GameLogic\\GameManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T04:01:27.838Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ChessGame.GameLogic.csproj",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-05T03:58:11.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AIService.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Services\\AIService.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.Server\\Services\\AIService.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Services\\AIService.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.Server\\Services\\AIService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T03:12:37.354Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "GameService.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Services\\GameService.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.Server\\Services\\GameService.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Services\\GameService.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.Server\\Services\\GameService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T03:12:24.66Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "GameHub.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Hubs\\GameHub.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.Server\\Hubs\\GameHub.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Hubs\\GameHub.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.Server\\Hubs\\GameHub.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T03:11:37.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Startup.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.Server\\Startup.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Startup.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.Server\\Startup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T03:10:04.587Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "AIController.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Controllers\\AIController.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.Server\\Controllers\\AIController.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Controllers\\AIController.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.Server\\Controllers\\AIController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T03:09:18.403Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "GameController.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Controllers\\GameController.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.Server\\Controllers\\GameController.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Controllers\\GameController.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.Server\\Controllers\\GameController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T03:08:59.677Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.Server\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.Server\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T03:07:44.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ChessGame.Server.csproj",
+              "DocumentMoniker": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\ChessGame.Server.csproj",
+              "RelativeDocumentMoniker": "..\\..\\VS\\ChessGame.Server\\ChessGame.Server.csproj",
+              "ToolTip": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.Server\\ChessGame.Server.csproj",
+              "RelativeToolTip": "..\\..\\VS\\ChessGame.Server\\ChessGame.Server.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-04T12:29:26.055Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "Version": 1,
+  "Hash": "aphCkWUOg2vpfubqHsx2lO69nVz9SJ7dc0+wDMyaI1Q=",
+  "Source": "ChessGame.AI",
+  "BasePath": "_content/ChessGame.AI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\BOSS0\\Desktop\\VS\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+      "Version": 2,
+      "Source": "ChessGame.GameLogic",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

@@ -1,0 +1,2 @@
+C:\Users\BOSS0\Desktop\VS\ChessGame.GameLogic\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\BOSS0\Desktop\VS\ChessGame.GameLogic\obj\Debug\net8.0\staticwebassets.build.json

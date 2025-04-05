@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "G/hX0KWDxzdF7162TuSSd1TtjbECAEvaYPKOJibyPF0=",
+  "Source": "ChessGame.Database",
+  "BasePath": "_content/ChessGame.Database",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
