@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\BOSS0\\Desktop\\github_repository2\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {}
+    "D:\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {}
   },
   "projects": {
-    "C:\\Users\\BOSS0\\Desktop\\github_repository2\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
+    "D:\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BOSS0\\Desktop\\github_repository2\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+        "projectUniqueName": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
         "projectName": "ChessGame.GameLogic",
-        "projectPath": "C:\\Users\\BOSS0\\Desktop\\github_repository2\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
-        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BOSS0\\Desktop\\github_repository2\\ChessGame.GameLogic\\obj\\",
+        "projectPath": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+        "packagesPath": "C:\\Users\\10540\\.nuget\\packages\\",
+        "outputPath": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\10540\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,12 +44,21 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -69,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

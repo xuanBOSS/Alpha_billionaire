@@ -1,7 +1,12 @@
+using Alpha_billionaire.Hubs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// 添加 SignalR 服务
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -21,5 +26,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+// 配置 SignalR 路由
+app.MapHub<AlphaHub>("/alphahub");
 
 app.Run();

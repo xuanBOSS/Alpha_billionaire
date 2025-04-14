@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ChessGame.Client.Views
 {
@@ -22,6 +23,15 @@ namespace ChessGame.Client.Views
         public MainWindow()
         {
             InitializeComponent();
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            testWindow testwindow = new testWindow();
+            testwindow.Show();
+
+            this.Close();
         }
     }
 }
