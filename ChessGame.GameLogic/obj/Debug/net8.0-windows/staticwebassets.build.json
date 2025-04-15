@@ -1,12 +1,11 @@
 {
   "Version": 1,
-  "Hash": "82ey9bD+/vKWwIjeXAy7yWAi+griIPYspNSsufJpVeA=",
+  "Hash": "uImQqLbp+nL72HvuVEv7bdgyU/BNfdU38D4/KcWezOw=",
   "Source": "ChessGame.GameLogic",
   "BasePath": "_content/ChessGame.GameLogic",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }

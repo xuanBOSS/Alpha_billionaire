@@ -29,13 +29,6 @@ namespace ChessGame.Client
             // 通过类型名访问静态成员 ServiceProvider
             _signalRService = App.ServiceProvider.GetRequiredService<SignalRService>();
 
-        }
-
-        private async Task testServer(string user, string msg)
-        {
-            // 客户端调用 SendMessage 方法，发送消息到服务器
-            await _signalRService.SendMessageToServer(user, msg);
-
             // 注册接收消息的事件
             _signalRService.RegisterReceiveMessage((user, message) =>
             {
@@ -45,6 +38,14 @@ namespace ChessGame.Client
                     MessagesListBox.Text = ($"{user}: {message}");
                 });
             });
+
+        }
+
+        private async Task testServer(string user, string msg)
+        {
+            // 客户端调用 SendMessage 方法，发送消息到服务器
+            await _signalRService.SendMessageToServer(user, msg);
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

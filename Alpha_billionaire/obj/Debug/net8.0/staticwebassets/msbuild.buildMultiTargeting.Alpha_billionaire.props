@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Alpha_billionaire.props" />
-</Project>

@@ -21,5 +21,10 @@ namespace ChessGame.GameLogic
         {
             Grid = new int[15, 15];
         }
+
+        public void AddPiece(int x, int y)//往棋盘上添加棋子
+        {
+
+        }
     }
 }
