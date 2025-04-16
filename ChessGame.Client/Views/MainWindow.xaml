@@ -5,9 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessGame.Client.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="testButton" HorizontalAlignment="Left" Height="34" Margin="688,377,0,0" VerticalAlignment="Top" Width="86" Click="Button_Click"/>
+        Title="MainWindow" Height="700" Width="800">
+    <Grid ShowGridLines = "True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height = "1*" />
+            <RowDefinition Height = "6*" />
+
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row = "0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width = "2*" />
+                <ColumnDefinition Width = "1*" />
+                <ColumnDefinition Width = "2*" />
+                <ColumnDefinition Width = "14*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column = "1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                <TextBlock Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+            </Grid>
+
+            <Grid Grid.Column = "2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                <TextBox Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+            </Grid>
+
+            <Grid Grid.Column = "3">
+                <TextBlock Text = "Alpha Billionaire" FontSize = "40" Margin = "50,15,220,5" VerticalAlignment = "Center" />
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row = "1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height = "1*" />
+                <RowDefinition Height = "1*" />
+                <RowDefinition Height = "1*" />
+                <RowDefinition Height = "1*" />
+                <RowDefinition Height = "1*" />
+                <RowDefinition Height = "1*" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row = "1" Height = "80" Width = "200" Content = "人机模式" FontSize = "25" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+            <Button Grid.Row = "2" Height = "80" Width = "200" Content = "联机模式" FontSize = "25" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+            <Button Grid.Row = "3" Height = "80" Width = "200" Content = "过程回顾" FontSize = "25" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+            <Button Grid.Row = "4" Height = "80" Width = "200" Content = "排行榜" FontSize = "25" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+            <Button Grid.Row = "5" Height = "80" Width = "200" Content = "testButton" FontSize = "25" VerticalAlignment = "Center" HorizontalAlignment = "Center" Click = "Button_Click" />
+        </Grid>
 
     </Grid>
 </Window>

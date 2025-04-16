@@ -1,0 +1,109 @@
+﻿<Window x:Class="ChessGame.Client.Views.GameViewAI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChessGame.Client.Views"
+        mc:Ignorable="d"
+        Title="GameViewAI" Height="700" Width="700">
+    <Grid ShowGridLines = "True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height = "1*" />
+            <RowDefinition Height = "7*" />
+
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row = "0">
+            <!--第一行-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width = "2*" />
+                <ColumnDefinition Width = "1*" />
+                <ColumnDefinition Width = "2*" />
+                <ColumnDefinition Width = "12*" />
+                <ColumnDefinition Width = "2*" />
+                <ColumnDefinition Width = "2*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column = "1">
+                <!--昵称和积分-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                <TextBlock Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+            </Grid>
+
+            <Grid Grid.Column = "2">
+                <!--实际昵称和积分显示-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                <TextBox Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+            </Grid>
+
+            <Grid Grid.Column = "3">
+                <!--标题人机模式-->
+                <TextBlock Text = "人机模式" FontSize = "40" Margin = "100,15,110,5" VerticalAlignment = "Center" />
+            </Grid>
+
+            <Grid Grid.Column = "4">
+                <!--机器人昵称-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row = "0" Text = "机器人" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                <TextBlock Grid.Row = "1" Text = "小煊" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row = "1">
+            <!--棋盘行-->
+
+            <!--棋盘背景-->
+            <Border Width = "510" Height = "510" Background = "LightGray" HorizontalAlignment = "Center" VerticalAlignment = "Center">
+                <!--棋盘网格-->
+                <Canvas Width = "490" Height = "490" HorizontalAlignment = "Center" VerticalAlignment = "Center">
+                    <!--水平线-->
+                    <ItemsControl ItemsSource = "{Binding HorizontalLines}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Line X1 = "0" X2 = "490" Y1 = "{Binding}" Y2 = "{Binding}" Stroke = "Black" StrokeThickness = "1" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!--垂直线-->
+                    <ItemsControl ItemsSource = "{Binding VerticalLines}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Line Y1 = "0" Y2 = "490" X1 = "{Binding}" X2 = "{Binding}" Stroke = "Black" StrokeThickness = "1" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!--五个星位点-->
+                    <Ellipse Canvas.Left = "100" Canvas.Top = "100" Width = "10" Height = "10" Fill = "Black" />
+                    <Ellipse Canvas.Left = "380" Canvas.Top = "100" Width = "10" Height = "10" Fill = "Black" />
+                    <Ellipse Canvas.Left = "240" Canvas.Top = "240" Width = "10" Height = "10" Fill = "Black" />
+                    <Ellipse Canvas.Left = "100" Canvas.Top = "380" Width = "10" Height = "10" Fill = "Black" />
+                    <Ellipse Canvas.Left = "380" Canvas.Top = "380" Width = "10" Height = "10" Fill = "Black" />
+                </Canvas>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

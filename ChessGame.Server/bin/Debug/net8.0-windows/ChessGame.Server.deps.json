@@ -312,7 +312,10 @@
           "Microsoft.Extensions.DependencyInjection": "9.0.4"
         },
         "runtime": {
-          "Alpha_billionaire.dll": {}
+          "Alpha_billionaire.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "ChessGame.AI/1.0.0": {
@@ -322,7 +325,10 @@
           "Microsoft.Extensions.DependencyInjection": "9.0.4"
         },
         "runtime": {
-          "ChessGame.AI.dll": {}
+          "ChessGame.AI.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "ChessGame.Client/1.0.0": {
@@ -331,7 +337,10 @@
           "Microsoft.Extensions.DependencyInjection": "9.0.4"
         },
         "runtime": {
-          "ChessGame.Client.dll": {}
+          "ChessGame.Client.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "ChessGame.Database/1.0.0": {
@@ -341,7 +350,10 @@
           "Microsoft.Extensions.DependencyInjection": "9.0.4"
         },
         "runtime": {
-          "ChessGame.Database.dll": {}
+          "ChessGame.Database.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "ChessGame.GameLogic/1.0.0": {
@@ -350,7 +362,10 @@
           "Microsoft.Extensions.DependencyInjection": "9.0.4"
         },
         "runtime": {
-          "ChessGame.GameLogic.dll": {}
+          "ChessGame.GameLogic.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
