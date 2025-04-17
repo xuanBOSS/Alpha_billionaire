@@ -129,3 +129,5 @@ D:\C#\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\
 D:\C#\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ref\ChessGame.Client.dll
 D:\C#\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\GameViewAI.g.cs
 D:\C#\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\GameViewAI.baml
+D:\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\GameViewAI.g.cs
+D:\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\GameViewAI.baml

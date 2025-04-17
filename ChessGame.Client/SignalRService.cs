@@ -101,16 +101,22 @@ namespace ChessGame.Client
             }
         }
 
-        // 注册接收落子信息的事件，在棋盘上显示落子结果
-        public void ReceivePiece(Action<string> ShowStep)
+        // 注册接收落子信息的事件，如果传入参数为true，在棋盘上显示落子结果
+        public void ReceivePiece(Action<bool> ShowStep)
         {
-            _connection.On<string>("PieceInfo", ShowStep);
+            _connection.On<bool>("PieceInfo", ShowStep);
         }
 
-        //注册显示胜负的事件
-        public void ReachEnd(Action<string> ShowResult)
+        //注册使游戏暂停的事件
+        public void PauseGame(Action<string> ShowResult)
         {
-            _connection.On<string>("GameOver", ShowResult);
+            _connection.On<string>("PauseGame", ShowResult);
+        }
+
+        //注册游戏结束的事件
+        public void GameEnd(Action<string> GameOver)
+        {
+            _connection.On<string>("GameOver", GameOver);
         }
 
         //注册显示当前轮次玩家状态的事件(行动或者等待)

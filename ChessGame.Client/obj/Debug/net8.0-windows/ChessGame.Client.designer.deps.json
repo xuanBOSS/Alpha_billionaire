@@ -11,12 +11,6 @@
           "Microsoft.Bcl.AsyncInterfaces": "9.0.4",
           "Microsoft.Extensions.Features": "9.0.4",
           "System.IO.Pipelines": "9.0.4"
-        },
-        "runtime": {
-          "lib/netstandard2.1/Microsoft.AspNetCore.Connections.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16403"
-          }
         }
       },
       "Microsoft.AspNetCore.Http.Connections.Client/9.0.4": {
@@ -25,36 +19,18 @@
           "Microsoft.Extensions.Logging.Abstractions": "9.0.4",
           "Microsoft.Extensions.Options": "9.0.4",
           "System.Net.ServerSentEvents": "9.0.4"
-        },
-        "runtime": {
-          "lib/netstandard2.1/Microsoft.AspNetCore.Http.Connections.Client.dll": {
-            "assemblyVersion": "9.0.4.0",
-            "fileVersion": "9.0.425.16403"
-          }
         }
       },
       "Microsoft.AspNetCore.Http.Connections.Common/9.0.4": {
         "dependencies": {
           "Microsoft.AspNetCore.Connections.Abstractions": "9.0.4",
           "System.Text.Json": "9.0.4"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Connections.Common.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16403"
-          }
         }
       },
       "Microsoft.AspNetCore.SignalR.Client/9.0.4": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Connections.Client": "9.0.4",
           "Microsoft.AspNetCore.SignalR.Client.Core": "9.0.4"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Client.dll": {
-            "assemblyVersion": "9.0.4.0",
-            "fileVersion": "9.0.425.16403"
-          }
         }
       },
       "Microsoft.AspNetCore.SignalR.Client.Core/9.0.4": {
@@ -65,12 +41,6 @@
           "Microsoft.Extensions.DependencyInjection": "9.0.4",
           "Microsoft.Extensions.Logging": "9.0.4",
           "System.Threading.Channels": "9.0.4"
-        },
-        "runtime": {
-          "lib/netstandard2.1/Microsoft.AspNetCore.SignalR.Client.Core.dll": {
-            "assemblyVersion": "9.0.4.0",
-            "fileVersion": "9.0.425.16403"
-          }
         }
       },
       "Microsoft.AspNetCore.SignalR.Common/9.0.4": {
@@ -78,173 +48,53 @@
           "Microsoft.AspNetCore.Connections.Abstractions": "9.0.4",
           "Microsoft.Extensions.Options": "9.0.4",
           "System.Text.Json": "9.0.4"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Common.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16403"
-          }
         }
       },
       "Microsoft.AspNetCore.SignalR.Protocols.Json/9.0.4": {
         "dependencies": {
           "Microsoft.AspNetCore.SignalR.Common": "9.0.4"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Protocols.Json.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16403"
-          }
         }
       },
-      "Microsoft.Bcl.AsyncInterfaces/9.0.4": {
-        "runtime": {
-          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
-            "assemblyVersion": "9.0.0.4",
-            "fileVersion": "9.0.425.16305"
-          }
-        }
-      },
-      "Microsoft.Bcl.TimeProvider/9.0.4": {
-        "runtime": {
-          "lib/net8.0/Microsoft.Bcl.TimeProvider.dll": {
-            "assemblyVersion": "9.0.0.4",
-            "fileVersion": "9.0.425.16305"
-          }
-        }
-      },
+      "Microsoft.Bcl.AsyncInterfaces/9.0.4": {},
+      "Microsoft.Bcl.TimeProvider/9.0.4": {},
       "Microsoft.Extensions.DependencyInjection/9.0.4": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.4"
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.DependencyInjection.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.4": {
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
-        }
-      },
-      "Microsoft.Extensions.Features/9.0.4": {
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.Features.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16403"
-          }
-        }
-      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.4": {},
+      "Microsoft.Extensions.Features/9.0.4": {},
       "Microsoft.Extensions.Logging/9.0.4": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "9.0.4",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.4",
           "Microsoft.Extensions.Options": "9.0.4"
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.Logging.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
         }
       },
       "Microsoft.Extensions.Logging.Abstractions/9.0.4": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.4",
           "System.Diagnostics.DiagnosticSource": "9.0.4"
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
         }
       },
       "Microsoft.Extensions.Options/9.0.4": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.4",
           "Microsoft.Extensions.Primitives": "9.0.4"
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.Options.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
         }
       },
-      "Microsoft.Extensions.Primitives/9.0.4": {
-        "runtime": {
-          "lib/net8.0/Microsoft.Extensions.Primitives.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
-        }
-      },
-      "System.Diagnostics.DiagnosticSource/9.0.4": {
-        "runtime": {
-          "lib/net8.0/System.Diagnostics.DiagnosticSource.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
-        }
-      },
-      "System.IO.Pipelines/9.0.4": {
-        "runtime": {
-          "lib/net8.0/System.IO.Pipelines.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
-        }
-      },
-      "System.Net.ServerSentEvents/9.0.4": {
-        "runtime": {
-          "lib/net8.0/System.Net.ServerSentEvents.dll": {
-            "assemblyVersion": "9.0.0.4",
-            "fileVersion": "9.0.425.16305"
-          }
-        }
-      },
-      "System.Text.Encodings.Web/9.0.4": {
-        "runtime": {
-          "lib/net8.0/System.Text.Encodings.Web.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll": {
-            "rid": "browser",
-            "assetType": "runtime",
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
-        }
-      },
+      "Microsoft.Extensions.Primitives/9.0.4": {},
+      "System.Diagnostics.DiagnosticSource/9.0.4": {},
+      "System.IO.Pipelines/9.0.4": {},
+      "System.Net.ServerSentEvents/9.0.4": {},
+      "System.Text.Encodings.Web/9.0.4": {},
       "System.Text.Json/9.0.4": {
         "dependencies": {
           "System.IO.Pipelines": "9.0.4",
           "System.Text.Encodings.Web": "9.0.4"
-        },
-        "runtime": {
-          "lib/net8.0/System.Text.Json.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
         }
       },
-      "System.Threading.Channels/9.0.4": {
-        "runtime": {
-          "lib/net8.0/System.Threading.Channels.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.425.16305"
-          }
-        }
-      }
+      "System.Threading.Channels/9.0.4": {}
     }
   },
   "libraries": {

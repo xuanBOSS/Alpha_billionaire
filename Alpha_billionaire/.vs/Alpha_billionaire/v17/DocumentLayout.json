@@ -3,13 +3,19 @@
   "WorkspaceRootPath": "D:\\Alpha_billionaire\\Alpha_billionaire\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{94744AFE-2EA0-4449-9A9E-6B50155E7DB5}|..\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj|d:\\alpha_billionaire\\chessgame.gamelogic\\gamerules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9F2AC4F5-8BD0-41FB-98BE-2BD2DB1B1E27}|..\\ChessGame.Server\\ChessGame.Server.csproj|d:\\alpha_billionaire\\chessgame.server\\controllers\\roommanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94744AFE-2EA0-4449-9A9E-6B50155E7DB5}|..\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj|d:\\alpha_billionaire\\chessgame.gamelogic\\bombmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DDF8EFBB-AF16-42DC-83FE-4274891E3831}|..\\ChessGame.Client\\ChessGame.Client.csproj|d:\\alpha_billionaire\\chessgame.client\\signalrservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{94744AFE-2EA0-4449-9A9E-6B50155E7DB5}|..\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj|d:\\alpha_billionaire\\chessgame.gamelogic\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9F2AC4F5-8BD0-41FB-98BE-2BD2DB1B1E27}|..\\ChessGame.Server\\ChessGame.Server.csproj|d:\\alpha_billionaire\\chessgame.server\\controllers\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94744AFE-2EA0-4449-9A9E-6B50155E7DB5}|..\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj|d:\\alpha_billionaire\\chessgame.gamelogic\\bombmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{94744AFE-2EA0-4449-9A9E-6B50155E7DB5}|..\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj|d:\\alpha_billionaire\\chessgame.gamelogic\\move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -50,7 +56,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -59,53 +65,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "BombManager.cs",
-              "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\BombManager.cs",
-              "RelativeDocumentMoniker": "..\\ChessGame.GameLogic\\BombManager.cs",
-              "ToolTip": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\BombManager.cs",
-              "RelativeToolTip": "..\\ChessGame.GameLogic\\BombManager.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAUwEcAAAAAAAAAAAAAAA==",
+              "Title": "SignalRService.cs",
+              "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.Client\\SignalRService.cs",
+              "RelativeDocumentMoniker": "..\\ChessGame.Client\\SignalRService.cs",
+              "ToolTip": "D:\\Alpha_billionaire\\ChessGame.Client\\SignalRService.cs",
+              "RelativeToolTip": "..\\ChessGame.Client\\SignalRService.cs",
+              "ViewState": "AQIAAGQAAAAAAAAAAAAgwHcAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T07:22:16.506Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\Program.cs",
-              "RelativeDocumentMoniker": "..\\ChessGame.GameLogic\\Program.cs",
-              "ToolTip": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\Program.cs",
-              "RelativeToolTip": "..\\ChessGame.GameLogic\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T07:21:48.219Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Move.cs",
-              "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\Move.cs",
-              "RelativeDocumentMoniker": "..\\ChessGame.GameLogic\\Move.cs",
-              "ToolTip": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\Move.cs",
-              "RelativeToolTip": "..\\ChessGame.GameLogic\\Move.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAmwCYAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T07:21:14.046Z",
+              "WhenOpened": "2025-04-17T11:38:35.808Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GameRules.cs",
-              "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\GameRules.cs",
-              "RelativeDocumentMoniker": "..\\ChessGame.GameLogic\\GameRules.cs",
-              "ToolTip": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\GameRules.cs",
-              "RelativeToolTip": "..\\ChessGame.GameLogic\\GameRules.cs",
-              "ViewState": "AgIAAOwAAAAAAAAAAAAgwAcBAAAAAAAAAAAAAA==",
+              "Title": "RoomManager.cs",
+              "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.Server\\Controllers\\RoomManager.cs",
+              "RelativeDocumentMoniker": "..\\ChessGame.Server\\Controllers\\RoomManager.cs",
+              "ToolTip": "D:\\Alpha_billionaire\\ChessGame.Server\\Controllers\\RoomManager.cs",
+              "RelativeToolTip": "..\\ChessGame.Server\\Controllers\\RoomManager.cs",
+              "ViewState": "AQIAAFoAAAAAAAAAAAAAAGMAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T07:20:45.759Z",
+              "WhenOpened": "2025-04-17T11:37:07.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Room.cs",
+              "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.Server\\Controllers\\Room.cs",
+              "RelativeDocumentMoniker": "..\\ChessGame.Server\\Controllers\\Room.cs",
+              "ToolTip": "D:\\Alpha_billionaire\\ChessGame.Server\\Controllers\\Room.cs",
+              "RelativeToolTip": "..\\ChessGame.Server\\Controllers\\Room.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAgwCEAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T11:03:03.644Z",
               "EditorCaption": ""
             },
             {
@@ -116,14 +109,52 @@
               "RelativeDocumentMoniker": "..\\ChessGame.GameLogic\\GameManager.cs",
               "ToolTip": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\GameManager.cs",
               "RelativeToolTip": "..\\ChessGame.GameLogic\\GameManager.cs",
-              "ViewState": "AgIAADoBAAAAAAAAAAAUwFIBAAABAAAAAAAAAA==",
+              "ViewState": "AQIAAIUAAAAAAAAAAAA2wI8AAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-17T07:20:10.247Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BombManager.cs",
+              "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\BombManager.cs",
+              "RelativeDocumentMoniker": "..\\ChessGame.GameLogic\\BombManager.cs",
+              "ToolTip": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\BombManager.cs",
+              "RelativeToolTip": "..\\ChessGame.GameLogic\\BombManager.cs",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T07:22:16.506Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\Program.cs",
+              "RelativeDocumentMoniker": "..\\ChessGame.GameLogic\\Program.cs",
+              "ToolTip": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\Program.cs",
+              "RelativeToolTip": "..\\ChessGame.GameLogic\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T07:21:48.219Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "Move.cs",
+              "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\Move.cs",
+              "RelativeDocumentMoniker": "..\\ChessGame.GameLogic\\Move.cs",
+              "ToolTip": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\Move.cs",
+              "RelativeToolTip": "..\\ChessGame.GameLogic\\Move.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAABIAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T07:21:14.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Board.cs",
               "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\Board.cs",
               "RelativeDocumentMoniker": "..\\ChessGame.GameLogic\\Board.cs",
@@ -131,38 +162,35 @@
               "RelativeToolTip": "..\\ChessGame.GameLogic\\Board.cs",
               "ViewState": "AgIAAFMAAAAAAAAAAADwv28AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T07:19:18.644Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-17T07:19:18.644Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ChessGame.Client",
+              "DocumentIndex": 8,
+              "Title": "ChessGame.Client.csproj",
               "DocumentMoniker": "D:\\Alpha_billionaire\\ChessGame.Client\\ChessGame.Client.csproj",
               "RelativeDocumentMoniker": "..\\ChessGame.Client\\ChessGame.Client.csproj",
               "ToolTip": "D:\\Alpha_billionaire\\ChessGame.Client\\ChessGame.Client.csproj",
               "RelativeToolTip": "..\\ChessGame.Client\\ChessGame.Client.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-17T07:19:11.348Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-17T07:19:11.348Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Alpha_billionaire",
+              "DocumentIndex": 9,
+              "Title": "Alpha_billionaire.csproj",
               "DocumentMoniker": "D:\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj",
               "RelativeDocumentMoniker": "Alpha_billionaire.csproj",
               "ToolTip": "D:\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj",
               "RelativeToolTip": "Alpha_billionaire.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-17T07:19:09.387Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-17T07:19:09.387Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "GameViewAI.xaml.cs",
               "DocumentMoniker": "D:\\C#\\\u8F6F\u4EF6\u6784\u9020\u57FA\u7840\\\u4E94\u5B50\u68CB\\Alpha_billionaire\\ChessGame.Client\\Views\\GameViewAI.xaml.cs",
               "RelativeDocumentMoniker": "..\\..\\C#\\\u8F6F\u4EF6\u6784\u9020\u57FA\u7840\\\u4E94\u5B50\u68CB\\Alpha_billionaire\\ChessGame.Client\\Views\\GameViewAI.xaml.cs",
@@ -174,7 +202,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "GameView.xaml",
               "DocumentMoniker": "D:\\C#\\\u8F6F\u4EF6\u6784\u9020\u57FA\u7840\\\u4E94\u5B50\u68CB\\Alpha_billionaire\\ChessGame.Client\\Views\\GameView.xaml",
               "RelativeDocumentMoniker": "..\\..\\C#\\\u8F6F\u4EF6\u6784\u9020\u57FA\u7840\\\u4E94\u5B50\u68CB\\Alpha_billionaire\\ChessGame.Client\\Views\\GameView.xaml",
@@ -185,7 +213,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "GameView.xaml.cs",
               "DocumentMoniker": "D:\\C#\\\u8F6F\u4EF6\u6784\u9020\u57FA\u7840\\\u4E94\u5B50\u68CB\\Alpha_billionaire\\ChessGame.Client\\Views\\GameView.xaml.cs",
               "RelativeDocumentMoniker": "..\\..\\C#\\\u8F6F\u4EF6\u6784\u9020\u57FA\u7840\\\u4E94\u5B50\u68CB\\Alpha_billionaire\\ChessGame.Client\\Views\\GameView.xaml.cs",
@@ -197,7 +225,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "GameViewAI.xaml",
               "DocumentMoniker": "D:\\C#\\\u8F6F\u4EF6\u6784\u9020\u57FA\u7840\\\u4E94\u5B50\u68CB\\Alpha_billionaire\\ChessGame.Client\\Views\\GameViewAI.xaml",
               "RelativeDocumentMoniker": "..\\..\\C#\\\u8F6F\u4EF6\u6784\u9020\u57FA\u7840\\\u4E94\u5B50\u68CB\\Alpha_billionaire\\ChessGame.Client\\Views\\GameViewAI.xaml",
@@ -208,7 +236,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\C#\\\u8F6F\u4EF6\u6784\u9020\u57FA\u7840\\\u4E94\u5B50\u68CB\\Alpha_billionaire\\ChessGame.Client\\App.xaml",
               "RelativeDocumentMoniker": "..\\..\\C#\\\u8F6F\u4EF6\u6784\u9020\u57FA\u7840\\\u4E94\u5B50\u68CB\\Alpha_billionaire\\ChessGame.Client\\App.xaml",

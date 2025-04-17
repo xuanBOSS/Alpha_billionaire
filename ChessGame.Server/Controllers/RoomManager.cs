@@ -73,41 +73,14 @@ namespace ChessGame.Server.Controllers
         {
             Room room = FindRoomByPlayer(connectionId);
 
-            string result = room.DealPiece(x, y,connectionId);
+
+            string msg;
+            bool result = room.DealPiece(x, y, connectionId, out msg);
 
             await _hubContext.Clients.Group(room.RoomID)
                    .SendAsync("PieceInfo", result);
 
-
-            //如果有一方胜利
-            if (result == "WIN")
-            {
-                if(connectionId == room.Player1)
-                {
-                    await _hubContext.Clients.Client(room.Player1)
-                   .SendAsync("GameOver", "WIN");
-
-                    await _hubContext.Clients.Client(room.Player2)
-                   .SendAsync("GameOver", "LOSE");
-                }
-                else
-                {
-                    await _hubContext.Clients.Client(room.Player1)
-                   .SendAsync("GameOver", "LOSE");
-
-                    await _hubContext.Clients.Client(room.Player2)
-                   .SendAsync("GameOver", "WIN");
-                }
-            }
-            else if(result =="DRAW")//如果是和棋
-            {
-                await _hubContext.Clients.Client(room.Player1)
-                   .SendAsync("GameOver", "DRAW");
-
-                await _hubContext.Clients.Client(room.Player2)
-               .SendAsync("GameOver", "DRAW");
-            }
-            else if(result == "CONTINUE")//如果对局没有结束
+            if(result && msg != "获胜")//如果落子成功，向双方展示落子并切换轮次
             {
                 if (connectionId == room.Player1)
                 {
@@ -126,6 +99,19 @@ namespace ChessGame.Server.Controllers
                    .SendAsync("State", "Wait");
                 }
             }
+            else if(result)//落子成功且对局结束
+            {
+                await _hubContext.Clients.Group(room.RoomID)
+                   .SendAsync("GameOver", msg);
+            }
+            else //如果落子失败或者需要爆破
+            {
+                await _hubContext.Clients.Client(connectionId)
+                   .SendAsync("PauseGame", msg);
+            }
+
+
+            
         }
     }
 }

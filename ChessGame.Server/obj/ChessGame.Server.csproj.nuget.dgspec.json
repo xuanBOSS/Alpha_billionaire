@@ -10,14 +10,14 @@
         "projectUniqueName": "D:\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj",
         "projectName": "Alpha_billionaire",
         "projectPath": "D:\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj",
-        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\10540\\.nuget\\packages\\",
         "outputPath": "D:\\Alpha_billionaire\\Alpha_billionaire\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\10540\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,8 +44,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -79,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -89,14 +88,14 @@
         "projectUniqueName": "D:\\Alpha_billionaire\\ChessGame.AI\\ChessGame.AI.csproj",
         "projectName": "ChessGame.AI",
         "projectPath": "D:\\Alpha_billionaire\\ChessGame.AI\\ChessGame.AI.csproj",
-        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\10540\\.nuget\\packages\\",
         "outputPath": "D:\\Alpha_billionaire\\ChessGame.AI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\10540\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -127,8 +126,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -162,7 +160,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -172,14 +170,14 @@
         "projectUniqueName": "D:\\Alpha_billionaire\\ChessGame.Client\\ChessGame.Client.csproj",
         "projectName": "ChessGame.Client",
         "projectPath": "D:\\Alpha_billionaire\\ChessGame.Client\\ChessGame.Client.csproj",
-        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\10540\\.nuget\\packages\\",
         "outputPath": "D:\\Alpha_billionaire\\ChessGame.Client\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\10540\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -206,8 +204,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -241,7 +238,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -251,14 +248,14 @@
         "projectUniqueName": "D:\\Alpha_billionaire\\ChessGame.Database\\ChessGame.Database.csproj",
         "projectName": "ChessGame.Database",
         "projectPath": "D:\\Alpha_billionaire\\ChessGame.Database\\ChessGame.Database.csproj",
-        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\10540\\.nuget\\packages\\",
         "outputPath": "D:\\Alpha_billionaire\\ChessGame.Database\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\10540\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -289,8 +286,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -324,7 +320,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -334,14 +330,14 @@
         "projectUniqueName": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
         "projectName": "ChessGame.GameLogic",
         "projectPath": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
-        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\10540\\.nuget\\packages\\",
         "outputPath": "D:\\Alpha_billionaire\\ChessGame.GameLogic\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\10540\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -368,8 +364,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -403,7 +398,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -413,14 +408,14 @@
         "projectUniqueName": "D:\\Alpha_billionaire\\ChessGame.Server\\ChessGame.Server.csproj",
         "projectName": "ChessGame.Server",
         "projectPath": "D:\\Alpha_billionaire\\ChessGame.Server\\ChessGame.Server.csproj",
-        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\10540\\.nuget\\packages\\",
         "outputPath": "D:\\Alpha_billionaire\\ChessGame.Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\10540\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -460,8 +455,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -499,7 +493,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
