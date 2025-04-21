@@ -1,0 +1,25 @@
+# 忽略 Visual Studio 文件
+.vs/
+*.user
+*.suo
+
+# 忽略编译生成文件
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+# 忽略 NuGet 缓存
+*.nupkg
+packages/
+
+# 忽略调试文件
+*.dbmdl
+*.db
+
+# 忽略系统文件
+Thumbs.db
+.DS_Store
