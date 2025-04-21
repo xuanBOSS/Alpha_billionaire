@@ -1,25 +1,17 @@
-# 忽略 Visual Studio 文件
+# Visual Studio
 .vs/
-*.user
 *.suo
+*.user
+*.userosscache
+*.sln.docstates
 
-# 忽略编译生成文件
+# Build results
 bin/
 obj/
-*.dll
-*.exe
-*.pdb
-*.cache
+
+# Others
 *.log
-
-# 忽略 NuGet 缓存
-*.nupkg
-packages/
-
-# 忽略调试文件
-*.dbmdl
+*.cache
 *.db
+*.pdb
 
-# 忽略系统文件
-Thumbs.db
-.DS_Store
