@@ -5,7 +5,8 @@
         private Random random = new Random();
 
         //当前的候选爆破区域中心点（在爆破前一手生成，用于提示）
-        public (int x, int y)? CandidateBombPosition { get; private set; }
+        //public (int x, int y)? CandidateBombPosition { get; private set; }
+        public (int x, int y)? CandidateBombPosition { get; set; }
 
         //爆破范围半径（半径为1表示 3×3 区域）
         private const int BombRadius = 1;
@@ -58,6 +59,7 @@
                     }
                 }
             }
+
 
             CandidateBombPosition = null; // 本次炸弹完成，清除候选
         }

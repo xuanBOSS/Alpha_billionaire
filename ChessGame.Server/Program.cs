@@ -14,6 +14,9 @@ builder.Services.AddSwaggerGen();
 // 添加 SignalR 服务
 builder.Services.AddSignalR();
 
+// 允许所有网络接口访问
+builder.WebHost.UseUrls("http://0.0.0.0:5000;https://0.0.0.0:5001"); 
+
 //添加房间匹配服务
 builder.Services.AddSingleton<RoomManager>();
 
@@ -47,5 +50,6 @@ app.MapRazorPages();
 // 配置 SignalR 路由
 app.MapHub<GameHub>("/gamehub");
 
-app.Run("https://localhost:7101");
+/*app.Run("https://localhost:7101");*/
+app.Run();
 

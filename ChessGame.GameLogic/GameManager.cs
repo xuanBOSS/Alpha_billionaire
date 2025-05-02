@@ -25,6 +25,7 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
     {
         //基础游戏状态
         public Board Board { get; private set; }
+        public MineMap MineMap { get; private set; }
         public PlayerColor CurrentPlayer { get; private set; }
         public bool IsGameOver { get; private set; }
         public PlayerColor Winner { get; private set; }
@@ -55,6 +56,9 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
         public GameManager()
         {
             Board = new Board();
+            MineMap = new MineMap();
+            MineMap.PlaceMinesByDensity(0.1);//生成地雷
+            MineMap.CalculateNumbers();//生成数字提示
             CurrentPlayer = PlayerColor.Black; // 黑棋先手
             IsGameOver = false;
             Winner = PlayerColor.None;
@@ -149,6 +153,73 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
             SwitchTurn();
             return true;
         }
+
+        public bool TryMakeMove_1(int x, int y, out string message)
+        {
+            message = "";
+
+            if (IsGameOver)
+            {
+                message = "游戏已结束。";
+                return false;
+            }
+
+            if (!Board.InBounds(x, y))
+            {
+                message = "超出棋盘范围。";
+                return false;
+            }
+
+            if (Board.GetCell(x, y) != PlayerColor.None)
+            {
+                message = "该位置已有棋子。";
+                return false;
+            }
+
+            if (!CanPlaceMorePieces(CurrentPlayer))
+            {
+                message = $"{CurrentPlayer}方棋子已用完";
+                return false;
+            }
+
+            // 黑棋禁手检测
+            if (CurrentPlayer == PlayerColor.Black && GameRules.IsForbiddenMove(Board, x, y))
+            {
+                message = "禁手：黑棋此处落子违反规则。";
+                return false;
+            }
+
+            var move = new Move(x, y, CurrentPlayer);
+            Board.PlaceMove(move);
+            moveHistory.Add(move);
+            pieceCount[CurrentPlayer]++;
+            turnCount++;
+
+            //爆破逻辑
+            bool explode = MineMap.CheckExplosion(x, y);//检查周围四个格子是否存在地雷
+            if(explode)
+            {
+                bombManager.BombEnabled = true;  //爆破使能信号置位
+                bombManager.CandidateBombPosition = (x, y);
+                bombManager.TriggerBomb(Board);  // 执行爆破
+                bombManager.BombEnabled = false; //爆破使能信号复原
+
+            }
+
+            // 胜负判断
+            if (GameRules.CheckWin(Board, x, y, CurrentPlayer))
+            {
+                IsGameOver = true;
+                Winner = CurrentPlayer;
+                message = $"{CurrentPlayer} 获胜！";
+                return true;
+            }
+
+            // 切换回合
+            SwitchTurn();
+            return true;
+        }
+
         //终局检查
         private int GetEmptyCells()
         {

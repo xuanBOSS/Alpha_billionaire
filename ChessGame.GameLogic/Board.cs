@@ -37,7 +37,8 @@ namespace ChessGame.GameLogic
     public class Board
     {
         public const int Size = 15;
-        private PlayerColor[,] grid;
+        /*private PlayerColor[,] grid;*/
+        public PlayerColor[,] grid;
 
         public Board()
         {

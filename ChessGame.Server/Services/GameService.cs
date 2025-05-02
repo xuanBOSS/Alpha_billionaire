@@ -11,6 +11,7 @@ public class GameService
 
     public bool IsMoveValid(int x, int y)
     {
-        return _gameManager.IsValidMove(x, y);
+        /*return _gameManager.IsValidMove(x, y);*/
+        return true;
     }
 }
