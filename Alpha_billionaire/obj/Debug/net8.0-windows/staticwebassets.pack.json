@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "D:\\Alpha_billionaire\\Alpha_billionaire\\obj\\Debug\\net8.0-windows\\scopedcss\\projectbundle\\Alpha_billionaire.bundle.scp.css",
-      "PackagePath": "staticwebassets\\Alpha_billionaire.bundle.scp.css"
+      "PackagePath": "staticwebassets\\Alpha_billionaire.ot987nc5ty.bundle.scp.css"
     },
     {
       "Id": "D:\\Alpha_billionaire\\Alpha_billionaire\\wwwroot\\css\\site.css",
@@ -243,6 +243,10 @@
     {
       "Id": "D:\\Alpha_billionaire\\Alpha_billionaire\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows\\staticwebassets\\msbuild.Alpha_billionaire.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net8.0-windows\\staticwebassets\\msbuild.Alpha_billionaire.Microsoft.AspNetCore.StaticWebAssets.props",

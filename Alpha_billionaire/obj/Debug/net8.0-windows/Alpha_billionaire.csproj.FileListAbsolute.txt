@@ -114,3 +114,7 @@ D:\Alpha_billionaire\Alpha_billionaire\obj\Debug\net8.0-windows\refint\Alpha_bil
 D:\Alpha_billionaire\Alpha_billionaire\obj\Debug\net8.0-windows\Alpha_billionaire.pdb
 D:\Alpha_billionaire\Alpha_billionaire\obj\Debug\net8.0-windows\Alpha_billionaire.genruntimeconfig.cache
 D:\Alpha_billionaire\Alpha_billionaire\obj\Debug\net8.0-windows\ref\Alpha_billionaire.dll
+D:\Alpha_billionaire\Alpha_billionaire\bin\Debug\net8.0-windows\Alpha_billionaire.staticwebassets.endpoints.json
+D:\Alpha_billionaire\Alpha_billionaire\obj\Debug\net8.0-windows\staticwebassets.build.endpoints.json
+D:\Alpha_billionaire\Alpha_billionaire\obj\Debug\net8.0-windows\staticwebassets\msbuild.Alpha_billionaire.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\Alpha_billionaire\Alpha_billionaire\obj\Debug\net8.0-windows\staticwebassets.upToDateCheck.txt

@@ -134,3 +134,7 @@ D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\refint\ChessGa
 D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\ChessGame.GameLogic.pdb
 D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\ChessGame.GameLogic.genruntimeconfig.cache
 D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\ref\ChessGame.GameLogic.dll
+D:\Alpha_billionaire\ChessGame.GameLogic\bin\Debug\net8.0-windows\ChessGame.GameLogic.staticwebassets.endpoints.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.endpoints.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets\msbuild.ChessGame.GameLogic.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.upToDateCheck.txt

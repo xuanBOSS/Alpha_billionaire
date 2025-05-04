@@ -1,33 +1,4 @@
-﻿// ChessGame.Logic/Board.cs
-/*namespace ChessGame.GameLogic
-{
-    public class Board
-    {
-        public int[,] Grid { get; set; } = new int[15, 15];
-
-        // 添加尺寸属性
-        public int Width => Grid.GetLength(1);  // 列数
-        public int Height => Grid.GetLength(0); // 行数
-
-        // 添加判空方法
-        public bool IsEmpty(int x, int y)
-        {
-            return x >= 0 && x < Width &&
-                   y >= 0 && y < Height &&
-                   Grid[x, y] == 0;
-        }
-
-        public Board()
-        {
-            Grid = new int[15, 15];
-        }
-
-        public void AddPiece(int x, int y)//往棋盘上添加棋子
-        {
-
-        }
-    }
-}*/
+﻿
 // ChessGame.Logic/Board.cs
 using System;
 using System.Collections.Generic;
@@ -108,6 +79,36 @@ namespace ChessGame.GameLogic
                 }
             }
             return false;
+        }
+        public bool IsFull()
+        {
+            for (int x = 0; x < Size; x++)
+                for (int y = 0; y < Size; y++)
+                    if (GetCell(x, y) == PlayerColor.None)
+                        return false;
+            return true;
+        }
+
+        public int TotalMoveCount { get; set; }
+        public int MaxMovesPerPlayer { get; set; } = 25; // 对应你的规则
+
+        public Board Clone()
+        {
+            var clone = new Board();
+            for (int x = 0; x < Size; x++)
+            {
+                for (int y = 0; y < Size; y++)
+                {
+                    clone.SetCell(x, y, GetCell(x, y));
+                }
+            }
+            return clone;
+        }
+
+        public void SetCell(int x, int y, PlayerColor player)
+        {
+            if (InBounds(x, y))
+                grid[x, y] = player;
         }
     }
 }

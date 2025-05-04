@@ -3,3 +3,14 @@ C:\Users\BOSS0\Desktop\VS\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticweb
 C:\Users\BOSS0\Desktop\VS\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
 C:\Users\BOSS0\Desktop\VS\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
 D:\C#\软件构造基础\五子棋\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json

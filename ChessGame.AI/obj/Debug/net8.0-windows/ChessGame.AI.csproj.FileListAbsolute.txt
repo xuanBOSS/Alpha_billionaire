@@ -153,3 +153,8 @@ D:\C#\软件构造基础\五子棋\Alpha_billionaire\ChessGame.AI\obj\Debug\net8
 D:\C#\软件构造基础\五子棋\Alpha_billionaire\ChessGame.AI\obj\Debug\net8.0-windows\ChessGame.AI.pdb
 D:\C#\软件构造基础\五子棋\Alpha_billionaire\ChessGame.AI\obj\Debug\net8.0-windows\ChessGame.AI.genruntimeconfig.cache
 D:\C#\软件构造基础\五子棋\Alpha_billionaire\ChessGame.AI\obj\Debug\net8.0-windows\ref\ChessGame.AI.dll
+D:\Alpha_billionaire\ChessGame.AI\bin\Debug\net8.0-windows\ChessGame.GameLogic.staticwebassets.endpoints.json
+D:\Alpha_billionaire\ChessGame.AI\bin\Debug\net8.0-windows\ChessGame.AI.staticwebassets.endpoints.json
+D:\Alpha_billionaire\ChessGame.AI\obj\Debug\net8.0-windows\staticwebassets.build.endpoints.json
+D:\Alpha_billionaire\ChessGame.AI\obj\Debug\net8.0-windows\staticwebassets\msbuild.ChessGame.AI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\Alpha_billionaire\ChessGame.AI\obj\Debug\net8.0-windows\staticwebassets.upToDateCheck.txt
