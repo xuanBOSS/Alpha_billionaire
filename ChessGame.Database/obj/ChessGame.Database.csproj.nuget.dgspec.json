@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Alpha_billionaire\\ChessGame.Database\\ChessGame.Database.csproj": {}
+    "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\ChessGame.Database.csproj": {}
   },
   "projects": {
-    "D:\\Alpha_billionaire\\ChessGame.Client\\ChessGame.Client.csproj": {
+    "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\ChessGame.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Alpha_billionaire\\ChessGame.Client\\ChessGame.Client.csproj",
+        "projectUniqueName": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\ChessGame.Client.csproj",
         "projectName": "ChessGame.Client",
-        "projectPath": "D:\\Alpha_billionaire\\ChessGame.Client\\ChessGame.Client.csproj",
-        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
-        "outputPath": "D:\\Alpha_billionaire\\ChessGame.Client\\obj\\",
+        "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\ChessGame.Client.csproj",
+        "packagesPath": "C:\\Users\\胡静雨\\.nuget\\packages\\",
+        "outputPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\app\\vssdk\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\胡静雨\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -99,24 +98,24 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Alpha_billionaire\\ChessGame.Database\\ChessGame.Database.csproj": {
+    "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\ChessGame.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Alpha_billionaire\\ChessGame.Database\\ChessGame.Database.csproj",
+        "projectUniqueName": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\ChessGame.Database.csproj",
         "projectName": "ChessGame.Database",
-        "projectPath": "D:\\Alpha_billionaire\\ChessGame.Database\\ChessGame.Database.csproj",
-        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
-        "outputPath": "D:\\Alpha_billionaire\\ChessGame.Database\\obj\\",
+        "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\ChessGame.Database.csproj",
+        "packagesPath": "C:\\Users\\胡静雨\\.nuget\\packages\\",
+        "outputPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\app\\vssdk\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\胡静雨\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -125,15 +124,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\Alpha_billionaire\\ChessGame.Client\\ChessGame.Client.csproj": {
-                "projectPath": "D:\\Alpha_billionaire\\ChessGame.Client\\ChessGame.Client.csproj"
+              "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\ChessGame.Client.csproj": {
+                "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\ChessGame.Client.csproj"
               }
             }
           }
@@ -196,7 +194,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

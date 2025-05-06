@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,37 +12,80 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ChessGame.Client;
 
 namespace ChessGame.Client.Views
 {
-    /// <summary>
-    /// GameViewAI.xaml 的交互逻辑
-    /// </summary>
     public partial class GameViewAI : Window
     {
-        public List<double> HorizontalLines { get; set; }
-        public List<double> VerticalLines { get; set; }
+        private SignalRService _signalRService;
+
+        private const int BoardSize = 15;
+        private const int spacing = 35;
         public GameViewAI()
         {
             InitializeComponent();
+            DrawBoard();
 
+            _signalRService = new SignalRService();
+        }
 
-            // 生成15条水平线和垂直线的位置
-            HorizontalLines = new List<double>();
-            VerticalLines = new List<double>();
-
-            // 计算每条线的间隔（600 / (15-1) ≈ 42.857）
-            double spacing = 490.0 / 14;
-
-            for (int i = 0; i < 15; i++)
+        private void DrawBoard()
+        {
+            for (int i = 0; i < BoardSize; i++)
             {
-                double position = 0 + i * spacing;
-                HorizontalLines.Add(position);
-                VerticalLines.Add(position);
-            }
+                // 绘制横线
+                Line horizontalLine = new Line
+                {
+                    X1 = 0,
+                    Y1 = i * spacing,
+                    X2 = (BoardSize - 1) * spacing,
+                    Y2 = i * spacing,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1
+                };
+                BoardCanvas.Children.Add(horizontalLine);
 
-            // 确保 DataContext 设置正确
-            this.DataContext = this;
+                // 绘制竖线
+                Line verticalLine = new Line
+                {
+                    X1 = i * spacing,
+                    Y1 = 0,
+                    X2 = i * spacing,
+                    Y2 = (BoardSize - 1) * spacing,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1
+                };
+                BoardCanvas.Children.Add(verticalLine);
+            }
+        }
+
+        //放置棋子，获取鼠标点击位置，计算最近交叉点，放置棋子
+        private async void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point clickPoint = e.GetPosition(BoardCanvas);
+            int x = (int)System.Math.Round(clickPoint.X / spacing);
+            int y = (int)System.Math.Round(clickPoint.Y / spacing);
+
+            if (x >= 0 && x < BoardSize && y >= 0 && y < BoardSize)
+            {
+                Ellipse blackPiece = new Ellipse
+                {
+                    Width = spacing - 2,
+                    Height = spacing - 2,
+                    Fill = Brushes.Black
+                };
+
+                x = x * spacing - (spacing - 2) / 2;
+                y = y * spacing - (spacing - 2) / 2;
+
+                // 调用 TryPlacePiece 方法
+                await _signalRService.TryPlacePiece(x, y);
+
+                Canvas.SetLeft(blackPiece, x);
+                Canvas.SetTop(blackPiece, y);
+                BoardCanvas.Children.Add(blackPiece);
+            }
         }
     }
 }

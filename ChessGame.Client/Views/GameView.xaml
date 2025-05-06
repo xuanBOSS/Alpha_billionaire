@@ -6,108 +6,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessGame.Client.Views"
         mc:Ignorable="d"
-        Title = "GameView" Height = "700" Width = "700">
-    <Grid ShowGridLines = "True">
+        Title = "GameView" Height = "700" Width = "900"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Grid>
         <Grid.RowDefinitions>
+            <!--第一行显示标题-->
             <RowDefinition Height = "1*" />
+            <!--第二行显示棋盘及胜率-->
             <RowDefinition Height = "7*" />
-
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row = "0">
-            <!--第一行-->
+        <!--第一行-->
+        <!--标题联机模式-->
+        <TextBlock Grid.Row = "0" Text = "联机模式" FontSize = "50" HorizontalAlignment="Center" VerticalAlignment = "Center" />
+
+        <!--第二行-->
+        <Grid Grid.Row = "1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width = "2*"/>
-                <ColumnDefinition Width = "1*"/>
-                <ColumnDefinition Width = "2*"/>
-                <ColumnDefinition Width = "11*"/>
-                <ColumnDefinition Width = "1*"/>
-                <ColumnDefinition Width = "2*"/>
-                <ColumnDefinition Width = "2*"/>
+                <!--第一列显示棋盘-->
+                <ColumnDefinition Width = "5*" />
+                <!--第二列显示玩家信息及胜率-->
+                <ColumnDefinition Width = "2*" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column = "1">
-                <!--昵称和积分-->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height = "1*" />
-                    <RowDefinition Height = "1*" />
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
-                <TextBlock Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
-            </Grid>
-
-            <Grid Grid.Column = "2">
-                <!--实际昵称和积分显示-->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height = "1*" />
-                    <RowDefinition Height = "1*" />
-                </Grid.RowDefinitions>
-                <TextBox Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
-                <TextBox Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
-            </Grid>
-
-            <Grid Grid.Column = "3">
-                <!--标题联机模式-->
-                <TextBlock Text = "联机模式" FontSize = "40" HorizontalAlignment = "Center" VerticalAlignment = "Center" />
-            </Grid>
-
-            <Grid Grid.Column = "4">
-                <!--对手昵称和积分-->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height = "1*" />
-                    <RowDefinition Height = "1*" />
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
-                <TextBlock Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
-            </Grid>
-
-            <Grid Grid.Column = "5">
-                <!--对手实际昵称和积分显示-->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height = "1*" />
-                    <RowDefinition Height = "1*" />
-                </Grid.RowDefinitions>
-                <TextBox Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
-                <TextBox Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
-            </Grid>
-
-        </Grid>
-
-        <Grid Grid.Row = "1">
-            <!--棋盘行-->
-
+            <!--棋盘-->
             <!--棋盘背景-->
-            <Border Width = "510" Height = "510" Background = "LightGray" HorizontalAlignment = "Center" VerticalAlignment = "Center">
+            <Border Width = "490" Height = "490" Background = "LightGray" HorizontalAlignment = "Center" VerticalAlignment = "Center">
                 <!--棋盘网格-->
-                <Canvas Width = "490" Height = "490" HorizontalAlignment = "Center" VerticalAlignment = "Center">
-                    <!--水平线-->
-                    <ItemsControl ItemsSource = "{Binding HorizontalLines}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <Canvas/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Line X1 = "0" X2 = "490" Y1 = "{Binding}" Y2 = "{Binding}" Stroke = "Black" StrokeThickness = "1" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-
-                    <!--垂直线-->
-                    <ItemsControl ItemsSource = "{Binding VerticalLines}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <Canvas/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Line Y1 = "0" Y2 = "490" X1 = "{Binding}" X2 = "{Binding}" Stroke = "Black" StrokeThickness = "1" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-
+                <Canvas x:Name="BoardCanvas" >
                     <!--五个星位点-->
                     <Ellipse Canvas.Left = "100" Canvas.Top = "100" Width = "10" Height = "10" Fill = "Black" />
                     <Ellipse Canvas.Left = "380" Canvas.Top = "100" Width = "10" Height = "10" Fill = "Black" />
@@ -116,6 +42,97 @@
                     <Ellipse Canvas.Left = "380" Canvas.Top = "380" Width = "10" Height = "10" Fill = "Black" />
                 </Canvas>
             </Border>
+
+            <!--显示玩家昵称积分和实时胜率-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "1*" />
+                </Grid.RowDefinitions>
+
+                <!--玩家A信息-->
+                <Grid Grid.Row = "1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width = "1*" />
+                        <ColumnDefinition Width = "1*" />
+                        <ColumnDefinition Width = "1*" />
+                        <ColumnDefinition Width = "1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column = "1">
+                        <!--昵称和积分-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height = "1*" />
+                            <RowDefinition Height = "1*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                        <TextBlock Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                    </Grid>
+
+                    <Grid Grid.Column = "2">
+                        <!--实际昵称和积分显示-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height = "1*" />
+                            <RowDefinition Height = "1*" />
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                        <TextBox Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                    </Grid>
+                </Grid>
+
+                <!--玩家A胜率-->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width = "1*" />
+                        <ColumnDefinition Width = "4*" />
+                        <ColumnDefinition Width = "1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text = "胜率" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                    <!--进度条-->
+                    <ProgressBar Grid.Column="1" VerticalAlignment = "Center" HorizontalAlignment = "Left" Width="200" Height="30"/>
+                </Grid>
+
+                <!--玩家B玩家信息-->
+                <Grid Grid.Row = "4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width = "1*" />
+                        <ColumnDefinition Width = "1*" />
+                        <ColumnDefinition Width = "1*" />
+                        <ColumnDefinition Width = "1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column = "1">
+                        <!--昵称和积分-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height = "1*" />
+                            <RowDefinition Height = "1*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row = "0" Text = "昵称" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                        <TextBlock Grid.Row = "1" Text = "积分" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                    </Grid>
+                </Grid>
+
+                <!--玩家B胜率-->
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width = "1*" />
+                        <ColumnDefinition Width = "4*" />
+                        <ColumnDefinition Width = "1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text = "胜率" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                    <!--进度条-->
+                    <ProgressBar Grid.Column="1" VerticalAlignment = "Center" HorizontalAlignment = "Left" Width="200" Height="30"/>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
+

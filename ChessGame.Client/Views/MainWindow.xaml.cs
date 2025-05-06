@@ -25,7 +25,20 @@ namespace ChessGame.Client.Views
             InitializeComponent();
 
         }
+        private void ManMachineMode_Click(object sender, RoutedEventArgs e)
+        {
+            GameViewAI GameViewAI = new GameViewAI();
+            GameViewAI.Show();
 
+            this.Close();
+        }
+        private void OnlineMode_Click(object sender, RoutedEventArgs e)
+        {
+            GameView GameView = new GameView();
+            GameView.Show();
+
+            this.Close();
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             testWindow testwindow = new testWindow();
