@@ -672,6 +672,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "ChessGame.GameLogic": "1.0.0",
           "Microsoft.AspNetCore.SignalR.Client": "9.0.4",
           "Microsoft.EntityFrameworkCore": "8.0.13",
           "Microsoft.Extensions.DependencyInjection": "9.0.4",

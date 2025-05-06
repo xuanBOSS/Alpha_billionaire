@@ -148,9 +148,7 @@ D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\
 D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll
 D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\Microsoft.EntityFrameworkCore.Design.dll
 D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\Microsoft.EntityFrameworkCore.Relational.dll
-D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
 D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Caching.Memory.dll
-D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.dll
 D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyModel.dll
@@ -252,3 +250,11 @@ D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\obj\
 D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ChessGame.Client.pdb
 D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ChessGame.Client.genruntimeconfig.cache
 D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ref\ChessGame.Client.dll
+D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\ChessGame.GameLogic.deps.json
+D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\ChessGame.GameLogic.runtimeconfig.json
+D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\appsettings.Development.json
+D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\appsettings.json
+D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\ChessGame.GameLogic.staticwebassets.endpoints.json
+D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\ChessGame.GameLogic.exe
+D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\ChessGame.GameLogic.dll
+D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\bin\Debug\net8.0-windows\ChessGame.GameLogic.pdb

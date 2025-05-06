@@ -191,7 +191,11 @@
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
+                "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

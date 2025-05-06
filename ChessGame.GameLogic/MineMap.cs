@@ -2,7 +2,7 @@
 {
     public class MineMap
     {
-        public const int Size = 14;//地图尺寸
+        public const int Size = 15;//地图尺寸
         public bool[,] mines;//指示该位置是否埋雷
         public int[,] numbers;//根据地雷摆放情况生成的数字提示
 
@@ -74,7 +74,7 @@
         }
 
         //打印扫雷地图
-        void PrintDebugBoard()
+        public void PrintDebugBoard()
         {
             Console.WriteLine("=== 调试棋盘（地雷 + 数字） ===");
             for (int y = 0; y < Size; y++)
