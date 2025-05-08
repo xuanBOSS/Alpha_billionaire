@@ -1068,11 +1068,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj",
+      "projectUniqueName": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj",
       "projectName": "Alpha_billionaire",
-      "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj",
+      "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj",
       "packagesPath": "C:\\Users\\胡静雨\\.nuget\\packages\\",
-      "outputPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\Alpha_billionaire\\obj\\",
+      "outputPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\Alpha_billionaire\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\app\\vssdk\\NuGetPackages"

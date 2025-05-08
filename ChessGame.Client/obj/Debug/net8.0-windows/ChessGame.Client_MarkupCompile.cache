@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\obj\Debug\net8.0-windows\
+D:\大二下课程\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\obj\Debug\net8.0-windows\
 ChessGame.Client
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-D:\C#\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\App.xaml
+D:\大二下课程\软件构造基础\五子棋GitHub\Alpha_Billionaire\ChessGame.Client\App.xaml
 51008450968
 
 919234392
-346158534395
+346885042800
 ChessBoard.xaml;testWindow.xaml;Views\GameView.xaml;Views\GameViewAI.xaml;Views\MainWindow.xaml;
 
 False

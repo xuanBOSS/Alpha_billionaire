@@ -100,7 +100,6 @@ namespace ChessGame.Client.Views
             }
         }
 
-
         // 根据数字值返回不同颜色
         private Brush GetNumberColor(int number)
         {

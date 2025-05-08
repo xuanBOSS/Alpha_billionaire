@@ -2744,11 +2744,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\ChessGame.Database.csproj",
+      "projectUniqueName": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\ChessGame.Database.csproj",
       "projectName": "ChessGame.Database",
-      "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\ChessGame.Database.csproj",
+      "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\ChessGame.Database.csproj",
       "packagesPath": "C:\\Users\\胡静雨\\.nuget\\packages\\",
-      "outputPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\obj\\",
+      "outputPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\app\\vssdk\\NuGetPackages"
@@ -2769,8 +2769,8 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\ChessGame.Client.csproj": {
-              "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\ChessGame.Client.csproj"
+            "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\ChessGame.Client.csproj": {
+              "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\ChessGame.Client.csproj"
             }
           }
         }
