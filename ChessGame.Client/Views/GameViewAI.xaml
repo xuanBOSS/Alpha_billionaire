@@ -32,13 +32,10 @@
 
             <!--棋盘-->
             <!--棋盘背景-->
-            <Border Width = "540" Height = "540" Background ="wheat" BorderBrush="DarkGoldenrod" BorderThickness="5" CornerRadius="10" HorizontalAlignment = "Center" VerticalAlignment = "Center">
+            <Border Width = "540" Height = "540" Background ="wheat" BorderBrush="DarkGoldenrod" BorderThickness="5" 
+                    CornerRadius="10" HorizontalAlignment = "Center" VerticalAlignment = "Center">
                 <Border.Effect>
-                    <DropShadowEffect Color="Black" 
-          Direction="315" 
-          ShadowDepth="10" 
-          Opacity="0.25" 
-          BlurRadius="10"/>
+                    <DropShadowEffect Color="Black" Direction="315" ShadowDepth="10" Opacity="0.25" BlurRadius="10"/>
                 </Border.Effect>
                 <!--棋盘网格-->
                 <Canvas x:Name="BoardCanvas" Background ="Cornsilk" Width = "490" Height = "490" HorizontalAlignment = "Center" VerticalAlignment = "Center">
@@ -65,7 +62,10 @@
                 </Grid.RowDefinitions>
 
                 <!--玩家信息-->
-                <Border Grid.Row="1" BorderBrush="BurlyWood" BorderThickness="3" CornerRadius="8" Margin="0,0,30,0" Padding="5">
+                <Border Grid.Row="1" BorderBrush="BurlyWood" BorderThickness="4" CornerRadius="8" Margin="0,0,30,0" Padding="5" >
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" Direction="315" ShadowDepth="5" Opacity="0.4" BlurRadius="8"/>
+                    </Border.Effect>
                     <Grid Grid.Row = "1" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width = "1*" />
@@ -74,14 +74,14 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- 添加头像 -->
-                        <Grid Grid.Column="0" Width="58" Height="58" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid Grid.Column="0" Width="56" Height="56" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Ellipse Fill="Black" />
                             <!-- 黑色背景，可选 -->
                             <Ellipse Stroke="Black" StrokeThickness="1" />
                             <!-- 边框 -->
                             <Image Source="pack://application:,,,/source/picture1.png" Stretch="UniformToFill">
                                 <Image.Clip>
-                                    <EllipseGeometry Center="29,29" RadiusX="29" RadiusY="29"/>
+                                    <EllipseGeometry Center="28,28" RadiusX="28" RadiusY="28"/>
                                 </Image.Clip>
                             </Image>
                         </Grid>
@@ -105,7 +105,7 @@
                         <ColumnDefinition Width = "3*" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text = "黑棋胜率" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                    <TextBlock Grid.Column="0" Text = "玩家胜率" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
                     <!-- 进度条+数值显示 -->
                     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
                         <ProgressBar x:Name="BlackWinProgress" Width="120" Height="20" Minimum="0" Maximum="1" Value="0.5">
@@ -118,8 +118,16 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="ProgressBar">
                                                 <Grid>
-                                                    <Border Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="3"/>
-                                                    <Border Name="PART_Indicator" Background="{TemplateBinding Foreground}" CornerRadius="3" HorizontalAlignment="Left"/>
+                                                    <Border Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="3">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect ShadowDepth="3" Color="Black" Opacity="0.4" BlurRadius="5"/>
+                                                        </Border.Effect>
+                                                    </Border>
+                                                    <Border Name="PART_Indicator" Background="{TemplateBinding Foreground}" CornerRadius="3" HorizontalAlignment="Left">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect ShadowDepth="2" Color="Black" Opacity="0.3" BlurRadius="3"/>
+                                                        </Border.Effect>
+                                                    </Border>
                                                 </Grid>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -133,7 +141,10 @@
                 </Grid>
 
                 <!--AI玩家信息-->
-                <Border Grid.Row="4" BorderBrush="BurlyWood" BorderThickness="3" CornerRadius="8" Margin="0,0,30,0" Padding="5">
+                <Border Grid.Row="4" BorderBrush="BurlyWood" BorderThickness="4" CornerRadius="8" Margin="0,0,30,0" Padding="5">
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" Direction="315" ShadowDepth="5" Opacity="0.4" BlurRadius="8"/>
+                    </Border.Effect>
                     <Grid Grid.Row = "4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width = "1*" />
@@ -142,14 +153,14 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- 添加头像 -->
-                        <Grid Grid.Column="0" Width="58" Height="58" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid Grid.Column="0" Width="56" Height="56" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Ellipse Fill="Black" />
                             <!-- 黑色背景，可选 -->
                             <Ellipse Stroke="Black" StrokeThickness="1" />
                             <!-- 边框 -->
                             <Image Source="pack://application:,,,/source/picture3.png" Stretch="UniformToFill">
                                 <Image.Clip>
-                                    <EllipseGeometry Center="29,29" RadiusX="29" RadiusY="29"/>
+                                    <EllipseGeometry Center="28,28" RadiusX="28" RadiusY="28"/>
                                 </Image.Clip>
                             </Image>
                         </Grid>
@@ -173,7 +184,8 @@
                         <ColumnDefinition Width = "3*" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text = "机器人胜率" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                    <TextBlock Grid.Row="0" Text = "AA胜率" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                    
                     <!-- 进度条+数值显示 -->
                     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
                         <ProgressBar x:Name="WhiteWinProgress" Width="120" Height="20" Minimum="0" Maximum="1" Value="0.5">
@@ -186,8 +198,16 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="ProgressBar">
                                                 <Grid>
-                                                    <Border Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="3"/>
-                                                    <Border Name="PART_Indicator" Background="{TemplateBinding Foreground}" CornerRadius="3" HorizontalAlignment="Left"/>
+                                                    <Border Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="3">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect ShadowDepth="3" Color="Black" Opacity="0.4" BlurRadius="5"/>
+                                                        </Border.Effect>
+                                                    </Border>
+                                                    <Border Name="PART_Indicator" Background="{TemplateBinding Foreground}" CornerRadius="3" HorizontalAlignment="Left">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect ShadowDepth="2" Color="Black" Opacity="0.3" BlurRadius="3"/>
+                                                        </Border.Effect>
+                                                    </Border>
                                                 </Grid>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -195,7 +215,7 @@
                                 </Style>
                             </ProgressBar.Style>
                         </ProgressBar>
-                        <TextBlock x:Name="WhiteWinText" FontFamily="FZYaoTi" Foreground="Sienna" Margin="10,0,0,0" Text="50%" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="AIWinText" FontFamily="FZYaoTi" Foreground="Sienna" Margin="10,0,0,0" Text="50%" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Grid>
 

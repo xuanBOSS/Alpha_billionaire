@@ -396,3 +396,5 @@ D:\大二下课程\软件构造基础\五子棋GitHub\Alpha_billionaire\ChessGam
 D:\大二下课程\软件构造基础\五子棋GitHub\Alpha_billionaire\ChessGame.Client\bin\Debug\net8.0-windows\source\picture2.png
 D:\大二下课程\软件构造基础\五子棋GitHub\Alpha_billionaire\ChessGame.Client\bin\Debug\net8.0-windows\source\picture3.png
 D:\大二下课程\软件构造基础\五子棋GitHub\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ChessGame.Client_Content.g.cs
+D:\大二下课程\软件构造基础\五子棋GitHub\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\login.g.cs
+D:\大二下课程\软件构造基础\五子棋GitHub\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\login.baml

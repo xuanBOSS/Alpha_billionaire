@@ -12,12 +12,11 @@ namespace ChessGame.Client.Views
 {
     public partial class GameView : Window
     {
-
         private SignalRService _signalRService;
 
         private GameManager _gameManager;
 
-        private const int BoardSize = 15;
+        private const int BoardSize = 15;//棋盘线条数
         private const int spacing = 35;//棋盘格边长
 
         private MineMap _mineMap;
@@ -27,24 +26,25 @@ namespace ChessGame.Client.Views
         {
             InitializeComponent();
 
-            // 加载爆炸图片
+            //加载爆炸图片
             _explosionImage = new BitmapImage(new Uri("pack://application:,,,/source/bomb.png"));
 
             //初始化游戏管理器
             _gameManager = new GameManager();
 
-            // 初始化地雷地图
+            //初始化地雷地图
             _mineMap = new MineMap();
-            _mineMap.PlaceMinesByDensity(0.08); // 8%的地雷密度
-            _mineMap.CalculateNumbers();
-            _mineMap.PrintDebugBoard(); // 调试输出
+            _mineMap.PlaceMinesByDensity(0.08); //8%的地雷密度
+            _mineMap.CalculateNumbers();//计算地雷数字
+            _mineMap.PrintDebugBoard(); //调试输出
 
-            DrawBoard();
-            DrawMineNumbers(); // 绘制数字提示
+            DrawBoard();//绘制棋盘
+            DrawMineNumbers(); //绘制数字提示
 
             _signalRService = new SignalRService();
         }
 
+        //绘制棋盘
         private void DrawBoard()
         {
             for (int i = 0; i < BoardSize; i++)
@@ -59,7 +59,7 @@ namespace ChessGame.Client.Views
                     Stroke = Brushes.BurlyWood,
                     StrokeThickness = 1
                 };
-                BoardCanvas.Children.Add(horizontalLine);
+                BoardCanvas.Children.Add(horizontalLine);//添加到棋盘中
 
                 // 绘制竖线
                 Line verticalLine = new Line
@@ -75,7 +75,7 @@ namespace ChessGame.Client.Views
             }
         }
 
-        // 绘制数字提示
+        // 绘制数字提示，即周围地雷数
         private void DrawMineNumbers()
         {
             for (int x = 0; x < BoardSize - 1; x++)
@@ -83,31 +83,31 @@ namespace ChessGame.Client.Views
                 for (int y = 0; y < BoardSize - 1; y++)
                 {
                     int number = _mineMap.numbers[x, y];
-                    if (number > 0) // 只显示有数字的格子
+                    if (number > 0) //只显示有数字的格子
                     {
-                        // 创建数字文本
+                        //创建数字文本
                         var numText = new TextBlock
                         {
                             Text = number.ToString(),
                             FontSize = 16,
                             FontWeight = FontWeights.Bold,
-                            Foreground = GetNumberColor(number),
+                            Foreground = GetNumberColor(number),//根据数字大小获取相应颜色
                             HorizontalAlignment = HorizontalAlignment.Center,
                             VerticalAlignment = VerticalAlignment.Center,
-                            Width = spacing,  // 设置宽度与格子相同
-                            Height = spacing, // 设置高度与格子相同
+                            Width = spacing,  //设置宽度与格子相同
+                            Height = spacing, //设置高度与格子相同
                             TextAlignment = TextAlignment.Center
                         };
 
-                        // 计算格子中心位置
+                        //计算格子中心位置
                         double centerX = x * spacing + spacing / 2;
                         double centerY = y * spacing + spacing / 2;
 
-                        // 将数字放置在格子中心
+                        //将数字放置在格子中心
                         Canvas.SetLeft(numText, centerX - numText.Width / 2);
                         Canvas.SetTop(numText, centerY - numText.Height / 2 + 8);
 
-                        BoardCanvas.Children.Add(numText);
+                        BoardCanvas.Children.Add(numText);//添加到棋盘中
                     }
                 }
             }
@@ -144,16 +144,17 @@ namespace ChessGame.Client.Views
 
                     if (px == x && py == y)
                     {
-                        BoardCanvas.Children.RemoveAt(i);
+                        BoardCanvas.Children.RemoveAt(i);//移除指定位置的棋子
                     }
                 }
             }
         }
-        // 地雷爆炸后清除棋子
+
+        //地雷爆炸后清除棋子
         private void ClearAffectedPieces(int mineX, int mineY)
         {
             var points = new HashSet<(int, int)>();
-            // 内圈4点 + 外圈12点
+            //内圈4点 + 外圈12点，3*3的9宫格
             for (int dx = -1; dx <= 1; dx++)
             {
                 for (int dy = -1; dy <= 1; dy++)
@@ -161,10 +162,10 @@ namespace ChessGame.Client.Views
                     int gx = mineX + dx, gy = mineY + dy;
                     if (_mineMap.InBounds(gx, gy))
                     {
-                        points.Add((gx, gy));       // 格子左上
-                        points.Add((gx + 1, gy));   // 格子右上
-                        points.Add((gx, gy + 1));   // 格子左下
-                        points.Add((gx + 1, gy + 1)); // 格子右下
+                        points.Add((gx, gy));       //棋子左上格子
+                        points.Add((gx + 1, gy));   //棋子右上格子
+                        points.Add((gx, gy + 1));   //棋子左下格子
+                        points.Add((gx + 1, gy + 1)); //棋子右下格子
                     }
                 }
             }
@@ -174,6 +175,7 @@ namespace ChessGame.Client.Views
             }
         }
 
+        //更新棋盘上的地雷提示数字
         private void UpdateMineNumbers()
         {
             // 移除旧数字
@@ -195,7 +197,7 @@ namespace ChessGame.Client.Views
                 Text = "💥",
                 FontSize = 24,
                 FontWeight = FontWeights.Bold,
-                Foreground=Brushes.DarkGoldenrod,
+                Foreground = Brushes.DarkGoldenrod,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 Width = spacing,
@@ -217,7 +219,7 @@ namespace ChessGame.Client.Views
             var explosionImage = new Image
             {
                 Source = _explosionImage,
-                Width = spacing,//1个格子大小
+                Width = spacing,//开始时一个格子大小
                 Height = spacing,
                 Stretch = Stretch.Uniform,
                 RenderTransformOrigin = new Point(0.5, 0.5), // 中心点缩放
@@ -227,46 +229,46 @@ namespace ChessGame.Client.Views
             Canvas.SetLeft(explosionImage, centerX - explosionImage.Width / 2);
             Canvas.SetTop(explosionImage, centerY - explosionImage.Height / 2);
 
-            // 添加到画布
+            //添加到画布
             BoardCanvas.Children.Add(explosionImage);
 
-            // 创建缩放动画（扩大到3x3格子大小）
+            //创建缩放动画（扩大到3x3格子大小）
             var scaleTransform = new ScaleTransform(1, 1);
             explosionImage.RenderTransform = scaleTransform;
 
             var scaleAnimation = new DoubleAnimation
             {
                 From = 1,
-                To = 3, // 3倍=3x3格子
+                To = 3, //从1*1到3*3的大小
                 Duration = TimeSpan.FromMilliseconds(800),
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
             };
 
-            // 创建透明度动画（2秒淡出）
+            //创建透明度动画（2秒淡出消失）
             var opacityAnimation = new DoubleAnimation
             {
                 From = 1,
                 To = 0,
-                BeginTime = TimeSpan.FromMilliseconds(800), // 缩放完成后开始
+                BeginTime = TimeSpan.FromMilliseconds(800), //缩放完成后开始
                 Duration = TimeSpan.FromSeconds(2),
                 FillBehavior = FillBehavior.Stop
             };
 
-            // 动画完成后移除图片
+            //动画完成后移除图片
             opacityAnimation.Completed += (s, e) =>
             {
                 BoardCanvas.Children.Remove(explosionImage);
             };
 
-            // 启动动画
+            //启动动画
             scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, scaleAnimation);
             scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, scaleAnimation);
             explosionImage.BeginAnimation(UIElement.OpacityProperty, opacityAnimation);
 
-            // 等待2秒
+            //等待2秒
             await Task.Delay(2000);
 
-            // 移除图标
+            //移除地雷小图标
             BoardCanvas.Children.Remove(explosionIcon);
         }
 
@@ -290,48 +292,48 @@ namespace ChessGame.Client.Views
                 };
                 */
 
-                // 创建更真实的棋子
-                var piece = CreateRealisticPiece(Brushes.LightGray); // 黑棋
+                //创建棋子
+                var piece = CreateRealisticPiece(Brushes.LightGray); //黑棋
 
-                // 调用 TryPlacePiece 方法
+                //调用 TryPlacePiece 方法
                 await _signalRService.TryPlacePiece(crossX, crossy);
+
                 //放置棋子
                 Canvas.SetLeft(piece, crossX * spacing - (spacing - 10) / 2);
                 Canvas.SetTop(piece, crossy * spacing - (spacing - 10) / 2);
                 BoardCanvas.Children.Add(piece);
 
-                // 检查是否引爆地雷
+                //检查是否引爆地雷
                 bool isExploded = _mineMap.CheckExplosion(crossX, crossy);
                 if (isExploded)
                 {
-                    // 获取被引爆的地雷位置
+                    //获取被引爆的地雷位置
                     var explodedMines = _mineMap.GetLastExplodedMines();
                     foreach (var (x, y) in explodedMines)
                     {
                         //显示地雷图标
                         await ShowExplosionEffect(x, y);
 
-                        // 清除受影响的棋子
+                        //清除受影响的棋子
                         ClearAffectedPieces(x, y);
 
-                        // 更新数字显示
+                        //更新数字显示
                         UpdateMineNumbers();
                     }
                 }
             }
         }
-
-        // 创建更真实的棋子（修正版）
+        //创建棋子
         private FrameworkElement CreateRealisticPiece(Brush baseColor)
         {
-            // 主容器
+            //主容器
             var container = new Grid
             {
                 Width = spacing - 10,
                 Height = spacing - 10
             };
 
-            // 棋子主体
+            //棋子主体
             var pieceBody = new Ellipse
             {
                 Width = spacing - 10,
@@ -341,21 +343,21 @@ namespace ChessGame.Client.Views
                 StrokeThickness = 0.5
             };
 
-            // 阴影效果（根据棋子颜色调整）
+            //阴影效果
             if (baseColor == Brushes.White)
             {
-                // 白棋：使用单一但精心调整的阴影
+                //白棋
                 pieceBody.Effect = new DropShadowEffect
                 {
                     Color = Colors.Black,
                     Direction = 320,
                     ShadowDepth = 3,
-                    Opacity = 0.4,  // 比之前更高一些
+                    Opacity = 0.4,
                     BlurRadius = 8,
                     RenderingBias = RenderingBias.Quality
                 };
 
-                // 添加额外的内阴影效果
+                //添加额外的内阴影效果
                 var innerShadow = new Ellipse
                 {
                     Width = spacing - 12,
@@ -370,7 +372,7 @@ namespace ChessGame.Client.Views
             }
             else
             {
-                // 黑棋：强阴影
+                //黑棋
                 pieceBody.Effect = new DropShadowEffect
                 {
                     Color = Colors.Black,
@@ -381,7 +383,7 @@ namespace ChessGame.Client.Views
                 };
             }
 
-            // 光泽效果（根据棋子颜色调整）
+            //光泽效果
             var highlight = new Ellipse
             {
                 Width = (spacing - 10) * 0.6,
@@ -406,7 +408,7 @@ namespace ChessGame.Client.Views
                         new Point(0.5, 1))
             };
 
-            // 边缘高光（仅白棋）
+            //边缘高光（仅白棋）
             if (baseColor == Brushes.White)
             {
                 var edgeGlow = new Ellipse
@@ -430,27 +432,28 @@ namespace ChessGame.Client.Views
                 container.Children.Add(edgeGlow);
             }
 
-            // 设置光泽位置
+            //设置光泽位置
             Canvas.SetLeft(highlight, (spacing - 10) * 0.2);
             Canvas.SetTop(highlight, (spacing - 10) * 0.1);
 
-            // 添加到容器
+            //添加到容器
             container.Children.Add(pieceBody);
             container.Children.Add(highlight);
 
             return container;
         }
-        // 修改方法签名以接受参数
+
+        //胜率进度条动画
         private void UpdateWinRateDisplay((double black, double white) probabilities)
         {
-            // 清除现有动画
+            //清除现有动画
             BlackWinProgress.BeginAnimation(ProgressBar.ValueProperty, null);
             WhiteWinProgress.BeginAnimation(ProgressBar.ValueProperty, null);
 
             double blackWinProb = Math.Max(0, Math.Min(1, probabilities.black));
             double whiteWinProb = Math.Max(0, Math.Min(1, probabilities.white));
 
-            // 创建动画 - 添加缓动函数使动画更平滑
+            //创建动画，添加缓动函数使动画更平滑
             var blackAnimation = new DoubleAnimation(
                 blackWinProb,
                 new Duration(TimeSpan.FromMilliseconds(500)))
@@ -465,25 +468,26 @@ namespace ChessGame.Client.Views
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
             };
 
-            // 应用动画
+            //应用动画
             BlackWinProgress.BeginAnimation(ProgressBar.ValueProperty, blackAnimation);
             WhiteWinProgress.BeginAnimation(ProgressBar.ValueProperty, whiteAnimation);
 
-            // 更新文本
+            //更新文本
             BlackWinText.Text = $"{blackWinProb:P0}";
             WhiteWinText.Text = $"{whiteWinProb:P0}";
         }
 
-        // 保留原来的无参数版本作为包装器
+        //无参数版本
         private void UpdateWinRateDisplay()
         {
             if (_gameManager == null) return;
             UpdateWinRateDisplay(_gameManager.GetWinProbabilities());
         }
 
+        //测试进度条是否能正常显示
         private void TestWinRate_Click(object sender, RoutedEventArgs e)
         {
-            // 随机生成测试数据
+            //随机生成测试数据
             Random rand = new Random();
             double blackProb = rand.NextDouble();
             double whiteProb = 1 - blackProb;
@@ -492,4 +496,5 @@ namespace ChessGame.Client.Views
             UpdateWinRateDisplay(testProbabilities);
         }
     }
+
 }

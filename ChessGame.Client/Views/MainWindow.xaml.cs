@@ -15,9 +15,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ChessGame.Client.Views
 {
-    /// <summary>
-    /// MainWindow.xaml 的交互逻辑
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -25,6 +22,8 @@ namespace ChessGame.Client.Views
             InitializeComponent();
 
         }
+
+        //选择人机模式
         private void ManMachineMode_Click(object sender, RoutedEventArgs e)
         {
             GameViewAI GameViewAI = new GameViewAI();
@@ -32,6 +31,8 @@ namespace ChessGame.Client.Views
 
             this.Close();
         }
+
+        //选择联机模式
         private void OnlineMode_Click(object sender, RoutedEventArgs e)
         {
             GameView GameView = new GameView();
@@ -39,6 +40,8 @@ namespace ChessGame.Client.Views
 
             this.Close();
         }
+
+        //通信测试
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             testWindow testwindow = new testWindow();

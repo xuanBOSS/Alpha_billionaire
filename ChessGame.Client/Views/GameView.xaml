@@ -67,6 +67,9 @@
 
                 <!--玩家A信息-->
                 <Border Grid.Row="1" BorderBrush="DarkGoldenrod" BorderThickness="3" CornerRadius="8" Margin="0,0,30,0" Padding="5">
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" Direction="315" ShadowDepth="5" Opacity="0.4" BlurRadius="8"/>
+                    </Border.Effect>
                     <Grid Grid.Row = "1" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width = "1*" />
@@ -75,14 +78,14 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- 添加头像 -->
-                        <Grid Grid.Column="0" Width="58" Height="58" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid Grid.Column="0" Width="56" Height="56" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Ellipse Fill="Black" />
                             <!-- 黑色背景，可选 -->
                             <Ellipse Stroke="Black" StrokeThickness="1" />
                             <!-- 边框 -->
                             <Image Source="pack://application:,,,/source/picture1.png" Stretch="UniformToFill">
                                 <Image.Clip>
-                                    <EllipseGeometry Center="29,29" RadiusX="29" RadiusY="29"/>
+                                    <EllipseGeometry Center="28,28" RadiusX="28" RadiusY="28"/>
                                 </Image.Clip>
                             </Image>
                         </Grid>
@@ -119,8 +122,16 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="ProgressBar">
                                                 <Grid>
-                                                    <Border Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="3"/>
-                                                    <Border Name="PART_Indicator" Background="{TemplateBinding Foreground}" CornerRadius="3" HorizontalAlignment="Left"/>
+                                                    <Border Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="3">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect ShadowDepth="3" Color="Black" Opacity="0.4" BlurRadius="5"/>
+                                                        </Border.Effect>
+                                                    </Border>
+                                                    <Border Name="PART_Indicator" Background="{TemplateBinding Foreground}" CornerRadius="3" HorizontalAlignment="Left">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect ShadowDepth="2" Color="Black" Opacity="0.3" BlurRadius="3"/>
+                                                        </Border.Effect>
+                                                    </Border>
                                                 </Grid>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -135,6 +146,9 @@
 
                 <!--玩家B玩家信息-->
                 <Border Grid.Row="4" BorderBrush="DarkGoldenrod" BorderThickness="3" CornerRadius="8" Margin="0,0,30,0" Padding="5">
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" Direction="315" ShadowDepth="5" Opacity="0.4" BlurRadius="8"/>
+                    </Border.Effect>
                     <Grid Grid.Row = "4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width = "1*" />
@@ -143,14 +157,14 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- 添加头像 -->
-                        <Grid Grid.Column="0" Width="58" Height="58" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid Grid.Column="0" Width="56" Height="56" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Ellipse Fill="Black" />
                             <!-- 黑色背景，可选 -->
                             <Ellipse Stroke="Black" StrokeThickness="1" />
                             <!-- 边框 -->
                             <Image Source="pack://application:,,,/source/picture2.png" Stretch="UniformToFill">
                                 <Image.Clip>
-                                    <EllipseGeometry Center="29,29" RadiusX="29" RadiusY="29"/>
+                                    <EllipseGeometry Center="28,28" RadiusX="28" RadiusY="28"/>
                                 </Image.Clip>
                             </Image>
                         </Grid>
@@ -187,8 +201,16 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="ProgressBar">
                                                 <Grid>
-                                                    <Border Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="3"/>
-                                                    <Border Name="PART_Indicator" Background="{TemplateBinding Foreground}" CornerRadius="3" HorizontalAlignment="Left"/>
+                                                    <Border Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="3">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect ShadowDepth="3" Color="Black" Opacity="0.4" BlurRadius="5"/>
+                                                        </Border.Effect>
+                                                    </Border>
+                                                    <Border Name="PART_Indicator" Background="{TemplateBinding Foreground}" CornerRadius="3" HorizontalAlignment="Left">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect ShadowDepth="2" Color="Black" Opacity="0.3" BlurRadius="3"/>
+                                                        </Border.Effect>
+                                                    </Border>
                                                 </Grid>
                                             </ControlTemplate>
                                         </Setter.Value>

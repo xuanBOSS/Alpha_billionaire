@@ -14,6 +14,9 @@
     <Compile Update="Views\GameViewAI.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

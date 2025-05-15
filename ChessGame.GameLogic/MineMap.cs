@@ -105,14 +105,14 @@
             }
         }
 
-        // 地雷爆炸综合处理
+        //地雷爆炸处理
         public void ExplodeMine(int mineX, int mineY)
         {
-            mines[mineX, mineY] = false; // 清除地雷
-            UpdateAdjacentNumbers(mineX, mineY); // 更新周围数字
+            mines[mineX, mineY] = false; //清除地雷
+            UpdateAdjacentNumbers(mineX, mineY); //更新周围数字
         }
 
-        // 更新周围3x3格子的数字提示
+        //更新周围3x3格子的数字提示
         public void UpdateAdjacentNumbers(int x, int y)
         {
             for (int dx = -1; dx <= 1; dx++)
@@ -130,6 +130,7 @@
 
         private List<(int x, int y)> _lastExplodedMines = new List<(int, int)>();
 
+        //放置棋子后检查周围是否有地雷
         public bool CheckExplosion(int px, int py)
         {
             _lastExplodedMines.Clear();

@@ -99,6 +99,7 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
                 }
             }
         }
+
         // 初始化AI并设置难度
         private void InitializeAI(AIDifficulty difficulty)
         {
@@ -121,6 +122,7 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
 
             ai = aiFactory(Board.Size, searchDepth);
         }
+
         public bool TryMakeMove_1(int x, int y, out string message)
         {
             message = "";
@@ -302,7 +304,7 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
             return snapshot;
         }
 
-        //添加获取胜率的方法
+        //获取胜率
         public (double black, double white) GetWinProbabilities()
         {
             if (aiHelper == null) return (0.5, 0.5);

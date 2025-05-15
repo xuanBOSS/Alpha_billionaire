@@ -5,32 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessGame.Client.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="800">
+        Title="MainWindow" Height="560" Width="600">
     <Window.Resources>
         <!-- 定义按钮样式 -->
         <Style x:Key="ModernButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Cornsilk"/>
             <!-- 默认背景色 -->
-            <Setter Property="Foreground" Value="DarkGoldenrod"/>
+            <Setter Property="Background" Value="Cornsilk"/>
             <!-- 文字颜色 -->
-            <Setter Property="BorderBrush" Value="DarkGoldenrod"/>
+            <Setter Property="Foreground" Value="DarkGoldenrod"/>
             <!-- 边框颜色 -->
-            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="DarkGoldenrod"/>
             <!-- 边框厚度 -->
+            <Setter Property="BorderThickness" Value="2"/>
+            <!-- 字体大小 -->
             <Setter Property="FontSize" Value="25"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="80"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" 
-                        CornerRadius="10" 
+                        <Border x:Name="border" CornerRadius="10" 
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
                             <Border.Effect>
-                                <DropShadowEffect Color="Black" Direction="270" ShadowDepth="5" BlurRadius="10" Opacity="0.3"/>
+                                <!-- 阴影 -->
+                                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="7" BlurRadius="10" Opacity="0.3"/>
                             </Border.Effect>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
@@ -45,7 +46,7 @@
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
-                            <!-- 按下效果 -->
+                            <!-- 鼠标按下效果 -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Background" Value="Wheat"/>
                                 <Setter Property="BorderBrush" Value="Tan"/>
@@ -63,61 +64,87 @@
     </Window.Resources>
 
     <Grid>
+        <!-- 整体分行 -->
         <Grid.RowDefinitions>
             <RowDefinition Height = "1*" />
             <RowDefinition Height = "6*" />
-
         </Grid.RowDefinitions>
 
+
+        <!-- 第一行：标题栏 -->
         <Grid Grid.Row = "0">
             <Grid.ColumnDefinitions>
+                <!-- 头像 -->
                 <ColumnDefinition Width = "2*" />
+                <!-- 昵称积分 -->
                 <ColumnDefinition Width = "1*" />
-                <ColumnDefinition Width = "2*" />
+                <!-- 项目名称 -->
                 <ColumnDefinition Width = "14*" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <!-- 头像 -->
+            <Grid Grid.Column="0" Width="64" Height="64" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- 黑色背景 -->
                 <Ellipse Fill="Black" />
-                <!-- 黑色背景，可选 -->
-                <Ellipse Stroke="Black" StrokeThickness="1" />
                 <!-- 边框 -->
+                <Ellipse Stroke="Black" StrokeThickness="1" />
+                <!-- 头像来源 -->
                 <Image Source="pack://application:,,,/source/picture1.png" Stretch="UniformToFill">
                     <Image.Clip>
-                        <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"/>
+                        <!-- 中心点和半径 -->
+                        <EllipseGeometry Center="32,32" RadiusX="32" RadiusY="32"/>
                     </Image.Clip>
                 </Image>
             </Grid>
 
+            <!-- 昵称和积分 -->
             <Grid Grid.Column = "1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height = "1*" />
                     <RowDefinition Height = "1*" />
                 </Grid.RowDefinitions>
-                <TextBox Grid.Row = "0" Text = "昵称" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
-                <TextBox Grid.Row = "1" Text = "积分" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "15" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                <TextBox Grid.Row = "0" Text = "昵称" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "15" 
+                         VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                <TextBox Grid.Row = "1" Text = "积分" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "15" 
+                         VerticalAlignment = "Center" HorizontalAlignment = "Center" />
             </Grid>
 
+            <!-- 项目名称 -->
             <Grid Grid.Column = "3">
-                <TextBlock Text = "Alpha Billionaire" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "50" Margin = "30,15,220,5" VerticalAlignment = "Center" />
+                <TextBlock Text = "Alpha Billionaire" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "50" 
+                           Margin = "60,20,0,0" VerticalAlignment = "Center" />
             </Grid>
 
         </Grid>
 
+        <!-- 下面部分 -->
         <Grid Grid.Row = "1">
             <Grid.RowDefinitions>
                 <RowDefinition Height = "1*" />
-                <RowDefinition Height = "1*" />
-                <RowDefinition Height = "1*" />
-                <RowDefinition Height = "1*" />
-                <RowDefinition Height = "1*" />
+                <RowDefinition Height = "2*" />
+                <RowDefinition Height = "2*" />
+                <RowDefinition Height = "2*" />
+                <RowDefinition Height = "2*" />
                 <RowDefinition Height = "1*" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Row = "1" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" Content = "人机模式" FontFamily="FZYaoTi" FontSize = "32" VerticalAlignment = "Center" HorizontalAlignment = "Center" Click = "ManMachineMode_Click"/>
-            <Button Grid.Row = "2" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" Content = "联机模式" FontFamily="FZYaoTi" FontSize = "32" VerticalAlignment = "Center" HorizontalAlignment = "Center" Click = "OnlineMode_Click"/>
-            <Button Grid.Row = "3" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" Content = "排行榜" FontFamily="FZYaoTi" FontSize = "32" VerticalAlignment = "Center" HorizontalAlignment = "Center" />
-            <Button Grid.Row = "4" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" Content = "testButton" FontFamily="FZYaoTi" FontSize = "32" VerticalAlignment = "Center" HorizontalAlignment = "Center" Click = "Button_Click" />
+            <!-- 人机模式按钮 -->
+            <Button Grid.Row = "1" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" 
+                    Content = "人机模式" FontFamily="FZYaoTi" FontSize = "32" 
+                    VerticalAlignment = "Center" HorizontalAlignment = "Center" Click = "ManMachineMode_Click"/>
+            <!-- 联机模式按钮 -->
+            <Button Grid.Row = "2" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" 
+                    Content = "联机模式" FontFamily="FZYaoTi" FontSize = "32" 
+                    VerticalAlignment = "Center" HorizontalAlignment = "Center" Click = "OnlineMode_Click"/>
+            <!-- 排行榜按钮 -->
+            <Button Grid.Row = "3" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" 
+                    Content = "排行榜" FontFamily="FZYaoTi" FontSize = "32" 
+                    VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+            <!-- test通信按钮 -->
+            <Button Grid.Row = "4" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" 
+                    Content = "testButton" FontFamily="FZYaoTi" FontSize = "32" 
+                    VerticalAlignment = "Center" HorizontalAlignment = "Center" Click = "Button_Click" />
         </Grid>
 
     </Grid>
