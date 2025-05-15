@@ -1975,11 +1975,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Server\\ChessGame.Server.csproj",
+      "projectUniqueName": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.Server\\ChessGame.Server.csproj",
       "projectName": "ChessGame.Server",
-      "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Server\\ChessGame.Server.csproj",
+      "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.Server\\ChessGame.Server.csproj",
       "packagesPath": "C:\\Users\\胡静雨\\.nuget\\packages\\",
-      "outputPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Server\\obj\\",
+      "outputPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\app\\vssdk\\NuGetPackages"
@@ -2000,17 +2000,17 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj": {
-              "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj"
+            "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj": {
+              "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj"
             },
-            "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.AI\\ChessGame.AI.csproj": {
-              "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.AI\\ChessGame.AI.csproj"
+            "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.AI\\ChessGame.AI.csproj": {
+              "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.AI\\ChessGame.AI.csproj"
             },
-            "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\ChessGame.Database.csproj": {
-              "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Database\\ChessGame.Database.csproj"
+            "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.Database\\ChessGame.Database.csproj": {
+              "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.Database\\ChessGame.Database.csproj"
             },
-            "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
-              "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj"
+            "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
+              "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj"
             }
           }
         }

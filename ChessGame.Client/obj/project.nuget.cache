@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Xbn4bSCdR7s=",
+  "dgSpecHash": "1lkKSrjstTw=",
   "success": true,
-  "projectFilePath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.Client\\ChessGame.Client.csproj",
+  "projectFilePath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.Client\\ChessGame.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\胡静雨\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\胡静雨\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\9.0.4\\microsoft.aspnetcore.connections.abstractions.9.0.4.nupkg.sha512",

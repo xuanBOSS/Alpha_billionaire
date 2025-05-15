@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "thrSJY25XmY=",
+  "dgSpecHash": "NDbHgZkjaMM=",
   "success": true,
-  "projectFilePath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+  "projectFilePath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\胡静雨\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\9.0.4\\microsoft.aspnetcore.connections.abstractions.9.0.4.nupkg.sha512",
     "C:\\Users\\胡静雨\\.nuget\\packages\\microsoft.aspnetcore.http.connections.client\\9.0.4\\microsoft.aspnetcore.http.connections.client.9.0.4.nupkg.sha512",

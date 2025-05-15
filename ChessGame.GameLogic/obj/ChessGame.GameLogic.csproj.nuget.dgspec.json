@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {}
+    "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {}
   },
   "projects": {
-    "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
+    "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+        "projectUniqueName": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
         "projectName": "ChessGame.GameLogic",
-        "projectPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+        "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
         "packagesPath": "C:\\Users\\胡静雨\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\软件构造基础\\五子棋GitHub\\Alpha_Billionaire\\ChessGame.GameLogic\\obj\\",
+        "outputPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\ChessGame.GameLogic\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\app\\vssdk\\NuGetPackages"

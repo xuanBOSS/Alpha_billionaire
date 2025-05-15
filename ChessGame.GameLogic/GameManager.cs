@@ -285,6 +285,7 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
             // 触发胜率更新事件
             WinProbabilityChanged?.Invoke(blackWinProb, whiteWinProb);
         }
+
         // 添加一个方法来获取棋盘快照，便于测试程序进行展示
         public PlayerColor[,] GetBoardSnapshot()
         {
@@ -299,6 +300,30 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
             }
 
             return snapshot;
+        }
+
+        //添加获取胜率的方法
+        public (double black, double white) GetWinProbabilities()
+        {
+            if (aiHelper == null) return (0.5, 0.5);
+
+            double blackWinProb = aiHelper.CalculateWinProbability(Board, MineMap, 1);
+            double whiteWinProb = aiHelper.CalculateWinProbability(Board, MineMap, 2);
+
+            // 归一化处理
+            double sum = blackWinProb + whiteWinProb;
+            if (sum > 0)
+            {
+                blackWinProb /= sum;
+                whiteWinProb /= sum;
+            }
+            else
+            {
+                blackWinProb = 0.5;
+                whiteWinProb = 0.5;
+            }
+
+            return (blackWinProb, whiteWinProb);
         }
     }
 }
