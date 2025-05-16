@@ -1,361 +1,22 @@
-﻿/*
+﻿using ChessGame.AI;
+using ChessGame.Database;
 using ChessGame.GameLogic;
-using System.Globalization;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Threading.Tasks;
 
 namespace testLogic
 {
     internal class Program
     {
-        public static void PrintBoard(GameManager gm)
-        {
-            int BoardSize = 15;
-            int MapSize = 14;   
 
-            for(int i = 0; i < BoardSize; i++)
-            {
-                Console.WriteLine();
-                for (int j = 0; j < BoardSize; j++)
-                {
-                    if(gm.Board.grid[i,j] == PlayerColor.None) Console.Write("+   ");
-                    else if (gm.Board.grid[i, j] == PlayerColor.Black) Console.Write("●   ");
-                    else
-                    {
-                         Console.Write("○   ");
-                    }
-                }
-
-                Console.WriteLine();
-                if (i == MapSize) continue;
-                Console.Write("  ");
-                for(int j = 0;j < MapSize;j++)
-                {
-                    if (gm.MineMap.mines[i, j] == true) Console.Write("@   ");
-                    else
-                    {
-                        if (gm.MineMap.numbers[i, j] == 0) Console.Write("    ");
-                        else Console.Write($"{gm.MineMap.numbers[i, j]}   ");
-                    }
-
-                }
-
-            }
-        }
-        static void Main(string[] args)
-        {
-            GameManager gameManager = new GameManager();
-            Console.SetWindowSize(200, 200);  // 设置控制台窗口大小为200列，200行
-            Console.SetBufferSize(200, 300);  // 设置缓冲区大小为200列，300行
+        // 添加数据库上下文工厂，用于创建数据库连接
+        private static readonly ChessDbContextFactory _dbContextFactory = new ChessDbContextFactory();
 
 
-            while (true)
-            {
-                Console.Clear();  // 清除上一轮的显示
-                Console.Out.Flush();  // 强制刷新输出
-                /*System.Diagnostics.Process.Start("cmd.exe", "/C cls");
-                Console.Out.Flush();  // 强制刷新输出
-                PrintBoard(gameManager);
-
-                Console.WriteLine($"轮到玩家{gameManager.CurrentPlayer}，请输入坐标：");
-                string input = Console.ReadLine();
-
-                int x = 0;
-                int y = 0;
-                int num = 0;
-                for(int i = 0;i<input.Length;i++)
-                {
-                    if (input[i] >= '0' && input[i] <= '9') num = num*10 +(input[i]-'0');
-                    else
-                    {
-                        x = num;
-                        num = 0;
-                    }
-                }
-                y = num;
-
-                string message;
-                gameManager.TryMakeMove_1(x, y,out message);
-            }
-        }
-    }
-}
-/*
-using System;
-using System.Threading;
-using ChessGame.GameLogic;
-using ChessGame.GameLogic.Interfaces;
-using ChessGame.AI;
-
-namespace ChessGame.TestLogic
-{
-    class AITester
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("=== 五子棋 AI 测试程序 ===");
-
-            // 测试自对弈
-            Console.WriteLine("\n[测试1] AI 自对弈测试");
-            TestAIvsAI();
-
-            // 测试AI移动生成
-            Console.WriteLine("\n[测试2] AI 落子生成测试");
-            TestAIMoveGeneration();
-
-            // 测试胜率估计
-            Console.WriteLine("\n[测试3] 胜率估计测试");
-            TestWinRateCalculation();
-
-            Console.WriteLine("\n所有测试完成。按任意键退出...");
-            Console.ReadKey();
-        }
-
-        static void TestAIvsAI()
-        {
-            // 创建AI工厂
-            Func<int, int, IAI> aiFactory = (boardSize, depth) => new AlphaBetaAI(boardSize, depth);
-            Func<int, IAIHelper> aiHelperFactory = (boardSize) => new AIHelper(boardSize);
-
-            // 创建游戏管理器，设置为AI对AI模式
-            var gameManager = new GameManager(
-                GameMode.AIVsAI,
-                AIDifficulty.Easy,  // 使用Easy难度以加快测试速度
-                aiFactory,
-                aiHelperFactory
-            );
-
-            // 添加事件监听器
-            int moveCount = 0;
-            gameManager.MoveExecuted += (x, y, color) =>
-            {
-                moveCount++;
-                Console.WriteLine($"移动 {moveCount}: {color} 在 ({x}, {y})");
-                PrintBoard(gameManager);
-            };
-
-            gameManager.WinProbabilityChanged += (blackWinRate, whiteWinRate) =>
-            {
-                Console.WriteLine($"胜率: 黑方 {blackWinRate:P1} | 白方 {whiteWinRate:P1}");
-            };
-
-            gameManager.GameEnded += (winner) =>
-            {
-                Console.WriteLine($"游戏结束! 获胜方: {winner}");
-            };
-
-            // 模拟游戏直到结束或达到最大回合数
-            int maxTurns = 50;
-            int currentTurn = 0;
-
-            while (!gameManager.IsGameOver && currentTurn < maxTurns)
-            {
-                // 模拟AI移动
-                if (gameManager.CurrentPlayer == PlayerColor.Black)
-                {
-                    // 模拟黑方AI移动
-                    SimulateAIMove(gameManager, PlayerColor.Black);
-                }
-                else
-                {
-                    // 模拟白方AI移动
-                    SimulateAIMove(gameManager, PlayerColor.White);
-                }
-
-                currentTurn++;
-                Thread.Sleep(100); // 添加短暂延迟使输出更易读
-            }
-
-            // 输出结果
-            if (gameManager.IsGameOver)
-            {
-                Console.WriteLine($"游戏在 {currentTurn} 回合后结束。获胜方: {gameManager.Winner}");
-            }
-            else
-            {
-                Console.WriteLine($"游戏达到最大回合数 ({maxTurns})。未决出胜负。");
-            }
-        }
-
-        static void TestAIMoveGeneration()
-        {
-            // 创建AI实例
-            var ai = new AlphaBetaAI(15, 3);  // 15x15棋盘，搜索深度3
-
-            // 创建一个棋盘和地雷图
-            var board = new Board();
-            var mineMap = new MineMap();
-            mineMap.PlaceMinesByDensity(0.1);
-            mineMap.CalculateNumbers();
-
-            // 放置一些棋子形成特定局面
-            board.PlaceMove(new Move(7, 7, PlayerColor.Black));
-            board.PlaceMove(new Move(7, 8, PlayerColor.White));
-            board.PlaceMove(new Move(8, 7, PlayerColor.Black));
-            board.PlaceMove(new Move(8, 8, PlayerColor.White));
-
-            // 打印初始棋盘
-            Console.WriteLine("初始棋盘状态:");
-            PrintBoard(board);
-
-            // 测试黑方AI移动
-            Console.WriteLine("\n黑方AI思考中...");
-            (int blackX, int blackY) = ai.GetNextMoveWithTimeLimit(board, mineMap, 1, 2000);
-            Console.WriteLine($"黑方AI选择落子位置: ({blackX}, {blackY})");
-
-            // 执行黑方移动
-            board.PlaceMove(new Move(blackX, blackY, PlayerColor.Black));
-            PrintBoard(board);
-
-            // 测试白方AI移动
-            Console.WriteLine("\n白方AI思考中...");
-            (int whiteX, int whiteY) = ai.GetNextMoveWithTimeLimit(board, mineMap, 2, 2000);
-            Console.WriteLine($"白方AI选择落子位置: ({whiteX}, {whiteY})");
-
-            // 执行白方移动
-            board.PlaceMove(new Move(whiteX, whiteY, PlayerColor.White));
-            PrintBoard(board);
-        }
-
-        static void TestWinRateCalculation()
-        {
-            // 创建AI助手
-            var aiHelper = new AIHelper(15);
-
-            // 创建测试局面
-            var board = new Board();
-            var mineMap = new MineMap();
-            int boardSize = 15;
-            int[,] numbers = new int[boardSize, boardSize];
-            Console.WriteLine("1. 空棋盘胜率测试");
-            double blackEmptyRate = aiHelper.CalculateWinProbability(board, mineMap, 1);
-            double whiteEmptyRate = aiHelper.CalculateWinProbability(board, mineMap, 2);
-            PrintWinRates(blackEmptyRate, whiteEmptyRate);
-
-            Console.WriteLine("\n2. 黑方优势局面胜率测试");
-            // 创建黑方占优局面 - 黑方接近连五
-            board.PlaceMove(new Move(7, 7, PlayerColor.Black));
-            board.PlaceMove(new Move(7, 8, PlayerColor.Black));
-            board.PlaceMove(new Move(7, 9, PlayerColor.Black));
-            board.PlaceMove(new Move(7, 10, PlayerColor.Black));
-            // 白方在其他位置
-            board.PlaceMove(new Move(5, 5, PlayerColor.White));
-            board.PlaceMove(new Move(5, 6, PlayerColor.White));
-
-            PrintBoard(board);
-            double blackAdvRate = aiHelper.CalculateWinProbability(board, mineMap, 1);
-            double whiteAdvRate = aiHelper.CalculateWinProbability(board, mineMap, 2);
-            PrintWinRates(blackAdvRate, whiteAdvRate);
-
-            Console.WriteLine("\n3. 白方优势局面胜率测试");
-            // 重置棋盘
-            board = new Board();
-            // 创建白方占优局面
-            board.PlaceMove(new Move(8, 8, PlayerColor.White));
-            board.PlaceMove(new Move(9, 8, PlayerColor.White));
-            board.PlaceMove(new Move(10, 8, PlayerColor.White));
-            board.PlaceMove(new Move(11, 8, PlayerColor.White));
-            // 黑方在其他位置
-            board.PlaceMove(new Move(3, 3, PlayerColor.Black));
-            board.PlaceMove(new Move(3, 4, PlayerColor.Black));
-
-            PrintBoard(board);
-            double blackAdvRate2 = aiHelper.CalculateWinProbability(board, mineMap, 1);
-            double whiteAdvRate2 = aiHelper.CalculateWinProbability(board, mineMap, 2);
-            PrintWinRates(blackAdvRate2, whiteAdvRate2);
-        }
-
-        // 辅助方法：打印棋盘
-        static void PrintBoard(Board board)
-        {
-            Console.WriteLine("  | 0 1 2 3 4 5 6 7 8 9 10111213141");
-            Console.WriteLine("--+--------------------------------");
-
-            for (int y = 0; y < Board.Size; y++)
-            {
-                Console.Write($"{y,2}| ");
-                for (int x = 0; x < Board.Size; x++)
-                {
-                    PlayerColor cell = board.GetCell(x, y);
-                    char symbol = cell == PlayerColor.None ? '.' :
-                                 cell == PlayerColor.Black ? 'X' : 'O';
-                    Console.Write($"{symbol} ");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        // 辅助方法：打印棋盘（使用GameManager）
-        static void PrintBoard(GameManager gameManager)
-        {
-            var snapshot = gameManager.GetBoardSnapshot();
-            Console.WriteLine("  | 0 1 2 3 4 5 6 7 8 9 10111213141");
-            Console.WriteLine("--+--------------------------------");
-
-            for (int y = 0; y < snapshot.GetLength(1); y++)
-            {
-                Console.Write($"{y,2}| ");
-                for (int x = 0; x < snapshot.GetLength(0); x++)
-                {
-                    PlayerColor cell = snapshot[x, y];
-                    char symbol = cell == PlayerColor.None ? '.' :
-                                 cell == PlayerColor.Black ? 'X' : 'O';
-                    Console.Write($"{symbol} ");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        // 辅助方法：打印胜率
-        static void PrintWinRates(double blackRate, double whiteRate)
-        {
-            // 归一化
-            double sum = blackRate + whiteRate;
-            if (sum > 0)
-            {
-                blackRate /= sum;
-                whiteRate /= sum;
-            }
-            else
-            {
-                blackRate = 0.5;
-                whiteRate = 0.5;
-            }
-
-            Console.WriteLine($"胜率评估: 黑方 {blackRate:P1} | 白方 {whiteRate:P1}");
-        }
-
-        // 辅助方法：模拟AI移动
-        static void SimulateAIMove(GameManager gameManager, PlayerColor player)
-        {
-            // 创建一个AlphaBetaAI实例
-            var ai = new AlphaBetaAI(Board.Size, 2);
-
-            // 获取当前棋盘状态
-            var board = gameManager.Board;
-            var mineMap = gameManager.MineMap;
-
-            // 计算最佳移动
-            int playerValue = player == PlayerColor.Black ? 1 : 2;
-            (int x, int y) = ai.GetNextMoveWithTimeLimit(board, mineMap, playerValue, 1000);
-
-            // 执行移动
-            string message;
-            if (!gameManager.TryMakeMove_1(x, y, out message))
-            {
-                Console.WriteLine($"AI移动失败: {message}");
-            }
-        }
-    }
-}
-*/
-
-using ChessGame.AI;
-using ChessGame.GameLogic;
-using System;
-
-namespace testLogic
-{
-    internal class Program
-    {
         public static void PrintBoard(GameManager gm)
         {
             int BoardSize = 15;
@@ -419,6 +80,41 @@ namespace testLogic
             }
             Console.WriteLine("--------------------------------");
         }
+        //static void Main(string[] args)
+        //{
+        //    try
+        //    {
+        //        Console.SetWindowSize(200, 200);  // 设置控制台窗口大小为200列，200行
+        //        Console.SetBufferSize(200, 300);  // 设置缓冲区大小为200列，300行
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // 忽略可能的窗口大小调整错误
+        //        Console.WriteLine("无法调整窗口大小，继续使用默认大小。");
+        //    }
+
+        //    // 显示游戏模式选择菜单
+        //    Console.WriteLine("欢迎来到五子棋游戏！");
+        //    Console.WriteLine("请选择游戏模式：");
+        //    Console.WriteLine("1. 人人对战");
+        //    Console.WriteLine("2. 人机对战");
+        //    Console.WriteLine("3. 人人对战（带胜率分析）");
+
+        //    int mode = GetValidInput(1, 3);
+
+        //    if (mode == 1)
+        //    {
+        //        PlayHumanVsHuman(false);
+        //    }
+        //    else if(mode == 2)
+        //    {
+        //        PlayHumanVsAI();
+        //    }
+        //    else
+        //    {
+        //        PlayHumanVsHuman(true);
+        //    }
+        //}
         static void Main(string[] args)
         {
             try
@@ -432,20 +128,324 @@ namespace testLogic
                 Console.WriteLine("无法调整窗口大小，继续使用默认大小。");
             }
 
+            // 显示主菜单
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("欢迎来到五子棋游戏测试程序！");
+                Console.WriteLine("请选择功能：");
+                Console.WriteLine("1. 游戏测试");
+                Console.WriteLine("2. 数据库测试");
+                Console.WriteLine("0. 退出程序");
+
+                int choice = GetValidInput(0, 2);
+
+                if (choice == 0)
+                {
+                    break;
+                }
+                else if (choice == 1)
+                {
+                    // 游戏模式测试
+                    GameModeTest();
+                }
+                else if (choice == 2)
+                {
+                    // 数据库测试
+                    DatabaseTest().Wait(); // 异步任务需要等待完成
+                }
+            }
+        }
+
+        // 新增：数据库测试功能
+        private static async Task DatabaseTest()
+        {
+            Console.Clear();
+            Console.WriteLine("========== 数据库功能测试 ==========");
+            Console.WriteLine("请选择测试功能：");
+            Console.WriteLine("1. 测试数据库连接");
+            Console.WriteLine("2. 注册新用户");
+            Console.WriteLine("3. 用户登录");
+            Console.WriteLine("4. 查看排行榜");
+            Console.WriteLine("5. 增加玩家胜利次数");
+            Console.WriteLine("0. 返回主菜单");
+
+            int choice = GetValidInput(0, 5);
+
+            switch (choice)
+            {
+                case 0:
+                    return;
+                case 1:
+                    await TestDatabaseConnection();
+                    break;
+                case 2:
+                    await RegisterUser();
+                    break;
+                case 3:
+                    await UserLogin();
+                    break;
+                case 4:
+                    await ViewLeaderboard();
+                    break;
+                case 5:
+                    await IncrementWins();
+                    break;
+            }
+
+            Console.WriteLine("\n按任意键返回...");
+            Console.ReadKey();
+        }
+
+        // 测试数据库连接
+        private static async Task TestDatabaseConnection()
+        {
+            Console.WriteLine("\n正在测试数据库连接...");
+
+            try
+            {
+                using (var dbContext = _dbContextFactory.CreateDbContext(Array.Empty<string>()))
+                {
+                    // 尝试从数据库获取数据
+                    bool canConnect = await dbContext.Database.CanConnectAsync();
+
+                    if (canConnect)
+                    {
+                        Console.WriteLine("✓ 数据库连接成功！");
+
+                        // 显示一些基本数据库信息
+                        int playerCount = await dbContext.Players.CountAsync();
+                        int recordCount = await dbContext.GameRecords.CountAsync();
+
+                        Console.WriteLine($"数据库信息:");
+                        Console.WriteLine($"- 用户数量: {playerCount}");
+                        Console.WriteLine($"- 游戏记录数量: {recordCount}");
+                        Console.WriteLine($"- 数据库提供商: {dbContext.Database.ProviderName}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("✗ 数据库连接失败！请检查连接字符串和服务器状态。");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"✗ 数据库连接错误: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"内部错误: {ex.InnerException.Message}");
+                }
+            }
+        }
+
+        // 注册新用户
+        private static async Task RegisterUser()
+        {
+            Console.WriteLine("\n===== 用户注册 =====");
+
+            Console.Write("请输入用户ID: ");
+            string userId = Console.ReadLine();
+
+            Console.Write("请输入密码: ");
+            string password = Console.ReadLine();
+
+            Console.Write("请输入昵称: ");
+            string userName = Console.ReadLine();
+
+            try
+            {
+                using (var dbContext = _dbContextFactory.CreateDbContext(Array.Empty<string>()))
+                {
+                    // 检查用户是否已存在
+                    var existingUser = await dbContext.Players.FindAsync(userId);
+                    if (existingUser != null)
+                    {
+                        Console.WriteLine("✗ 注册失败: 该用户ID已存在！");
+                        return;
+                    }
+
+                    // 创建新用户
+                    var newPlayer = new Player
+                    {
+                        UserId = userId,
+                        PassWord = password,
+                        UserName = userName
+                    };
+
+                    dbContext.Players.Add(newPlayer);
+
+                    // 创建新的游戏记录
+                    var newRecord = new GameRecord
+                    {
+                        UserId = userId,
+                        UserName = userName,
+                        WinTimes = 0
+                    };
+
+                    dbContext.GameRecords.Add(newRecord);
+
+                    await dbContext.SaveChangesAsync();
+                    Console.WriteLine("✓ 用户注册成功！");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"✗ 注册失败: {ex.Message}");
+            }
+        }
+
+        // 用户登录
+        private static async Task UserLogin()
+        {
+            Console.WriteLine("\n===== 用户登录 =====");
+
+            Console.Write("请输入用户ID: ");
+            string userId = Console.ReadLine();
+
+            Console.Write("请输入密码: ");
+            string password = Console.ReadLine();
+
+            try
+            {
+                using (var dbContext = _dbContextFactory.CreateDbContext(Array.Empty<string>()))
+                {
+                    // 查找用户
+                    var player = await dbContext.Players.FirstOrDefaultAsync(p => p.UserId == userId);
+
+                    if (player == null)
+                    {
+                        Console.WriteLine("✗ 登录失败: 用户不存在！");
+                        return;
+                    }
+
+                    if (player.PassWord != password)
+                    {
+                        Console.WriteLine("✗ 登录失败: 密码错误！");
+                        return;
+                    }
+
+                    // 获取用户的游戏记录
+                    var gameRecord = await dbContext.GameRecords.FindAsync(userId);
+
+                    Console.WriteLine("✓ 登录成功！");
+                    Console.WriteLine("\n===== 用户信息 =====");
+                    Console.WriteLine($"用户ID: {player.UserId}");
+                    Console.WriteLine($"昵称: {player.UserName}");
+                    Console.WriteLine($"胜利次数: {gameRecord?.WinTimes ?? 0}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"✗ 登录失败: {ex.Message}");
+            }
+        }
+
+        // 查看排行榜
+        private static async Task ViewLeaderboard()
+        {
+            Console.WriteLine("\n===== 游戏排行榜 =====");
+
+            try
+            {
+                using (var dbContext = _dbContextFactory.CreateDbContext(Array.Empty<string>()))
+                {
+                    // 获取排序后的游戏记录
+                    var leaderboard = await dbContext.GameRecords
+                        .OrderByDescending(r => r.WinTimes)
+                        .ToListAsync();
+
+                    if (leaderboard.Count == 0)
+                    {
+                        Console.WriteLine("暂无排行榜数据。");
+                        return;
+                    }
+
+                    // 打印排行榜表头
+                    Console.WriteLine("\n排名\t用户ID\t\t昵称\t\t胜利次数");
+                    Console.WriteLine("--------------------------------------------------");
+
+                    // 打印排行榜数据
+                    int rank = 1;
+                    int lastWins = -1;
+                    int lastRank = 0;
+
+                    foreach (var record in leaderboard)
+                    {
+                        // 处理并列排名
+                        if (record.WinTimes != lastWins)
+                        {
+                            lastRank = rank;
+                            lastWins = record.WinTimes;
+                        }
+
+                        // 打印排行信息
+                        Console.WriteLine($"{lastRank}\t{record.UserId}\t\t{record.UserName}\t\t{record.WinTimes}");
+                        rank++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"✗ 获取排行榜失败: {ex.Message}");
+            }
+        }
+
+        // 增加玩家胜利次数
+        private static async Task IncrementWins()
+        {
+            Console.WriteLine("\n===== 增加胜利次数 =====");
+
+            Console.Write("请输入用户ID: ");
+            string userId = Console.ReadLine();
+
+            try
+            {
+                using (var dbContext = _dbContextFactory.CreateDbContext(Array.Empty<string>()))
+                {
+                    // 查找用户游戏记录
+                    var gameRecord = await dbContext.GameRecords.FindAsync(userId);
+
+                    if (gameRecord == null)
+                    {
+                        Console.WriteLine("✗ 操作失败: 用户不存在！");
+                        return;
+                    }
+
+                    // 增加胜利次数
+                    gameRecord.WinTimes += 1;
+                    await dbContext.SaveChangesAsync();
+
+                    Console.WriteLine($"✓ 操作成功！{gameRecord.UserName} 的胜利次数已增加到 {gameRecord.WinTimes}。");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"✗ 操作失败: {ex.Message}");
+            }
+        }
+
+        // 游戏模式测试（原有游戏测试功能）
+        static void GameModeTest()
+        {
+            Console.Clear();
             // 显示游戏模式选择菜单
-            Console.WriteLine("欢迎来到五子棋游戏！");
             Console.WriteLine("请选择游戏模式：");
             Console.WriteLine("1. 人人对战");
             Console.WriteLine("2. 人机对战");
             Console.WriteLine("3. 人人对战（带胜率分析）");
+            Console.WriteLine("0. 返回主菜单");
 
-            int mode = GetValidInput(1, 3);
+            int mode = GetValidInput(0, 3);
 
-            if (mode == 1)
+            if (mode == 0)
+            {
+                return;
+            }
+            else if (mode == 1)
             {
                 PlayHumanVsHuman(false);
             }
-            else if(mode == 2)
+            else if (mode == 2)
             {
                 PlayHumanVsAI();
             }
@@ -454,6 +454,7 @@ namespace testLogic
                 PlayHumanVsHuman(true);
             }
         }
+
 
         // 获取有效的用户输入（数字在min和max之间）
         static int GetValidInput(int min, int max)

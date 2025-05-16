@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChessGame.AI\ChessGame.AI.csproj" />
+    <ProjectReference Include="..\ChessGame.Database\ChessGame.Database.csproj" />
     <ProjectReference Include="..\ChessGame.GameLogic\ChessGame.GameLogic.csproj" />
   </ItemGroup>
 

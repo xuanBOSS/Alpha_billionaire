@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj": {}
+    "D:\\Alpha\\Alpha_billionaire\\Alpha_billionaire.csproj": {}
   },
   "projects": {
-    "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj": {
+    "D:\\Alpha\\Alpha_billionaire\\Alpha_billionaire.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj",
+        "projectUniqueName": "D:\\Alpha\\Alpha_billionaire\\Alpha_billionaire.csproj",
         "projectName": "Alpha_billionaire",
-        "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj",
-        "packagesPath": "C:\\Users\\胡静雨\\.nuget\\packages\\",
-        "outputPath": "D:\\大二下课程\\软件构造基础\\五子棋GitHub\\Alpha_billionaire\\Alpha_billionaire\\obj\\",
+        "projectPath": "D:\\Alpha\\Alpha_billionaire\\Alpha_billionaire.csproj",
+        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
+        "outputPath": "D:\\Alpha\\Alpha_billionaire\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\app\\vssdk\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\胡静雨\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -78,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
