@@ -93,7 +93,7 @@ namespace ChessGame.Client.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ChessGame.Client;V1.0.0.0;component/views/gameviewai.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ChessGame.Client;component/views/gameviewai.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\GameViewAI.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

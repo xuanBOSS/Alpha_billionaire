@@ -53,7 +53,7 @@ namespace ChessGame.Client {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ChessGame.Client;V1.0.0.0;component/chessboard.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ChessGame.Client;component/chessboard.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ChessBoard.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

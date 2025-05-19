@@ -1,5 +1,7 @@
 using ChessGame.Server.Hubs;
 using ChessGame.Server.Controllers;
+using ChessGame.Database;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// 添加数据库服务
+builder.Services.AddDbContext<ChessDbContext>(options =>
+    options.UseMySql("Server=localhost;Database=chessgamedb;User=root;Password=200498;",
+        new MySqlServerVersion(new Version(8, 0, 21))));
 
 // 添加 SignalR 服务
 builder.Services.AddSignalR();

@@ -1,11 +1,24 @@
 {
   "Version": 1,
-  "Hash": "RwrA0DbGYsA5mpaLzPk2Hm7rPqixx4BCLX1kKiU7QNs=",
+  "Hash": "pre+C2PLw3tWrOEQPcHQwNFWtRFzuPc5UQ7+F7PL88E=",
   "Source": "ChessGame.Database",
   "BasePath": "_content/ChessGame.Database",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Alpha\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+      "Version": 2,
+      "Source": "ChessGame.GameLogic",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
