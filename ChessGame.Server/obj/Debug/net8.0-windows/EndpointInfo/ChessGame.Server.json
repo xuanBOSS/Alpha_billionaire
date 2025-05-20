@@ -81,20 +81,13 @@
       "Board": {
         "type": "object",
         "properties": {
-          "grid": {
-            "type": "array",
-            "items": { },
-            "nullable": true
-          },
-          "width": {
+          "totalMoveCount": {
             "type": "integer",
-            "format": "int32",
-            "readOnly": true
+            "format": "int32"
           },
-          "height": {
+          "maxMovesPerPlayer": {
             "type": "integer",
-            "format": "int32",
-            "readOnly": true
+            "format": "int32"
           }
         },
         "additionalProperties": false

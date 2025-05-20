@@ -16,3 +16,11 @@ D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebasset
 D:\Alpha_billionaire\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
 D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
 D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json

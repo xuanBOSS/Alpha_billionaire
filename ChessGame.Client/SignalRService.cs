@@ -5,19 +5,56 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
+using System.Windows;
 
 namespace ChessGame.Client
 {
     public class SignalRService
     {
         private HubConnection _connection;
+        private static SignalRService _instance;
+
+        // 用户信息
+        public UserInfo CurrentUser { get; private set; }
+        public bool IsLoggedIn => CurrentUser != null;
+
+        // 事件
+        public event Action<string> OnError;
+        public event Action<bool> OnConnectionStateChanged;
+
+        // 单例模式
+        public static SignalRService Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new SignalRService();
+                }
+                return _instance;
+            }
+        }
 
         public SignalRService()
         {
             // 创建与 SignalR Hub 的连接
             _connection = new HubConnectionBuilder()
                 .WithUrl("https://localhost:7101/gamehub") // SignalR 服务器的 URL
+                .WithAutomaticReconnect()
                 .Build();
+
+            _connection.Closed += async (error) =>
+            {
+                OnConnectionStateChanged?.Invoke(false);
+                await Task.Delay(new Random().Next(0, 5) * 1000);
+                await StartConnectionAsync();
+            };
+
+            _connection.Reconnected += (connectionId) =>
+            {
+                OnConnectionStateChanged?.Invoke(true);
+                return Task.CompletedTask;
+            };
         }
 
         // 启动 SignalR 连接
@@ -25,15 +62,122 @@ namespace ChessGame.Client
         {
             try
             {
-                await _connection.StartAsync();
-                Console.WriteLine("SignalR连接成功!");
+                if (_connection.State == HubConnectionState.Disconnected)
+                {
+                    await _connection.StartAsync();
+                    Console.WriteLine("SignalR连接成功!");
+                    OnConnectionStateChanged?.Invoke(true);
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"连接失败: {ex.Message}");
+                OnError?.Invoke($"连接服务器失败: {ex.Message}");
+                OnConnectionStateChanged?.Invoke(false);
             }
         }
 
+        // 用户登录
+        public async Task<LoginResult> LoginAsync(string userId, string password)
+        {
+            try
+            {
+                // 确保已连接
+                if (_connection.State == HubConnectionState.Disconnected)
+                {
+                    await StartConnectionAsync();
+                    // 再次检查连接状态
+                    if (_connection.State != HubConnectionState.Connected)
+                    {
+                        return new LoginResult
+                        {
+                            Success = false,
+                            ErrorMessage = "无法连接到服务器，请检查网络或稍后重试。"
+                        };
+                    }
+                }
+
+                // 调用服务器的登录方法
+                var response = await _connection.InvokeAsync<LoginResponse>("Login", userId, password);
+
+                if (response.Success)
+                {
+                    // 保存当前用户信息
+                    CurrentUser = new UserInfo
+                    {
+                        UserId = response.UserId,
+                        UserName = response.UserName
+                    };
+
+                    return new LoginResult { Success = true };
+                }
+                else
+                {
+                    return new LoginResult
+                    {
+                        Success = false,
+                        ErrorMessage = response.Message ?? "登录失败"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new LoginResult
+                {
+                    Success = false,
+                    ErrorMessage = $"登录请求出错: {ex.Message}"
+                };
+            }
+        }
+
+        // 用户注册
+        public async Task<RegisterResult> RegisterAsync(string userId, string password, string userName)
+        {
+            try
+            {
+                // 确保已连接
+                if (_connection.State == HubConnectionState.Disconnected)
+                {
+                    await StartConnectionAsync();
+                }
+
+                // 调用服务器的注册方法
+                var response = await _connection.InvokeAsync<RegisterResponse>("Register", userId, password, userName);
+
+                if (response.Success)
+                {
+                    return new RegisterResult { Success = true };
+                }
+                else
+                {
+                    return new RegisterResult
+                    {
+                        Success = false,
+                        ErrorMessage = response.Message ?? "注册失败"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RegisterResult
+                {
+                    Success = false,
+                    ErrorMessage = $"注册请求出错: {ex.Message}"
+                };
+            }
+        }
+
+        // 注销
+        public void Logout()
+        {
+            CurrentUser = null;
+        }
+
+        // 获取Hub连接以供其他需要直接访问Hub的方法使用
+        public HubConnection GetHubConnection()
+        {
+            return _connection;
+        }
 
 
 
@@ -49,6 +193,7 @@ namespace ChessGame.Client
             catch (Exception ex)
             {
                 Console.WriteLine($"发送消息失败: {ex.Message}");//房间匹配失败
+                OnError?.Invoke($"房间匹配失败: {ex.Message}");
             }
         }
 
@@ -79,6 +224,7 @@ namespace ChessGame.Client
             catch (Exception ex)
             {
                 Console.WriteLine($"发送消息失败: {ex.Message}");//退出房间失败
+                OnError?.Invoke($"退出房间失败: {ex.Message}");
             }
         }
 
@@ -98,6 +244,7 @@ namespace ChessGame.Client
             catch (Exception ex)
             {
                 Console.WriteLine($"发送消息失败: {ex.Message}");
+                OnError?.Invoke($"发送落子信息失败: {ex.Message}");
             }
         }
 
@@ -153,6 +300,7 @@ namespace ChessGame.Client
             catch (Exception ex)
             {
                 Console.WriteLine($"发送消息失败: {ex.Message}");
+                OnError?.Invoke($"发送消息失败: {ex.Message}");
             }
         }
 
@@ -162,5 +310,43 @@ namespace ChessGame.Client
         {
             await _connection.SendAsync("SendMessage", user, message);
         }*/
+        // 用户信息类
+        public class UserInfo
+        {
+            public string UserId { get; set; }
+            public string UserName { get; set; }
+        }
+
+        // 登录结果类
+        public class LoginResult
+        {
+            public bool Success { get; set; }
+            public string ErrorMessage { get; set; }
+        }
+
+        // 注册结果类
+        public class RegisterResult
+        {
+            public bool Success { get; set; }
+            public string ErrorMessage { get; set; }
+        }
+
+        // 服务器登录响应类
+        public class LoginResponse
+        {
+            public bool Success { get; set; }
+            public string UserId { get; set; }
+            public string UserName { get; set; }
+            public string Message { get; set; }
+        }
+
+        // 服务器注册响应类
+        public class RegisterResponse
+        {
+            public bool Success { get; set; }
+            public string UserId { get; set; }
+            public string UserName { get; set; }
+            public string Message { get; set; }
+        }
     }
 }

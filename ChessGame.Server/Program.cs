@@ -1,6 +1,9 @@
 using ChessGame.Server.Hubs;
 using ChessGame.Server.Controllers;
+using ChessGame.Server.Services;
 using ChessGame.Database;
+using ChessGame.GameLogic;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,10 +25,21 @@ builder.Services.AddDbContext<ChessDbContext>(options =>
 builder.Services.AddSignalR();
 
 // 允许所有网络接口访问
-builder.WebHost.UseUrls("http://0.0.0.0:5000;https://0.0.0.0:5001"); 
+builder.WebHost.UseUrls("http://0.0.0.0:5000;https://0.0.0.0:5001");
 
-//添加房间匹配服务
-builder.Services.AddSingleton<RoomManager>();
+// 注册PlayerSessionManager服务（必须在RoomManager之前注册）
+builder.Services.AddSingleton<PlayerSessionManager>();
+
+// 如果需要，注册AI服务
+builder.Services.AddSingleton<AIService>();
+
+// 3. 注册RoomManager，但使用工厂方法来解决循环依赖
+builder.Services.AddSingleton<RoomManager>(serviceProvider => {
+    var hubContext = serviceProvider.GetRequiredService<Microsoft.AspNetCore.SignalR.IHubContext<GameHub>>();
+    var dbContext = serviceProvider.GetRequiredService<ChessDbContext>();
+    var sessionManager = serviceProvider.GetRequiredService<PlayerSessionManager>();
+    return new RoomManager(hubContext, dbContext, sessionManager);
+});
 
 var app = builder.Build();
 
