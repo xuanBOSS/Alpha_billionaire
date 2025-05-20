@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.SignalR;
 using ChessGame.Database;
 using ChessGame.Server.Services;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChessGame.Server.Controllers
 {
@@ -236,15 +237,25 @@ namespace ChessGame.Server.Controllers
             }
             else if (result) // 落子成功且对局结束
             {
-                // 获取胜利者的用户ID
+                // 获取胜利者和失败者的用户ID
                 string winnerConnectionId = connectionId;
                 string winnerUserId = connectionId == room.Player1 ? room.Player1UserId : room.Player2UserId;
+                string loserUserId = connectionId == room.Player1 ? room.Player2UserId : room.Player1UserId;
 
                 // 更新胜利次数
                 await UpdateWinRecord(winnerUserId);
 
+                // 发送游戏结束消息
                 await _hubContext.Clients.Group(room.RoomID)
                     .SendAsync("GameOver", msg);
+
+                // 发送排行榜信息给获胜者和失败者
+                var playerRank = await GetPlayerRank(winnerUserId);
+                var rankChangeMsg = playerRank > 0
+                    ? $"恭喜！您当前排名第{playerRank}位"
+                    : "您暂未进入排行榜";
+                await _hubContext.Clients.Client(winnerConnectionId)
+                    .SendAsync("RankInfo", rankChangeMsg, true);
             }
             else // 如果落子失败或者需要爆破
             {
@@ -252,16 +263,120 @@ namespace ChessGame.Server.Controllers
                     .SendAsync("PauseGame", msg);
             }
         }
+        // 获取玩家当前排名
+        private async Task<int> GetPlayerRank(string userId)
+        {
+            // 找出玩家在排行榜中的位置
+            var allPlayers = await _dbContext.GameRecords
+                .OrderByDescending(g => g.WinTimes)
+                .ToListAsync();
 
+            for (int i = 0; i < allPlayers.Count; i++)
+            {
+                if (allPlayers[i].UserId == userId)
+                {
+                    return i + 1; // 返回1-based索引作为排名
+                }
+            }
+
+            return 0; // 玩家不在排行榜中
+        }
         // 更新胜利记录
         private async Task UpdateWinRecord(string userId)
         {
-            var gameRecord = await _dbContext.GameRecords.FindAsync(userId);
-            if (gameRecord != null)
+            try
             {
-                gameRecord.WinTimes += 1;
-                await _dbContext.SaveChangesAsync();
+                // 查找用户的游戏记录
+                var gameRecord = await _dbContext.GameRecords.FindAsync(userId);
+                if (gameRecord != null)
+                {
+                    // 更新胜利次数
+                    gameRecord.WinTimes += 1;
+                    await _dbContext.SaveChangesAsync();
+
+                    // 通知所有客户端排行榜已更新
+                    await NotifyLeaderboardUpdated();
+                }
+                else
+                {
+                    // 如果记录不存在，创建新记录
+                    var player = await _dbContext.Players.FindAsync(userId);
+                    if (player != null)
+                    {
+                        var newRecord = new GameRecord
+                        {
+                            UserId = player.UserId,
+                            UserName = player.UserName,
+                            WinTimes = 1
+                        };
+                        _dbContext.GameRecords.Add(newRecord);
+                        await _dbContext.SaveChangesAsync();
+
+                        // 通知所有客户端排行榜已更新
+                        await NotifyLeaderboardUpdated();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // 记录错误但不中断游戏流程
+                Console.WriteLine($"更新胜利记录失败: {ex.Message}");
             }
         }
+
+        // 通知所有客户端排行榜已更新
+        private async Task NotifyLeaderboardUpdated()
+        {
+            try
+            {
+                // 获取最新的排行榜数据
+                var leaderboard = await GetTopPlayersAsync(10);
+
+                // 将排行榜数据广播给所有客户端
+                await _hubContext.Clients.All.SendAsync("LeaderboardUpdated", leaderboard);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"通知排行榜更新失败: {ex.Message}");
+            }
+        }
+
+        // 获取排行榜前N名玩家
+        private async Task<List<LeaderboardEntry>> GetTopPlayersAsync(int count)
+        {
+            // 获取按胜利次数排序的前N名玩家
+            var topPlayers = await _dbContext.GameRecords
+                .OrderByDescending(g => g.WinTimes)
+                .Take(count)
+                .ToListAsync();
+
+            var result = new List<LeaderboardEntry>();
+            int rank = 1;
+            int lastScore = -1;
+            int lastRank = 0;
+
+            foreach (var player in topPlayers)
+            {
+                // 处理相同分数的情况
+                if (player.WinTimes != lastScore)
+                {
+                    lastRank = rank;
+                    lastScore = player.WinTimes;
+                }
+
+                result.Add(new LeaderboardEntry
+                {
+                    UserId = player.UserId,
+                    UserName = player.UserName,
+                    WinTimes = player.WinTimes,
+                    Rank = lastRank
+                });
+
+                rank++;
+            }
+
+            return result;
+        }
+
     }
 }

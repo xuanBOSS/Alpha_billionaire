@@ -60,10 +60,28 @@ namespace ChessGame.Client
         // 启动 SignalR 连接
         public async Task StartConnectionAsync()
         {
+            //try
+            //{
+            //    if (_connection.State == HubConnectionState.Disconnected)
+            //    {
+            //        await _connection.StartAsync();
+            //        Console.WriteLine("SignalR连接成功!");
+            //        OnConnectionStateChanged?.Invoke(true);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"连接失败: {ex.Message}");
+            //    OnError?.Invoke($"连接服务器失败: {ex.Message}");
+            //    OnConnectionStateChanged?.Invoke(false);
+            //}
             try
             {
                 if (_connection.State == HubConnectionState.Disconnected)
                 {
+                    Console.WriteLine("正在连接到服务器...");
+                    Console.WriteLine($"连接URL: {_connection.ConnectionId}");
+
                     await _connection.StartAsync();
                     Console.WriteLine("SignalR连接成功!");
                     OnConnectionStateChanged?.Invoke(true);
@@ -72,7 +90,21 @@ namespace ChessGame.Client
             catch (Exception ex)
             {
                 Console.WriteLine($"连接失败: {ex.Message}");
-                OnError?.Invoke($"连接服务器失败: {ex.Message}");
+
+                // 输出更详细的错误信息
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"内部错误: {ex.InnerException.Message}");
+                }
+
+                // 提供更友好的错误提示
+                string errorMessage = $"连接服务器失败: {ex.Message}\n\n" +
+                    "可能的原因:\n" +
+                    "1. 服务器未运行\n" +
+                    "2. 连接URL配置错误\n" +
+                    "3. 网络连接问题";
+
+                OnError?.Invoke(errorMessage);
                 OnConnectionStateChanged?.Invoke(false);
             }
         }
@@ -179,9 +211,6 @@ namespace ChessGame.Client
             return _connection;
         }
 
-
-
-
         //房间匹配窗口可能需要注册的消息
         //请求进行房间匹配
         public async Task TryMatchRoom()
@@ -228,11 +257,6 @@ namespace ChessGame.Client
             }
         }
 
-
-
-
-
-
         //对战窗口可能需要注册的消息
         //向服务端传送落子信息
         public async Task TryPlacePiece(int x, int y)//传入落子位置(x,y)
@@ -271,15 +295,6 @@ namespace ChessGame.Client
         {
             _connection.On<string>("State", ShowState);
         }
-
-
-
-
-
-
-
-
-
         //testWindow中对服务端和客户端的检查代码
 
         // 注册接收消息的事件
@@ -347,6 +362,51 @@ namespace ChessGame.Client
             public string UserId { get; set; }
             public string UserName { get; set; }
             public string Message { get; set; }
+        }
+
+        public async Task<List<LeaderboardEntry>> GetLeaderboardAsync()
+        {
+            try
+            {
+                if (_connection.State != HubConnectionState.Connected)
+                {
+                    await StartConnectionAsync();
+                    if (_connection.State != HubConnectionState.Connected)
+                    {
+                        Console.WriteLine("无法连接到服务器获取排行榜数据");
+                        return new List<LeaderboardEntry>();
+                    }
+                }
+
+                // 调用服务端的GetLeaderboard方法
+                var leaderboard = await _connection.InvokeAsync<List<LeaderboardEntry>>("GetLeaderboard");
+                Console.WriteLine($"成功获取排行榜数据，共{leaderboard.Count}条记录");
+                return leaderboard;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"获取排行榜数据失败: {ex.Message}");
+                OnError?.Invoke($"获取排行榜数据失败: {ex.Message}");
+                return new List<LeaderboardEntry>();
+            }
+        }
+
+        // 添加LeaderboardEntry类
+        public class LeaderboardEntry
+        {
+            public string UserId { get; set; }
+            public string UserName { get; set; }
+            public int WinTimes { get; set; }
+            public int Rank { get; set; }
+        }
+
+        // 注册排行榜更新事件
+        public void RegisterLeaderboardUpdatedEvent(Action<List<LeaderboardEntry>> onLeaderboardUpdated)
+        {
+            _connection.On<List<LeaderboardEntry>>("LeaderboardUpdated", (leaderboard) =>
+            {
+                onLeaderboardUpdated?.Invoke(leaderboard);
+            });
         }
     }
 }

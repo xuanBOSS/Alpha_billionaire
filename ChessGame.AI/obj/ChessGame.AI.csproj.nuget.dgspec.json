@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.AI\\ChessGame.AI.csproj": {}
+    "D:\\Alpha\\ChessGame.AI\\ChessGame.AI.csproj": {}
   },
   "projects": {
-    "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.AI\\ChessGame.AI.csproj": {
+    "D:\\Alpha\\ChessGame.AI\\ChessGame.AI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.AI\\ChessGame.AI.csproj",
+        "projectUniqueName": "D:\\Alpha\\ChessGame.AI\\ChessGame.AI.csproj",
         "projectName": "ChessGame.AI",
-        "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.AI\\ChessGame.AI.csproj",
-        "packagesPath": "C:\\Users\\胡静雨\\.nuget\\packages\\",
-        "outputPath": "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.AI\\obj\\",
+        "projectPath": "D:\\Alpha\\ChessGame.AI\\ChessGame.AI.csproj",
+        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
+        "outputPath": "D:\\Alpha\\ChessGame.AI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\app\\vssdk\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\胡静雨\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
-                "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj"
+              "D:\\Alpha\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
+                "projectPath": "D:\\Alpha\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj"
               }
             }
           }
@@ -82,24 +83,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
+    "D:\\Alpha\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+        "projectUniqueName": "D:\\Alpha\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
         "projectName": "ChessGame.GameLogic",
-        "projectPath": "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
-        "packagesPath": "C:\\Users\\胡静雨\\.nuget\\packages\\",
-        "outputPath": "D:\\大二下课程\\软件构造基础\\五子棋\\Alpha_billionaire\\ChessGame.GameLogic\\obj\\",
+        "projectPath": "D:\\Alpha\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+        "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
+        "outputPath": "D:\\Alpha\\ChessGame.GameLogic\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\app\\vssdk\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\胡静雨\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -108,6 +109,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -160,7 +162,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

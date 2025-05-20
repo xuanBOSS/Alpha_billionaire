@@ -86,8 +86,23 @@ namespace ChessGame.Client.Views
                 {
                     await _signalRService.StartConnectionAsync();
 
-                    // 检查连接是否成功
-                    if (_signalRService.GetHubConnection().State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+                    // 修改后 - 添加空引用检查
+                    if (_signalRService == null)
+                    {
+                        MessageBox.Show("SignalR服务未初始化", "系统错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    // 安全获取连接
+                    var hubConnection = _signalRService.GetHubConnection();
+                    if (hubConnection == null)
+                    {
+                        MessageBox.Show("SignalR连接未初始化", "连接错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    // 检查连接状态
+                    if (hubConnection.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
                     {
                         MessageBox.Show("无法连接到服务器，请检查网络连接。", "连接错误", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;

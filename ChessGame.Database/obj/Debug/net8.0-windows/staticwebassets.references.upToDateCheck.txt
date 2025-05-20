@@ -8,3 +8,15 @@ D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
 D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
 D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
 D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json
+D:\Alpha\ChessGame.GameLogic\obj\Debug\net8.0-windows\staticwebassets.build.json

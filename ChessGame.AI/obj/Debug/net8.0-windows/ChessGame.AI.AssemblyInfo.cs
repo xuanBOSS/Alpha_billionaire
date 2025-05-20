@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChessGame.AI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef4133017568c7931965fb33ef5981cd374887e2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+395d941bf6421674859725d4118e90445d931b42")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChessGame.AI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChessGame.AI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
