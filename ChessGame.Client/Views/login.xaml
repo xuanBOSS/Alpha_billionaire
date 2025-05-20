@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessGame.Client.Views"
         mc:Ignorable="d"
-        Title="login" Height="500" Width="400">
+        Title="login" Height="500" Width="400"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!-- 按钮样式 -->
         <Style x:Key="ModernButtonStyle" TargetType="Button">
@@ -123,7 +124,7 @@
 
             <!-- Welcome to -->
             <Grid Grid.Row="0">
-                <TextBlock Text = "Welcome to" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "30" 
+                <TextBlock Text = "欢迎来到" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "30" 
                            HorizontalAlignment="Center" VerticalAlignment = "Bottom" />
             </Grid>
             
@@ -138,7 +139,7 @@
         <Grid Grid.Row="1">
             <!-- 用户名输入框 -->
             <TextBox x:Name="UsernameTextBox" Style="{StaticResource LoginTextBoxStyle}" 
-                     Width="220" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center">
+                     Width="220" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center">
                 
             </TextBox>
         </Grid>
@@ -152,7 +153,7 @@
         </Grid>-->
         <!-- 修改密码输入框为PasswordBox -->
         <Grid Grid.Row="2">
-            <PasswordBox x:Name="PasswordBox" Width="220" Height="40" 
+            <PasswordBox x:Name="PasswordBox" Width="220" Height="50" 
                  VerticalAlignment="Top" HorizontalAlignment="Center"
                  FontSize="18" Padding="10,5">
                 <PasswordBox.Resources>
@@ -208,13 +209,13 @@
 
             <!-- 登录按钮 -->
             <Button Grid.Column="0" x:Name="LogInButton" Style="{StaticResource ModernButtonStyle}" 
-            Height="44" Width="100" Content="Log in" FontFamily="FZYaoTi" FontSize="26" 
-            VerticalAlignment="Center" HorizontalAlignment="Center" Click="Login_Click"/>
+            Height="48" Width="100" Content="登录" FontFamily="FZYaoTi" FontSize="26" 
+            VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Login_Click"/>
 
             <!-- 注册按钮 -->
             <Button Grid.Column="1" x:Name="RegisterButton" Style="{StaticResource ModernButtonStyle}" 
-            Height="44" Width="100" Content="Register" FontFamily="FZYaoTi" FontSize="26" 
-            VerticalAlignment="Center" HorizontalAlignment="Center" Click="Register_Click"/>
+            Height="48" Width="100" Content="注册" FontFamily="FZYaoTi" FontSize="26" 
+            VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Register_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -7,7 +7,66 @@
         xmlns:local="clr-namespace:ChessGame.Client.Views"
         mc:Ignorable="d"
         Title = "GameView" Height = "700" Width = "900"
-        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- 按钮样式 -->
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <!-- 默认背景色 -->
+            <Setter Property="Background" Value="Cornsilk"/>
+            <!-- 文字颜色 -->
+            <Setter Property="Foreground" Value="DarkGoldenrod"/>
+            <!-- 边框颜色 -->
+            <Setter Property="BorderBrush" Value="DarkGoldenrod"/>
+            <!-- 边框厚度 -->
+            <Setter Property="BorderThickness" Value="2"/>
+            <!-- 字体大小 -->
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+            CornerRadius="4" 
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}">
+                            <Border.Effect>
+                                <!-- 阴影 -->
+                                <DropShadowEffect Color="Black" Direction="300" ShadowDepth="7" BlurRadius="10" Opacity="0.3"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- 鼠标悬停效果 -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Wheat"/>
+                                <Setter Property="BorderBrush" Value="DarkGoldenrod"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" Direction="270" ShadowDepth="7" BlurRadius="15" Opacity="0.3"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <!-- 鼠标按下效果 -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="Wheat"/>
+                                <Setter Property="BorderBrush" Value="Tan"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" Direction="270" ShadowDepth="3" BlurRadius="5" Opacity="0.3"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <!--第一行显示标题-->
@@ -61,8 +120,7 @@
                     <RowDefinition Height = "1*" />
                     <RowDefinition Height = "1*" />
                     <RowDefinition Height = "1*" />
-                    <RowDefinition Height = "1*" />
-                    <RowDefinition Height = "1*" />
+                    <RowDefinition Height = "2*" />
                 </Grid.RowDefinitions>
 
                 <!--玩家A信息-->
@@ -222,7 +280,11 @@
                     </StackPanel>
                 </Grid>
 
-                <Button Grid.Row="6" Content="测试胜率动画" Margin="10" Click="TestWinRate_Click"/>
+                <Button Grid.Row="0" Content="测试胜率" Click="TestWinRate_Click" Height="20" Width="60"/>
+
+                <Button Grid.Row="6" Click="Return_Click" Style="{StaticResource ModernButtonStyle}" Height = "44" Width = "100" 
+                        Content = "退出游戏" FontFamily="FZYaoTi" FontSize = "20" Margin="0,0,40,20"
+                        VerticalAlignment = "Center" HorizontalAlignment = "Center" />
             </Grid>
         </Grid>
     </Grid>

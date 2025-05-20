@@ -22,6 +22,9 @@ namespace ChessGame.Client.Views
         private MineMap _mineMap;
 
         private readonly ImageSource _explosionImage;//存储图片资源
+
+        private Dictionary<(int, int), Rectangle> _coverTiles = new Dictionary<(int, int), Rectangle>();
+
         public GameViewAI()
         {
             InitializeComponent();
@@ -39,7 +42,7 @@ namespace ChessGame.Client.Views
             _mineMap.PrintDebugBoard(); //调试输出
 
             DrawBoard();//绘制棋盘
-            DrawMineNumbers(); //绘制数字提示
+            //DrawMineNumbers(); //绘制数字提示
 
             _signalRService = new SignalRService();
         }
@@ -49,6 +52,9 @@ namespace ChessGame.Client.Views
         {
             for (int i = 0; i < BoardSize; i++)
             {
+                // 清除现有覆盖层
+                _coverTiles.Clear();
+
                 // 绘制横线
                 Line horizontalLine = new Line
                 {
@@ -72,6 +78,35 @@ namespace ChessGame.Client.Views
                     StrokeThickness = 1
                 };
                 BoardCanvas.Children.Add(verticalLine);
+            }
+            // 添加覆盖层
+            for (int x = 0; x < BoardSize - 1; x++)
+            {
+                for (int y = 0; y < BoardSize - 1; y++)
+                {
+                    var cover = new Rectangle
+                    {
+                        Width = spacing,
+                        Height = spacing,
+                        Fill = new SolidColorBrush(Color.FromRgb(210, 180, 140)), //不透明
+                        Stroke = Brushes.Wheat,//背景色
+                        StrokeThickness = 0.5
+                    };
+
+                    Canvas.SetLeft(cover, x * spacing);
+                    Canvas.SetTop(cover, y * spacing);
+                    BoardCanvas.Children.Add(cover);
+                    _coverTiles[(x, y)] = cover;
+
+                    // 设置覆盖层在棋盘上层
+                    Panel.SetZIndex(cover, 10);
+                }
+            }
+
+            // 确保覆盖层在数字上方
+            foreach (var cover in _coverTiles.Values)
+            {
+                Panel.SetZIndex(cover, 1);
             }
         }
 
@@ -178,14 +213,45 @@ namespace ChessGame.Client.Views
         //更新棋盘上的地雷提示数字
         private void UpdateMineNumbers()
         {
-            // 移除旧数字
+            //先清除所有已显示的数字
             for (int i = BoardCanvas.Children.Count - 1; i >= 0; i--)
             {
                 if (BoardCanvas.Children[i] is TextBlock)
+                {
                     BoardCanvas.Children.RemoveAt(i);
+                }
             }
-            // 重新绘制数字
-            DrawMineNumbers();
+
+            //重新绘制所有已揭开的数字
+            for (int x = 0; x < BoardSize - 1; x++)
+            {
+                for (int y = 0; y < BoardSize - 1; y++)
+                {
+                    if (!_coverTiles.ContainsKey((x, y)) && _mineMap.numbers[x, y] > 0)
+                    {
+                        var numText = new TextBlock
+                        {
+                            Text = _mineMap.numbers[x, y].ToString(),
+                            FontSize = 16,
+                            FontWeight = FontWeights.Bold,
+                            Foreground = GetNumberColor(_mineMap.numbers[x, y]),
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Width = spacing,
+                            Height = spacing,
+                            TextAlignment = TextAlignment.Center
+                        };
+
+                        double centerX = x * spacing + spacing / 2;
+                        double centerY = y * spacing + spacing / 2;
+
+                        Canvas.SetLeft(numText, centerX - numText.Width / 2);
+                        Canvas.SetTop(numText, centerY - numText.Height / 2 + 8);
+                        Panel.SetZIndex(numText, 5);
+                        BoardCanvas.Children.Add(numText);
+                    }
+                }
+            }
         }
 
         //显示爆炸效果
@@ -231,6 +297,7 @@ namespace ChessGame.Client.Views
 
             //添加到画布
             BoardCanvas.Children.Add(explosionImage);
+            Panel.SetZIndex(explosionImage, 100); //设置高ZIndex，图片在最上层
 
             //创建缩放动画（扩大到3x3格子大小）
             var scaleTransform = new ScaleTransform(1, 1);
@@ -280,31 +347,39 @@ namespace ChessGame.Client.Views
 
             //计算最近交叉点
             int crossX = (int)System.Math.Round(clickPoint.X / spacing);
-            int crossy = (int)System.Math.Round(clickPoint.Y / spacing);
+            int crossY = (int)System.Math.Round(clickPoint.Y / spacing);
 
-            if (crossX >= 0 && crossX < BoardSize && crossy >= 0 && crossy < BoardSize)
+            if (crossX >= 0 && crossX < BoardSize && crossY >= 0 && crossY < BoardSize)
             {
-                /*Ellipse blackPiece = new Ellipse
-                {
-                    Width = spacing - 10,
-                    Height = spacing - 10,
-                    Fill = Brushes.Black
-                };
-                */
-
                 //创建棋子
                 var piece = CreateRealisticPiece(Brushes.LightGray); //黑棋
 
                 //调用 TryPlacePiece 方法
-                await _signalRService.TryPlacePiece(crossX, crossy);
+                await _signalRService.TryPlacePiece(crossX, crossY);
 
                 //放置棋子
                 Canvas.SetLeft(piece, crossX * spacing - (spacing - 10) / 2);
-                Canvas.SetTop(piece, crossy * spacing - (spacing - 10) / 2);
+                Canvas.SetTop(piece, crossY * spacing - (spacing - 10) / 2);
                 BoardCanvas.Children.Add(piece);
 
+                //检查周围4个格子是否有雷
+                if (HasAdjacentMines(crossX, crossY))
+                {
+                    //有雷，揭开3x3区域
+                    Reveal3x3Area(crossX, crossY);
+                }
+                else
+                {
+                    //无雷，递归展开
+                    //从周围4个格子开始展开
+                    if (crossX > 0 && crossY > 0) RevealAdjacentSafeArea(crossX - 1, crossY - 1); // 左上
+                    if (crossX < BoardSize - 1 && crossY > 0) RevealAdjacentSafeArea(crossX, crossY - 1); // 右上
+                    if (crossX > 0 && crossY < BoardSize - 1) RevealAdjacentSafeArea(crossX - 1, crossY); // 左下
+                    if (crossX < BoardSize - 1 && crossY < BoardSize - 1) RevealAdjacentSafeArea(crossX, crossY); // 右下
+                }
+
                 //检查是否引爆地雷
-                bool isExploded = _mineMap.CheckExplosion(crossX, crossy);
+                bool isExploded = _mineMap.CheckExplosion(crossX, crossY);
                 if (isExploded)
                 {
                     //获取被引爆的地雷位置
@@ -318,12 +393,28 @@ namespace ChessGame.Client.Views
                         ClearAffectedPieces(x, y);
 
                         //更新数字显示
+                        //引爆后揭开地雷周围的数字(3x3区域)
+                        for (int dx = -1; dx <= 1; dx++)
+                        {
+                            for (int dy = -1; dy <= 1; dy++)
+                            {
+                                int revealX = x + dx;
+                                int revealY = y + dy;
+                                if (revealX >= 0 && revealX < BoardSize - 1 &&
+                                    revealY >= 0 && revealY < BoardSize - 1)
+                                {
+                                    RemoveCover(revealX, revealY);
+                                }
+                            }
+                        }
+                        //更新数字显示
                         UpdateMineNumbers();
                     }
                 }
             }
         }
-            //创建棋子
+        
+        //创建棋子
         private FrameworkElement CreateRealisticPiece(Brush baseColor)
         {
             //主容器
@@ -495,6 +586,165 @@ namespace ChessGame.Client.Views
             var testProbabilities = (black: blackProb, white: whiteProb);
             UpdateWinRateDisplay(testProbabilities);
         }
-    }
-    
+
+        //递归展开覆盖层
+        private void RevealAdjacentSafeArea(int x, int y)
+        {
+            //检查坐标是否有效
+            if (x < 0 || x >= BoardSize - 1 || y < 0 || y >= BoardSize - 1)
+                return;
+
+            //如果这个格子已经被揭开，则停止
+            if (!_coverTiles.ContainsKey((x, y)))
+                return;
+
+            //揭开当前格子
+            RemoveCover(x, y);
+
+            //如果当前格子数字为0(周围无地雷)，则递归揭开相邻4个方向的格子
+            if (_mineMap.numbers[x, y] == 0)
+            {
+                //4方向递归(上、下、左、右)
+                RevealAdjacentSafeArea(x, y - 1); // 上
+                RevealAdjacentSafeArea(x, y + 1); // 下
+                RevealAdjacentSafeArea(x - 1, y); // 左
+                RevealAdjacentSafeArea(x + 1, y); // 右
+            }
+        }
+
+        //检查交叉点周围的4个格子是否有雷
+        private bool HasAdjacentMines(int crossX, int crossY)
+        {
+            // 检查每个格子是否在范围内且有雷
+            bool hasMine = false;
+
+            // 左上格子
+            if (crossX > 0 && crossY > 0 && _mineMap.IsMine(crossX - 1, crossY - 1))
+                hasMine = true;
+
+            // 右上格子
+            if (crossX < BoardSize - 1 && crossY > 0 && _mineMap.IsMine(crossX, crossY - 1))
+                hasMine = true;
+
+            // 左下格子
+            if (crossX > 0 && crossY < BoardSize - 1 && _mineMap.IsMine(crossX - 1, crossY))
+                hasMine = true;
+
+            // 右下格子
+            if (crossX < BoardSize - 1 && crossY < BoardSize - 1 && _mineMap.IsMine(crossX, crossY))
+                hasMine = true;
+
+            return hasMine;
+        }
+
+        //揭开交叉点周围的3x3区域
+        private void Reveal3x3Area(int crossX, int crossY)
+        {
+            //交叉点对应的左上格子坐标
+            int gridX = crossX - 1;
+            int gridY = crossY - 1;
+
+            //揭开3x3格子区域
+            for (int dx = 0; dx <= 1; dx++)
+            {
+                for (int dy = 0; dy <= 1; dy++)
+                {
+                    int revealX = gridX + dx;
+                    int revealY = gridY + dy;
+
+                    if (revealX >= 0 && revealX < BoardSize - 1 &&
+                        revealY >= 0 && revealY < BoardSize - 1)
+                    {
+                        RemoveCover(revealX, revealY);
+                    }
+                }
+            }
+        }
+
+        //揭开覆盖层
+        private void RemoveCover(int x, int y)
+        {
+            if (_coverTiles.TryGetValue((x, y), out var cover))
+            {
+                //先移除该位置可能存在的旧数字
+                ClearNumberAt(x, y);
+
+                BoardCanvas.Children.Remove(cover);
+                _coverTiles.Remove((x, y));
+
+                //如果这个格子有数字，显示它
+                if (_mineMap.numbers[x, y] > 0)
+                {
+                    var numText = new TextBlock
+                    {
+                        Text = _mineMap.numbers[x, y].ToString(),
+                        FontSize = 16,
+                        FontWeight = FontWeights.Bold,
+                        Foreground = GetNumberColor(_mineMap.numbers[x, y]),
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Width = spacing,
+                        Height = spacing,
+                        TextAlignment = TextAlignment.Center
+                    };
+
+                    double centerX = x * spacing + spacing / 2;
+                    double centerY = y * spacing + spacing / 2;
+
+                    Canvas.SetLeft(numText, centerX - numText.Width / 2);
+                    Canvas.SetTop(numText, centerY - numText.Height / 2 + 8);
+
+                    //确保数字在正确层级
+                    Panel.SetZIndex(numText, 5);
+                    BoardCanvas.Children.Add(numText);
+                }
+            }
+        }
+        
+        //添加清除数字的方法
+        private void ClearNumberAt(int x, int y)
+        {
+            for (int i = BoardCanvas.Children.Count - 1; i >= 0; i--)
+            {
+                if (BoardCanvas.Children[i] is TextBlock textBlock)
+                {
+                    double left = Canvas.GetLeft(textBlock);
+                    double top = Canvas.GetTop(textBlock);
+                    int tx = (int)((left + spacing / 2) / spacing);
+                    int ty = (int)((top + spacing / 2 - 8) / spacing);
+
+                    if (tx == x && ty == y)
+                    {
+                        BoardCanvas.Children.RemoveAt(i);
+                    }
+                }
+            }
+        }
+
+        private void Return_Click2(object sender, RoutedEventArgs e)
+        {
+            ShowReturnTest();
+        }
+
+        private void ShowReturnTest()
+        {
+            ReturnTest ReturnTest = new ReturnTest
+            {
+                Owner = this // 设置所有者窗口以确保对话框显示在主窗口中央
+            };
+
+            ReturnTest.ShowDialog(); // 使用ShowDialog以模态方式显示
+
+            if (ReturnTest.DialogResult == true)
+            {
+                //_isProgrammaticClose = true;
+                // 用户点击确定
+                MainWindow MainWindow = new MainWindow();
+                MainWindow.Show();
+
+                this.Close(); // 关闭当前窗口
+            }
+            // 用户点击取消或关闭，不做任何操作
+        }
+    } 
 }

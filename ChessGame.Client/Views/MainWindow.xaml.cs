@@ -41,6 +41,14 @@ namespace ChessGame.Client.Views
             this.Close();
         }
 
+        private void RankingList_Click(object sender, RoutedEventArgs e)
+        {
+            RankingList RankingList = new RankingList();
+            RankingList.Show();
+
+            this.Close();
+        }
+
         //通信测试
         private void Button_Click(object sender, RoutedEventArgs e)
         {

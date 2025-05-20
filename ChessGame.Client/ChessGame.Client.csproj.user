@@ -17,7 +17,19 @@
     <Compile Update="Views\login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Lose.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RankingList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ReturnTest.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Win.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

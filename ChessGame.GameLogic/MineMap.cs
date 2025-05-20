@@ -207,5 +207,9 @@
             return x >= 0 && x < Size && y >= 0 && y < Size;
         }
 
+        public bool IsMine(int x, int y)
+        {
+            return InBounds(x, y) && mines[x, y];
+        }
     }
 }

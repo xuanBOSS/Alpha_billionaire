@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChessGame.Client.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="560" Width="600">
+        Title="MainWindow" Height="560" Width="600"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!-- 定义按钮样式 -->
         <Style x:Key="ModernButtonStyle" TargetType="Button">
@@ -21,7 +22,7 @@
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Width" Value="200"/>
-            <Setter Property="Height" Value="80"/>
+            <Setter Property="Height" Value="70"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -130,19 +131,19 @@
             </Grid.RowDefinitions>
 
             <!-- 人机模式按钮 -->
-            <Button Grid.Row = "1" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" 
+            <Button Grid.Row = "1" Style="{StaticResource ModernButtonStyle}" Height = "70" Width = "200" 
                     Content = "人机模式" FontFamily="FZYaoTi" FontSize = "32" 
                     VerticalAlignment = "Center" HorizontalAlignment = "Center" Click = "ManMachineMode_Click"/>
             <!-- 联机模式按钮 -->
-            <Button Grid.Row = "2" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" 
+            <Button Grid.Row = "2" Style="{StaticResource ModernButtonStyle}" Height = "70" Width = "200" 
                     Content = "联机模式" FontFamily="FZYaoTi" FontSize = "32" 
                     VerticalAlignment = "Center" HorizontalAlignment = "Center" Click = "OnlineMode_Click"/>
             <!-- 排行榜按钮 -->
-            <Button Grid.Row = "3" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" 
+            <Button Grid.Row = "3" Style="{StaticResource ModernButtonStyle}" Height = "70" Width = "200" 
                     Content = "排行榜" FontFamily="FZYaoTi" FontSize = "32" 
-                    VerticalAlignment = "Center" HorizontalAlignment = "Center" />
+                    VerticalAlignment = "Center" HorizontalAlignment = "Center" Click="RankingList_Click"/>
             <!-- test通信按钮 -->
-            <Button Grid.Row = "4" Style="{StaticResource ModernButtonStyle}" Height = "80" Width = "200" 
+            <Button Grid.Row = "4" Style="{StaticResource ModernButtonStyle}" Height = "70" Width = "200" 
                     Content = "testButton" FontFamily="FZYaoTi" FontSize = "32" 
                     VerticalAlignment = "Center" HorizontalAlignment = "Center" Click = "Button_Click" />
         </Grid>
