@@ -721,7 +721,7 @@ namespace ChessGame.Client.Views
             }
         }
 
-        private void Return_Click2(object sender, RoutedEventArgs e)
+        private void Return_Click(object sender, RoutedEventArgs e)
         {
             ShowReturnTest();
         }
@@ -745,6 +745,64 @@ namespace ChessGame.Client.Views
                 this.Close(); // 关闭当前窗口
             }
             // 用户点击取消或关闭，不做任何操作
+        }
+
+        //放置棋子失败，禁手点
+        private void Is_illegalMove()
+        {
+            illegalMove illegalMovet = new illegalMove
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+        }
+
+        //放置棋子失败，该位置已经有棋子
+        private void Is_AlreadyhavePiece()
+        {
+            AlreadyhavePiece AlreadyhavePiece = new AlreadyhavePiece
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+        }
+
+        //如果游戏胜利
+        private void Is_Win()
+        {
+            Win Win = new Win
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+
+            Win.ShowDialog(); //使用ShowDialog以模态方式显示
+
+            if (Win.DialogResult == true)
+            {
+                //用户点击返回或关闭
+                MainWindow MainWindow = new MainWindow();
+                MainWindow.Show();
+
+                this.Close();//关闭游戏界面
+            }
+        }
+
+        //如果游戏失败
+        private void Is_Lose()
+        {
+            Lose Lose = new Lose
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+
+            Lose.ShowDialog(); //使用ShowDialog以模态方式显示
+
+            if (Lose.DialogResult == true)
+            {
+                //用户点击返回或关闭
+                MainWindow MainWindow = new MainWindow();
+                MainWindow.Show();
+
+                this.Close();//关闭游戏界面
+            }
         }
     } 
 }

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title = "GameView" Height = "700" Width = "900"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <!-- 按钮样式 -->
         <Style x:Key="ModernButtonStyle" TargetType="Button">

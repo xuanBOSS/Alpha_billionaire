@@ -27,24 +27,15 @@ namespace ChessGame.Client.Views
         //点击返回按钮
         private void WinReturn_Click(object sender, RoutedEventArgs e)
         {
-            if (Application.Current.MainWindow == null || !(Application.Current.MainWindow is MainWindow))
-            {
-                var mainWindow = new MainWindow();
-                mainWindow.Show();
-                Application.Current.MainWindow = mainWindow;
-            }
-            this.Close(); 
+            DialogResult = true;
+            Close();
         }
        
         //点击右上角叉关闭窗口
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Application.Current.MainWindow == null || !(Application.Current.MainWindow is MainWindow))
-            {
-                var mainWindow = new MainWindow();
-                mainWindow.Show();
-                Application.Current.MainWindow = mainWindow;
-            }
+            DialogResult = true;
+            Close();
         }
     }
 }

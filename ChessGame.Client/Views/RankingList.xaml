@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ChessGame.Client.Views"
         mc:Ignorable="d"
         Title="RankingList" Height="560" Width="600"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <!-- 按钮样式 -->
         <Style x:Key="ModernButtonStyle" TargetType="Button">

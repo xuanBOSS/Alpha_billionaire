@@ -8,10 +8,16 @@
     <Compile Update="testWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AlreadyhavePiece.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\GameView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\GameViewAI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\illegalMove.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\login.xaml.cs">

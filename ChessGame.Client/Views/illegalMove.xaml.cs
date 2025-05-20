@@ -15,27 +15,19 @@ using System.Windows.Shapes;
 namespace ChessGame.Client.Views
 {
     /// <summary>
-    /// Lose.xaml 的交互逻辑
+    /// illegalMove.xaml 的交互逻辑
     /// </summary>
-    public partial class Lose : Window
+    public partial class illegalMove : Window
     {
-        public Lose()
+        public illegalMove()
         {
             InitializeComponent();
         }
-
-        //点击返回按钮
-        private void LoseReturn_Click(object sender, RoutedEventArgs e)
+        
+        //点击确认按钮
+        private void OKButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
-            Close();
-        }
-
-        //点击右上角叉关闭窗口
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            DialogResult = true;
-            Close();
+            this.Close();
         }
     }
 }

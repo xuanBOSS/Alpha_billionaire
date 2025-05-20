@@ -294,3 +294,7 @@ D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Clie
 D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ChessGam.D8A973DE.Up2Date
 D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ChessGame.Client.genruntimeconfig.cache
 D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ref\ChessGame.Client.dll
+D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\illegalMove.g.cs
+D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\illegalMove.baml
+D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\AlreadyhavePiece.g.cs
+D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\AlreadyhavePiece.baml

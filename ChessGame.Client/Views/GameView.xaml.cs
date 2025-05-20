@@ -351,14 +351,18 @@ namespace ChessGame.Client.Views
             if (crossX >= 0 && crossX < BoardSize && crossY >= 0 && crossY < BoardSize)
             {
                 //创建棋子
-                var piece = CreateRealisticPiece(Brushes.LightGray); //黑棋
+                var piece = CreateRealisticPiece(Brushes.Black); //黑棋
+
+                int PieceX = crossX * spacing - (spacing - 10) / 2;
+                int PieceY = crossY * spacing - (spacing - 10) / 2;
 
                 //调用 TryPlacePiece 方法
-                await _signalRService.TryPlacePiece(crossX, crossY);
+                await _signalRService.TryPlacePiece(PieceX, PieceX);
+
 
                 //放置棋子
-                Canvas.SetLeft(piece, crossX * spacing - (spacing - 10) / 2);
-                Canvas.SetTop(piece, crossY * spacing - (spacing - 10) / 2);
+                Canvas.SetLeft(piece, PieceX);
+                Canvas.SetTop(piece, PieceY);
                 BoardCanvas.Children.Add(piece);
 
                 //检查周围4个格子是否有雷
@@ -429,7 +433,7 @@ namespace ChessGame.Client.Views
                 Width = spacing - 10,
                 Height = spacing - 10,
                 Fill = baseColor,
-                Stroke = baseColor == Brushes.White ? Brushes.Gray : Brushes.Transparent,
+                Stroke = baseColor == Brushes.White ? Brushes.Gray : Brushes.Black,
                 StrokeThickness = 0.5
             };
 
@@ -699,6 +703,7 @@ namespace ChessGame.Client.Views
                 }
             }
         }
+
         //添加清除数字的方法
         private void ClearNumberAt(int x, int y)
         {
@@ -719,36 +724,24 @@ namespace ChessGame.Client.Views
             }
         }
 
-        //private bool _isProgrammaticClose = false; // 添加标志变量
-        /*
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            // 如果是程序主动关闭，不显示确认对话框
-            if (_isProgrammaticClose) 
-                return;
-
-            // 取消默认关闭行为
-            e.Cancel = true;
-            ShowReturnTest();
-        }
-        */
+        //点击退出游戏按钮，弹出确认小窗口
         private void Return_Click(object sender, RoutedEventArgs e)
         {
             ShowReturnTest();
         }
 
+        //确认是否确认退出游戏的小窗口，点击确认退出则回到主界面
         private void ShowReturnTest()
         {
             ReturnTest ReturnTest = new ReturnTest
             {
-                Owner = this // 设置所有者窗口以确保对话框显示在主窗口中央
+                Owner = this //设置所有者窗口以确保对话框显示在主窗口中央
             };
 
-            ReturnTest.ShowDialog(); // 使用ShowDialog以模态方式显示
+            ReturnTest.ShowDialog(); //使用ShowDialog以模态方式显示
 
             if (ReturnTest.DialogResult == true)
             {
-                //_isProgrammaticClose = true;
                 // 用户点击确定
                 MainWindow MainWindow = new MainWindow();
                 MainWindow.Show();
@@ -756,6 +749,64 @@ namespace ChessGame.Client.Views
                 this.Close(); // 关闭当前窗口
             }
             // 用户点击取消或关闭，不做任何操作
+        }
+
+        //放置棋子失败，禁手点
+        private void Is_illegalMove()
+        {
+            illegalMove illegalMovet = new illegalMove
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+        }
+
+        //放置棋子失败，该位置已经有棋子
+        private void Is_AlreadyhavePiece()
+        {
+            AlreadyhavePiece AlreadyhavePiece = new AlreadyhavePiece
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+        }
+
+        //如果游戏胜利
+        private void Is_Win()
+        {
+            Win Win = new Win
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+
+            Win.ShowDialog(); //使用ShowDialog以模态方式显示
+
+            if (Win.DialogResult == true)
+            {
+                //用户点击返回或关闭
+                MainWindow MainWindow = new MainWindow();
+                MainWindow.Show();
+
+                this.Close();//关闭游戏界面
+            }
+        }
+
+        //如果游戏失败
+        private void Is_Lose()
+        {
+            Lose Lose = new Lose
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+
+            Lose.ShowDialog(); //使用ShowDialog以模态方式显示
+
+            if (Lose.DialogResult == true)
+            {
+                //用户点击返回或关闭
+                MainWindow MainWindow = new MainWindow();
+                MainWindow.Show();
+
+                this.Close();//关闭游戏界面
+            }
         }
     }
 }
