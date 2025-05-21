@@ -7,6 +7,8 @@ using ChessGame.GameLogic;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Effects;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows.Media.Media3D;
 
 namespace ChessGame.Client.Views
 {
@@ -14,7 +16,7 @@ namespace ChessGame.Client.Views
     {
         private SignalRService _signalRService;
 
-        private GameManager _gameManager;
+       // private GameManager _gameManager;
 
         private const int BoardSize = 15;//棋盘线条数
         private const int spacing = 35;//棋盘格边长
@@ -31,19 +33,104 @@ namespace ChessGame.Client.Views
             //加载爆炸图片
             _explosionImage = new BitmapImage(new Uri("pack://application:,,,/source/bomb.png"));
 
+            // 通过类型名访问静态成员 ServiceProvider
+            _signalRService = App.ServiceProvider.GetRequiredService<SignalRService>();
+
+            //注册接收地图信息的事件
+            _signalRService.GetMap((mineMap) =>
+            {
+                // 在接收到消息时更新 UI
+                Application.Current.Dispatcher.Invoke(()=>
+                {
+                    _mineMap = mineMap;
+                });
+            });
+
+            //注册接收落子信息的事件
+            _signalRService.ReceivePiece((result,x,y,c) =>
+            {
+                // 在接收到消息时更新 UI
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if(result)
+                    {
+                        Brush color = null;
+                        if (c == 1) color = Brushes.Black;
+                        else if(c == 2) color = Brushes.White;
+
+                        PlacePiece(x, y, color);
+                    }
+                });
+
+                // 在接收到消息时更新 UI
+                Application.Current.Dispatcher.Invoke(() =>
+                    MineisBomb
+                );
+            });
+
+            //注册使游戏暂停的事件
+            _signalRService.PauseGame((msg) =>
+            {
+                // 在接收到消息时更新 UI
+                if(msg == "超出棋盘范围。")
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                        Is_OutofRange
+                    );
+                }
+                else if(msg == "禁手：黑棋此处落子违反规则。")
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                        Is_illegalMove
+                    );
+                }
+                else if(msg == "该位置已有棋子。")
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                        Is_AlreadyhavePiece
+                    );
+                }
+                //如果有一方获胜不进行任何处理，由另一个事件负责传递游戏信息
+            });
+
+            
+            //注册使游戏结束的事件
+            _signalRService.GameEnd((result) =>
+            {
+                if(result == "胜利")
+                {
+                    // 在接收到消息时更新 UI
+                    Application.Current.Dispatcher.Invoke(() =>
+                        Is_Win
+                    );
+                }
+                else
+                {
+                    // 在接收到消息时更新 UI
+                    Application.Current.Dispatcher.Invoke(() =>
+                        Is_Lose
+                    );
+                }
+                
+            });
+
+
             //初始化游戏管理器
-            _gameManager = new GameManager();
+            //_gameManager = new GameManager();
 
             //初始化地雷地图
-            _mineMap = new MineMap();
+            /*_mineMap = new MineMap();
             _mineMap.PlaceMinesByDensity(0.08); //8%的地雷密度
             _mineMap.CalculateNumbers();//计算地雷数字
-            _mineMap.PrintDebugBoard(); //调试输出
+            _mineMap.PrintDebugBoard(); //调试输出*/
 
             DrawBoard();//绘制棋盘
-           // DrawMineNumbers(); //绘制数字提示
+                        // DrawMineNumbers(); //绘制数字提示
 
-            _signalRService = new SignalRService();
+            /*_signalRService = new SignalRService();*/
+
+
+
         }
 
         //绘制棋盘
@@ -511,11 +598,11 @@ namespace ChessGame.Client.Views
         }
 
         //无参数版本
-        private void UpdateWinRateDisplay()
+       /* private void UpdateWinRateDisplay()
         {
             if (_gameManager == null) return;
             UpdateWinRateDisplay(_gameManager.GetWinProbabilities());
-        }
+        }*/
 
         //测试进度条是否能正常显示
         private void TestWinRate_Click(object sender, RoutedEventArgs e)

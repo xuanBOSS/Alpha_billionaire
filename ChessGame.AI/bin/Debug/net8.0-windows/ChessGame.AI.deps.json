@@ -261,10 +261,7 @@
           "Microsoft.Extensions.DependencyInjection": "9.0.4"
         },
         "runtime": {
-          "ChessGame.GameLogic.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "ChessGame.GameLogic.dll": {}
         }
       }
     }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using ChessGame.Database;
 using ChessGame.Server.Services;
+using ChessGame.GameLogic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -159,6 +160,10 @@ namespace ChessGame.Server.Controllers
                     .SendAsync("MatchSuccess", waitingRoom.RoomID, $"你是黑方，对手是 {player2Name}");
                 await _hubContext.Clients.Client(waitingRoom.Player2)
                     .SendAsync("MatchSuccess", waitingRoom.RoomID, $"你是白方，对手是 {player1Name}");
+
+                //将地图传送给双方玩家(只需要在最开始的时候将客户端与服务端的地图同步)
+                await _hubContext.Clients.Group(waitingRoom.RoomID)
+                   .SendAsync("MapInfo", waitingRoom.GameManager.MineMap);
             }
             else//加入玩家1
             {
@@ -216,8 +221,13 @@ namespace ChessGame.Server.Controllers
             string msg;
             bool result = room.DealPiece(x, y, connectionId, out msg);
 
+            int color = 0;
+            if (room.GameManager.CurrentPlayer == GameLogic.PlayerColor.Black) color = 1;
+            if (room.GameManager.CurrentPlayer == GameLogic.PlayerColor.White) color = 2;
+
             await _hubContext.Clients.Group(room.RoomID)
-                   .SendAsync("PieceInfo", result);
+                   .SendAsync("PieceInfo", result,x,y,color);
+
 
             if (result && msg != "获胜") // 如果落子成功，向双方展示落子并切换轮次
             {
@@ -249,8 +259,23 @@ namespace ChessGame.Server.Controllers
                 await UpdateWinRecord(winnerUserId);
 
                 // 发送游戏结束消息
-                await _hubContext.Clients.Group(room.RoomID)
-                    .SendAsync("GameOver", msg);
+                /*await _hubContext.Clients.Group(room.RoomID)
+                    .SendAsync("GameOver", msg);*/
+
+                if(room.GameManager.CurrentPlayer == PlayerColor.Black)
+                {
+                    await _hubContext.Clients.Client(room.Player1)
+                    .SendAsync("GameOver", "胜利");
+                    await _hubContext.Clients.Client(room.Player2)
+                        .SendAsync("GameOver", "失败");
+                }
+                else
+                {
+                    await _hubContext.Clients.Client(room.Player1)
+                    .SendAsync("GameOver", "失败");
+                    await _hubContext.Clients.Client(room.Player2)
+                        .SendAsync("GameOver", "胜利");
+                }
 
                 // 发送排行榜信息给获胜者和失败者
                 var playerRank = await GetPlayerRank(winnerUserId);

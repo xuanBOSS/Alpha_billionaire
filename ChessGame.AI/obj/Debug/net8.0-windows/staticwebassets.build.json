@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "y10/df8Th5fh+0XdNRzfE+xJKR5CJZegiMlYSuXLih0=",
+  "Hash": "2uEuJxc1zq4J/2410Kj3dJR59D7GGl7bmbtaxaH8cOw=",
   "Source": "ChessGame.AI",
   "BasePath": "_content/ChessGame.AI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\Alpha\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
+      "Identity": "D:\\Alpha\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj",
       "Version": 2,
       "Source": "ChessGame.GameLogic",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
@@ -19,6 +19,5 @@
     }
   ],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }

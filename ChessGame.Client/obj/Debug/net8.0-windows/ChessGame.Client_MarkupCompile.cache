@@ -4,23 +4,17 @@
 winexe
 C#
 .cs
-D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\
+D:\Alpha\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\
 ChessGame.Client
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\App.xaml
-15555930218
+D:\Alpha\Alpha_billionaire\ChessGame.Client\App.xaml
+17490699698
 41931609565
-<<<<<<< HEAD
-17-84383548
-346-2025609153
-ChessBoard.xaml;testWindow.xaml;Views\AlreadyhavePiece.xaml;Views\GameView.xaml;Views\GameViewAI.xaml;Views\illegalMove.xaml;Views\login.xaml;Views\Lose.xaml;Views\MainWindow.xaml;Views\RankingList.xaml;Views\ReturnTest.xaml;Views\Win.xaml;
-=======
-201841322222
-346-169794032
-ChessBoard.xaml;testWindow.xaml;Views\AlreadyhavePiece.xaml;Views\GameisOver.xaml;Views\GameView.xaml;Views\GameViewAI.xaml;Views\illegalMove.xaml;Views\login.xaml;Views\Lose.xaml;Views\MainWindow.xaml;Views\NoRankingList.xaml;Views\OutofRange.xaml;Views\RankingList.xaml;Views\ReturnTest.xaml;Views\Win.xaml;
->>>>>>> 036eb9ab3f24b42fa567bce3c493ddb887251e8c
+22925767271
+34672936881
+ChessBoard.xaml;testWindow.xaml;Views\AlreadyhavePiece.xaml;Views\GameisOver.xaml;Views\GameView.xaml;Views\GameViewAI.xaml;Views\illegalMove.xaml;Views\login.xaml;Views\Lose.xaml;Views\MainWindow.xaml;Views\MatchRequest.xaml;Views\MatchSuccess.xaml;Views\NoRankingList.xaml;Views\OutofRange.xaml;Views\RankingList.xaml;Views\ReturnTest.xaml;Views\Win.xaml;
 
 False
 

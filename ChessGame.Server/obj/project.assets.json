@@ -1969,23 +1969,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\BOSS0\\.nuget\\packages\\": {},
+    "C:\\Users\\10540\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Alpha\\ChessGame.Server\\ChessGame.Server.csproj",
+      "projectUniqueName": "D:\\Alpha\\Alpha_billionaire\\ChessGame.Server\\ChessGame.Server.csproj",
       "projectName": "ChessGame.Server",
-      "projectPath": "D:\\Alpha\\ChessGame.Server\\ChessGame.Server.csproj",
-      "packagesPath": "C:\\Users\\BOSS0\\.nuget\\packages\\",
-      "outputPath": "D:\\Alpha\\ChessGame.Server\\obj\\",
+      "projectPath": "D:\\Alpha\\Alpha_billionaire\\ChessGame.Server\\ChessGame.Server.csproj",
+      "packagesPath": "C:\\Users\\10540\\.nuget\\packages\\",
+      "outputPath": "D:\\Alpha\\Alpha_billionaire\\ChessGame.Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\BOSS0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\10540\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2001,17 +2001,17 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "D:\\Alpha\\Alpha_billionaire\\Alpha_billionaire.csproj": {
-              "projectPath": "D:\\Alpha\\Alpha_billionaire\\Alpha_billionaire.csproj"
+            "D:\\Alpha\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj": {
+              "projectPath": "D:\\Alpha\\Alpha_billionaire\\Alpha_billionaire\\Alpha_billionaire.csproj"
             },
-            "D:\\Alpha\\ChessGame.AI\\ChessGame.AI.csproj": {
-              "projectPath": "D:\\Alpha\\ChessGame.AI\\ChessGame.AI.csproj"
+            "D:\\Alpha\\Alpha_billionaire\\ChessGame.AI\\ChessGame.AI.csproj": {
+              "projectPath": "D:\\Alpha\\Alpha_billionaire\\ChessGame.AI\\ChessGame.AI.csproj"
             },
-            "D:\\Alpha\\ChessGame.Database\\ChessGame.Database.csproj": {
-              "projectPath": "D:\\Alpha\\ChessGame.Database\\ChessGame.Database.csproj"
+            "D:\\Alpha\\Alpha_billionaire\\ChessGame.Database\\ChessGame.Database.csproj": {
+              "projectPath": "D:\\Alpha\\Alpha_billionaire\\ChessGame.Database\\ChessGame.Database.csproj"
             },
-            "D:\\Alpha\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
-              "projectPath": "D:\\Alpha\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj"
+            "D:\\Alpha\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj": {
+              "projectPath": "D:\\Alpha\\Alpha_billionaire\\ChessGame.GameLogic\\ChessGame.GameLogic.csproj"
             }
           }
         }
@@ -2025,8 +2025,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -2064,7 +2063,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

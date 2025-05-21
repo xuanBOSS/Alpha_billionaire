@@ -125,6 +125,7 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
 
         public bool TryMakeMove_1(int x, int y, out string message)
         {
+
             message = "";
 
             if (IsGameOver)
@@ -145,11 +146,11 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
                 return false;
             }
 
-            if (!CanPlaceMorePieces(CurrentPlayer))
+            /*if (!CanPlaceMorePieces(CurrentPlayer))
             {
                 message = $"{CurrentPlayer}方棋子已用完";
                 return false;
-            }
+            }*/
 
             // 黑棋禁手检测
             if (CurrentPlayer == PlayerColor.Black && GameRules.IsForbiddenMove(Board, x, y))
@@ -180,7 +181,8 @@ namespace ChessGame.GameLogic  // 命名空间必须一致
             {
                 IsGameOver = true;
                 Winner = CurrentPlayer;
-                message = $"{CurrentPlayer} 获胜！";
+                /*message = $"{CurrentPlayer} 获胜！";*/
+                message = "获胜！";
                 return true;
             }
 

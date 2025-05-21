@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
+using ChessGame.GameLogic;
 using System.Windows;
 
 namespace ChessGame.Client
@@ -244,6 +245,12 @@ namespace ChessGame.Client
             }
         }
 
+        //注册接受地图信息的事件
+        public void GetMap(Action<MineMap> HandleMap)//EnterRoom在界面类中定义，展示匹配成功后的界面
+        {
+            _connection.On<MineMap>("MapInfo", HandleMap);//没有处理房间匹配失败的情况
+        }
+
         //对战窗口可能需要注册的消息
         //向服务端传送落子信息
         public async Task TryPlacePiece(int x, int y)//传入落子位置(x,y)
@@ -260,9 +267,9 @@ namespace ChessGame.Client
         }
 
         // 注册接收落子信息的事件，如果传入参数为true，在棋盘上显示落子结果
-        public void ReceivePiece(Action<bool> ShowStep)
+        public void ReceivePiece(Action<bool,int,int,int> ShowStep)//黑1白2
         {
-            _connection.On<bool>("PieceInfo", ShowStep);
+            _connection.On<bool,int,int,int>("PieceInfo", ShowStep);
         }
 
         //注册使游戏暂停的事件
