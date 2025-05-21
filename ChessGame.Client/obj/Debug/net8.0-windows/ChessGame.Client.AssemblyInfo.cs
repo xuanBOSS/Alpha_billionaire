@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChessGame.Client")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4900479acf1bd04541c027ed9e0a8c9f9b313d5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d86e0c98880d4f41e46f1bf2d4e811be334fb178")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChessGame.Client")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChessGame.Client")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

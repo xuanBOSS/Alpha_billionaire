@@ -77,7 +77,7 @@ namespace ChessGame.Client {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ChessGame.Client;V1.0.0.0;component/testwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ChessGame.Client;component/testwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\testWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

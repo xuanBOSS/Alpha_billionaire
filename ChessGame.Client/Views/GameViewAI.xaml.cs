@@ -7,6 +7,8 @@ using ChessGame.GameLogic;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Effects;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO.Pipelines;
 
 namespace ChessGame.Client.Views
 {
@@ -44,7 +46,7 @@ namespace ChessGame.Client.Views
             DrawBoard();//绘制棋盘
             //DrawMineNumbers(); //绘制数字提示
 
-            _signalRService = new SignalRService();
+            _signalRService = App.ServiceProvider.GetRequiredService<SignalRService>();
         }
 
         //绘制棋盘
@@ -339,7 +341,7 @@ namespace ChessGame.Client.Views
             BoardCanvas.Children.Remove(explosionIcon);
         }
 
-        //放置棋子
+        //鼠标尝试放置棋子
         private async void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //获取鼠标点击位置
@@ -349,70 +351,11 @@ namespace ChessGame.Client.Views
             int crossX = (int)System.Math.Round(clickPoint.X / spacing);
             int crossY = (int)System.Math.Round(clickPoint.Y / spacing);
 
-            if (crossX >= 0 && crossX < BoardSize && crossY >= 0 && crossY < BoardSize)
-            {
-                //创建棋子
-                var piece = CreateRealisticPiece(Brushes.LightGray); //黑棋
+            //调用 TryPlacePiece 方法
+            await _signalRService.TryPlacePiece(crossX, crossY);
 
-                //调用 TryPlacePiece 方法
-                await _signalRService.TryPlacePiece(crossX, crossY);
-
-                //放置棋子
-                Canvas.SetLeft(piece, crossX * spacing - (spacing - 10) / 2);
-                Canvas.SetTop(piece, crossY * spacing - (spacing - 10) / 2);
-                BoardCanvas.Children.Add(piece);
-
-                //检查周围4个格子是否有雷
-                if (HasAdjacentMines(crossX, crossY))
-                {
-                    //有雷，揭开3x3区域
-                    Reveal3x3Area(crossX, crossY);
-                }
-                else
-                {
-                    //无雷，递归展开
-                    //从周围4个格子开始展开
-                    if (crossX > 0 && crossY > 0) RevealAdjacentSafeArea(crossX - 1, crossY - 1); // 左上
-                    if (crossX < BoardSize - 1 && crossY > 0) RevealAdjacentSafeArea(crossX, crossY - 1); // 右上
-                    if (crossX > 0 && crossY < BoardSize - 1) RevealAdjacentSafeArea(crossX - 1, crossY); // 左下
-                    if (crossX < BoardSize - 1 && crossY < BoardSize - 1) RevealAdjacentSafeArea(crossX, crossY); // 右下
-                }
-
-                //检查是否引爆地雷
-                bool isExploded = _mineMap.CheckExplosion(crossX, crossY);
-                if (isExploded)
-                {
-                    //获取被引爆的地雷位置
-                    var explodedMines = _mineMap.GetLastExplodedMines();
-                    foreach (var (x, y) in explodedMines)
-                    {
-                        //显示地雷图标
-                        await ShowExplosionEffect(x, y);
-
-                        //清除受影响的棋子
-                        ClearAffectedPieces(x, y);
-
-                        //更新数字显示
-                        //引爆后揭开地雷周围的数字(3x3区域)
-                        for (int dx = -1; dx <= 1; dx++)
-                        {
-                            for (int dy = -1; dy <= 1; dy++)
-                            {
-                                int revealX = x + dx;
-                                int revealY = y + dy;
-                                if (revealX >= 0 && revealX < BoardSize - 1 &&
-                                    revealY >= 0 && revealY < BoardSize - 1)
-                                {
-                                    RemoveCover(revealX, revealY);
-                                }
-                            }
-                        }
-                        //更新数字显示
-                        UpdateMineNumbers();
-                    }
-                }
-            }
         }
+
         
         //创建棋子
         private FrameworkElement CreateRealisticPiece(Brush baseColor)
@@ -430,12 +373,12 @@ namespace ChessGame.Client.Views
                 Width = spacing - 10,
                 Height = spacing - 10,
                 Fill = baseColor,
-                Stroke = baseColor == Brushes.White ? Brushes.Gray : Brushes.Transparent,
+                Stroke = baseColor == Brushes.LightGray ? Brushes.LightGray : Brushes.Transparent,
                 StrokeThickness = 0.5
             };
 
             //阴影效果
-            if (baseColor == Brushes.White)
+            if (baseColor == Brushes.LightGray)
             {
                 //白棋
                 pieceBody.Effect = new DropShadowEffect
@@ -479,7 +422,7 @@ namespace ChessGame.Client.Views
             {
                 Width = (spacing - 10) * 0.6,
                 Height = (spacing - 10) * 0.3,
-                Fill = baseColor == Brushes.White
+                Fill = baseColor == Brushes.LightGray
                     ? new LinearGradientBrush(
                         new GradientStopCollection
                         {
@@ -500,7 +443,7 @@ namespace ChessGame.Client.Views
             };
 
             //边缘高光（仅白棋）
-            if (baseColor == Brushes.White)
+            if (baseColor == Brushes.LightGray)
             {
                 var edgeGlow = new Ellipse
                 {
@@ -747,7 +690,7 @@ namespace ChessGame.Client.Views
             // 用户点击取消或关闭，不做任何操作
         }
 
-        //放置棋子失败，禁手点
+        //禁手点
         private void Is_illegalMove()
         {
             illegalMove illegalMovet = new illegalMove
@@ -756,7 +699,7 @@ namespace ChessGame.Client.Views
             };
         }
 
-        //放置棋子失败，该位置已经有棋子
+        //该位置已经有棋子
         private void Is_AlreadyhavePiece()
         {
             AlreadyhavePiece AlreadyhavePiece = new AlreadyhavePiece
@@ -781,6 +724,72 @@ namespace ChessGame.Client.Views
             {
                 Owner = this //设置所有者窗口主窗口中央
             };
+        }
+
+        //地雷爆炸
+        private async void MineisBomb(int crossX, int crossY)
+        {
+            //检查周围4个格子是否有雷
+            if (HasAdjacentMines(crossX, crossY))
+            {
+                //有雷，揭开3x3区域
+                Reveal3x3Area(crossX, crossY);
+            }
+            else
+            {
+                //无雷，递归展开
+                //从周围4个格子开始展开
+                if (crossX > 0 && crossY > 0) RevealAdjacentSafeArea(crossX - 1, crossY - 1); // 左上
+                if (crossX < BoardSize - 1 && crossY > 0) RevealAdjacentSafeArea(crossX, crossY - 1); // 右上
+                if (crossX > 0 && crossY < BoardSize - 1) RevealAdjacentSafeArea(crossX - 1, crossY); // 左下
+                if (crossX < BoardSize - 1 && crossY < BoardSize - 1) RevealAdjacentSafeArea(crossX, crossY); // 右下
+            }
+
+            //检查是否引爆地雷
+            bool isExploded = _mineMap.CheckExplosion(crossX, crossY);
+            if (isExploded)
+            {
+                //获取被引爆的地雷位置
+                var explodedMines = _mineMap.GetLastExplodedMines();
+                foreach (var (x, y) in explodedMines)
+                {
+                    //显示地雷图标
+                    await ShowExplosionEffect(x, y);
+
+                    //清除受影响的棋子
+                    ClearAffectedPieces(x, y);
+
+                    //更新数字显示
+                    //引爆后揭开地雷周围的数字(3x3区域)
+                    for (int dx = -1; dx <= 1; dx++)
+                    {
+                        for (int dy = -1; dy <= 1; dy++)
+                        {
+                            int revealX = x + dx;
+                            int revealY = y + dy;
+                            if (revealX >= 0 && revealX < BoardSize - 1 &&
+                                revealY >= 0 && revealY < BoardSize - 1)
+                            {
+                                RemoveCover(revealX, revealY);
+                            }
+                        }
+                    }
+                    //更新数字显示
+                    UpdateMineNumbers();
+                }
+            }
+        }
+
+        //放置棋子
+        private void PlacePiece(int crossX, int crossY, Brush PieceColor)
+        {
+            //创建棋子
+            var piece = CreateRealisticPiece(PieceColor);
+
+            //放置棋子
+            Canvas.SetLeft(piece, crossX * spacing - (spacing - 10) / 2);
+            Canvas.SetTop(piece, crossY * spacing - (spacing - 10) / 2);
+            BoardCanvas.Children.Add(piece);
         }
 
         //如果游戏胜利
