@@ -16,17 +16,27 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 添加数据库服务
-builder.Services.AddDbContext<ChessDbContext>(options =>
-    options.UseMySql("Server=localhost;Database=chessgamedb;User=root;Password=200498;",
-        new MySqlServerVersion(new Version(8, 0, 21))));
+//// 添加数据库服务
+//builder.Services.AddDbContext<ChessDbContext>(options =>
+//    options.UseMySql("Server=localhost;Database=chessgamedb;User=root;Password=200498;",
+//        new MySqlServerVersion(new Version(8, 0, 21))));
+// 使用DbContextFactory代替普通的DbContext注册
+builder.Services.AddDbContextFactory<ChessDbContext>(options =>
+    options.UseMySql(
+        "Server=localhost;Database=chessgamedb;User=root;Password=200498;",
+        ServerVersion.AutoDetect("Server=localhost;Database=chessgamedb;User=root;Password=200498;")
+    ));
 
-// 添加 SignalR 服务
-builder.Services.AddSignalR();
-
+//// 添加 SignalR 服务
+//builder.Services.AddSignalR();
+// 确保SignalR配置正确
+builder.Services.AddSignalR().AddHubOptions<GameHub>(options =>
+{
+    options.EnableDetailedErrors = true;
+});
 // 允许所有网络接口访问
-builder.WebHost.UseUrls("http://0.0.0.0:5000;https://0.0.0.0:5001");
-
+//builder.WebHost.UseUrls("http://0.0.0.0:5000;https://0.0.0.0:5001");
+builder.WebHost.UseUrls("http://localhost:5000");
 // 注册PlayerSessionManager服务（必须在RoomManager之前注册）
 builder.Services.AddSingleton<PlayerSessionManager>();
 
@@ -34,11 +44,12 @@ builder.Services.AddSingleton<PlayerSessionManager>();
 builder.Services.AddSingleton<AIService>();
 
 // 3. 注册RoomManager，但使用工厂方法来解决循环依赖
+// 修正：注册RoomManager并使用IDbContextFactory而不是直接使用DbContext
 builder.Services.AddSingleton<RoomManager>(serviceProvider => {
-    var hubContext = serviceProvider.GetRequiredService<Microsoft.AspNetCore.SignalR.IHubContext<GameHub>>();
-    var dbContext = serviceProvider.GetRequiredService<ChessDbContext>();
+    var hubContext = serviceProvider.GetRequiredService<IHubContext<GameHub>>();
+    var dbContextFactory = serviceProvider.GetRequiredService<IDbContextFactory<ChessDbContext>>();
     var sessionManager = serviceProvider.GetRequiredService<PlayerSessionManager>();
-    return new RoomManager(hubContext, dbContext, sessionManager);
+    return new RoomManager(hubContext, dbContextFactory, sessionManager);
 });
 
 var app = builder.Build();

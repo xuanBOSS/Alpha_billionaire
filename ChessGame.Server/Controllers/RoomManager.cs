@@ -122,13 +122,13 @@ namespace ChessGame.Server.Controllers
     {
         private readonly List<Room> _rooms = new();//维护房间信息的链表
         private readonly IHubContext<GameHub> _hubContext;//允许在Hub类外执行与客户端的交互
-        private readonly ChessDbContext _dbContext;
+        private readonly IDbContextFactory<ChessDbContext> _dbContextFactory;
         private readonly PlayerSessionManager _sessionManager;
 
-        public RoomManager(IHubContext<GameHub> hubContext, ChessDbContext dbContext, PlayerSessionManager sessionManager)
+        public RoomManager(IHubContext<GameHub> hubContext, IDbContextFactory<ChessDbContext> dbContextFactory, PlayerSessionManager sessionManager)
         {
             _hubContext = hubContext;
-            _dbContext = dbContext;
+            _dbContextFactory = dbContextFactory;
             _sessionManager = sessionManager;
         }
 
@@ -174,8 +174,11 @@ namespace ChessGame.Server.Controllers
         // 获取玩家名称
         private async Task<string> GetPlayerName(string userId)
         {
-            var player = await _dbContext.Players.FindAsync(userId);
-            return player?.UserName ?? userId;
+            using (var dbContext = await _dbContextFactory.CreateDbContextAsync())
+            {
+                var player = await dbContext.Players.FindAsync(userId);
+                return player?.UserName ?? userId;
+            }
         }
 
         // 离开房间
@@ -266,54 +269,60 @@ namespace ChessGame.Server.Controllers
         // 获取玩家当前排名
         private async Task<int> GetPlayerRank(string userId)
         {
-            // 找出玩家在排行榜中的位置
-            var allPlayers = await _dbContext.GameRecords
-                .OrderByDescending(g => g.WinTimes)
-                .ToListAsync();
-
-            for (int i = 0; i < allPlayers.Count; i++)
+            using (var dbContext = await _dbContextFactory.CreateDbContextAsync())
             {
-                if (allPlayers[i].UserId == userId)
-                {
-                    return i + 1; // 返回1-based索引作为排名
-                }
-            }
+                // 找出玩家在排行榜中的位置
+                var allPlayers = await dbContext.GameRecords
+                    .OrderByDescending(g => g.WinTimes)
+                    .ToListAsync();
 
-            return 0; // 玩家不在排行榜中
+                for (int i = 0; i < allPlayers.Count; i++)
+                {
+                    if (allPlayers[i].UserId == userId)
+                    {
+                        return i + 1; // 返回1-based索引作为排名
+                    }
+                }
+
+                return 0; // 玩家不在排行榜中
+            }
         }
         // 更新胜利记录
         private async Task UpdateWinRecord(string userId)
         {
             try
             {
-                // 查找用户的游戏记录
-                var gameRecord = await _dbContext.GameRecords.FindAsync(userId);
-                if (gameRecord != null)
+                using (var dbContext = await _dbContextFactory.CreateDbContextAsync())
                 {
-                    // 更新胜利次数
-                    gameRecord.WinTimes += 1;
-                    await _dbContext.SaveChangesAsync();
-
-                    // 通知所有客户端排行榜已更新
-                    await NotifyLeaderboardUpdated();
-                }
-                else
-                {
-                    // 如果记录不存在，创建新记录
-                    var player = await _dbContext.Players.FindAsync(userId);
-                    if (player != null)
+                    // 查找用户的游戏记录
+                    var gameRecord = await dbContext.GameRecords.FindAsync(userId);
+                    if (gameRecord != null)
                     {
-                        var newRecord = new GameRecord
-                        {
-                            UserId = player.UserId,
-                            UserName = player.UserName,
-                            WinTimes = 1
-                        };
-                        _dbContext.GameRecords.Add(newRecord);
-                        await _dbContext.SaveChangesAsync();
+                        // 更新胜利次数
+                        gameRecord.WinTimes += 1;
+                        await dbContext.SaveChangesAsync();
 
                         // 通知所有客户端排行榜已更新
                         await NotifyLeaderboardUpdated();
+                    }
+                    else
+                    {
+                        // 如果记录不存在，创建新记录
+                        var player = await dbContext.Players.FindAsync(userId);
+                        if (player != null)
+                        {
+                            var newRecord = new GameRecord
+                            {
+                                UserId = player.UserId,
+                                UserName = player.UserName,
+                                WinTimes = 1
+                            };
+                            dbContext.GameRecords.Add(newRecord);
+                            await dbContext.SaveChangesAsync();
+
+                            // 通知所有客户端排行榜已更新
+                            await NotifyLeaderboardUpdated();
+                        }
                     }
                 }
             }
@@ -344,39 +353,41 @@ namespace ChessGame.Server.Controllers
         // 获取排行榜前N名玩家
         private async Task<List<LeaderboardEntry>> GetTopPlayersAsync(int count)
         {
-            // 获取按胜利次数排序的前N名玩家
-            var topPlayers = await _dbContext.GameRecords
-                .OrderByDescending(g => g.WinTimes)
-                .Take(count)
-                .ToListAsync();
-
-            var result = new List<LeaderboardEntry>();
-            int rank = 1;
-            int lastScore = -1;
-            int lastRank = 0;
-
-            foreach (var player in topPlayers)
+            using (var dbContext = await _dbContextFactory.CreateDbContextAsync())
             {
-                // 处理相同分数的情况
-                if (player.WinTimes != lastScore)
+                // 获取按胜利次数排序的前N名玩家
+                var topPlayers = await dbContext.GameRecords
+                    .OrderByDescending(g => g.WinTimes)
+                    .Take(count)
+                    .ToListAsync();
+
+                var result = new List<LeaderboardEntry>();
+                int rank = 1;
+                int lastScore = -1;
+                int lastRank = 0;
+
+                foreach (var player in topPlayers)
                 {
-                    lastRank = rank;
-                    lastScore = player.WinTimes;
+                    // 处理相同分数的情况
+                    if (player.WinTimes != lastScore)
+                    {
+                        lastRank = rank;
+                        lastScore = player.WinTimes;
+                    }
+
+                    result.Add(new LeaderboardEntry
+                    {
+                        UserId = player.UserId,
+                        UserName = player.UserName,
+                        WinTimes = player.WinTimes,
+                        Rank = lastRank
+                    });
+
+                    rank++;
                 }
 
-                result.Add(new LeaderboardEntry
-                {
-                    UserId = player.UserId,
-                    UserName = player.UserName,
-                    WinTimes = player.WinTimes,
-                    Rank = lastRank
-                });
-
-                rank++;
+                return result;
             }
-
-            return result;
         }
-
     }
 }

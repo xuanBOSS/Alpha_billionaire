@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ChessGame.Client;
 using System;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace ChessGame.Client.Views
@@ -46,8 +47,8 @@ namespace ChessGame.Client.Views
             InitializeComponent();
 
             // 获取GameConnection单例
-            _signalRService = SignalRService.Instance;
-
+            //_signalRService = SignalRService.Instance;
+            _signalRService = App.ServiceProvider.GetRequiredService<SignalRService>();
             // 先连接服务器
             ConnectToServer();
         }
@@ -81,30 +82,58 @@ namespace ChessGame.Client.Views
                 // 显示加载状态或禁用按钮
                 LogInButton.IsEnabled = false;
 
+                //// 确保先连接到服务器
+                //if (_signalRService.GetHubConnection().State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+                //{
+                //    await _signalRService.StartConnectionAsync();
+
+                //    // 修改后 - 添加空引用检查
+                //    if (_signalRService == null)
+                //    {
+                //        MessageBox.Show("SignalR服务未初始化", "系统错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                //        return;
+                //    }
+
+                //    // 安全获取连接
+                //    var hubConnection = _signalRService.GetHubConnection();
+                //    if (hubConnection == null)
+                //    {
+                //        MessageBox.Show("SignalR连接未初始化", "连接错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                //        return;
+                //    }
+
+                //    // 检查连接状态
+                //    if (hubConnection.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+                //    {
+                //        MessageBox.Show("无法连接到服务器，请检查网络连接。", "连接错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                //        return;
+                //    }
+                //}
+                // 在登录按钮点击事件中
                 // 确保先连接到服务器
-                if (_signalRService.GetHubConnection().State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+                var hubConnection = _signalRService.GetHubConnection();
+                if (hubConnection == null)
                 {
-                    await _signalRService.StartConnectionAsync();
+                    MessageBox.Show("SignalR连接未初始化", "连接错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
-                    // 修改后 - 添加空引用检查
-                    if (_signalRService == null)
+                if (hubConnection.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+                {
+                    try
                     {
-                        MessageBox.Show("SignalR服务未初始化", "系统错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
+                        await _signalRService.StartConnectionAsync();
+
+                        // 再次检查连接状态
+                        if (hubConnection.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
+                        {
+                            MessageBox.Show("无法连接到服务器，请检查网络连接。", "连接错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
                     }
-
-                    // 安全获取连接
-                    var hubConnection = _signalRService.GetHubConnection();
-                    if (hubConnection == null)
+                    catch (Exception connEx)
                     {
-                        MessageBox.Show("SignalR连接未初始化", "连接错误", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-
-                    // 检查连接状态
-                    if (hubConnection.State != Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected)
-                    {
-                        MessageBox.Show("无法连接到服务器，请检查网络连接。", "连接错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show($"连接错误: {connEx.Message}", "连接错误", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                 }

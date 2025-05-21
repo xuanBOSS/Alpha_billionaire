@@ -10,103 +10,118 @@ namespace ChessGame.Server.Hubs
     public class GameHub : Hub
     {
         private readonly RoomManager _roomManager;
-        private readonly ChessDbContext _dbContext;
+        //private readonly ChessDbContext _dbContext;
+        private readonly IDbContextFactory<ChessDbContext> _dbContextFactory; // 修改为DbContextFactory
         private readonly PlayerSessionManager _sessionManager;
+        private readonly AIService _aiService;
 
-        public GameHub(RoomManager roomManager, ChessDbContext dbContext, PlayerSessionManager sessionManager)
+        public GameHub(RoomManager roomManager, IDbContextFactory<ChessDbContext> dbContextFactory, PlayerSessionManager sessionManager, AIService aiService)
         {
             _roomManager = roomManager;
-            _dbContext = dbContext;
+            _dbContextFactory = dbContextFactory; // 使用工厂
             _sessionManager = sessionManager;
+            _aiService = aiService;
         }
 
         // 登录方法
         public async Task<LoginResponse> Login(string userId, string password)
         {
-            var player = await _dbContext.Players.SingleOrDefaultAsync(p => p.UserId == userId);
-
-            if (player == null || player.PassWord != password)
+            // 使用工厂创建DbContext
+            using (var dbContext = await _dbContextFactory.CreateDbContextAsync())
             {
-                return new LoginResponse { Success = false, Message = "用户名或密码错误" };
+                var player = await dbContext.Players.SingleOrDefaultAsync(p => p.UserId == userId);
+
+                if (player == null || player.PassWord != password)
+                {
+                    return new LoginResponse { Success = false, Message = "用户名或密码错误" };
+                }
+
+                // 登录成功，记录用户会话
+                _sessionManager.AddSession(userId, Context.ConnectionId);
+
+                return new LoginResponse
+                {
+                    Success = true,
+                    UserId = player.UserId,
+                    UserName = player.UserName
+                };
             }
-
-            // 登录成功，记录用户会话
-            _sessionManager.AddSession(userId, Context.ConnectionId);
-
-            return new LoginResponse
-            {
-                Success = true,
-                UserId = player.UserId,
-                UserName = player.UserName
-            };
         }
 
         // 注册方法
         public async Task<RegisterResponse> Register(string userId, string password, string userName)
         {
-            // 检查用户是否已存在
-            var existingPlayer = await _dbContext.Players.FindAsync(userId);
-            if (existingPlayer != null)
+            // 使用工厂创建DbContext
+            using (var dbContext = await _dbContextFactory.CreateDbContextAsync())
             {
-                return new RegisterResponse { Success = false, Message = "用户ID已存在" };
+                // 检查用户是否已存在
+                var existingPlayer = await dbContext.Players.FindAsync(userId);
+                if (existingPlayer != null)
+                {
+                    return new RegisterResponse { Success = false, Message = "用户ID已存在" };
+                }
+
+                // 添加新用户
+                var player = new Player
+                {
+                    UserId = userId,
+                    PassWord = password,
+                    UserName = userName
+                };
+                dbContext.Players.Add(player);
+                await dbContext.SaveChangesAsync();
+
+                // 添加默认游戏记录
+                var gameRecord = new GameRecord
+                {
+                    UserId = player.UserId,
+                    UserName = player.UserName,
+                    WinTimes = 0
+                };
+                dbContext.GameRecords.Add(gameRecord);
+                await dbContext.SaveChangesAsync();
+
+                return new RegisterResponse { Success = true, UserId = userId, UserName = userName };
             }
-
-            // 添加新用户
-            var player = new Player
-            {
-                UserId = userId,
-                PassWord = password,
-                UserName = userName
-            };
-            _dbContext.Players.Add(player);
-            await _dbContext.SaveChangesAsync();
-
-            // 添加默认游戏记录
-            var gameRecord = new GameRecord
-            {
-                UserId = player.UserId,
-                UserName = player.UserName,
-                WinTimes = 0
-            };
-            _dbContext.GameRecords.Add(gameRecord);
-            await _dbContext.SaveChangesAsync();
-
-            return new RegisterResponse { Success = true, UserId = userId, UserName = userName };
         }
 
         // 获取排行榜
         public async Task<List<LeaderboardEntry>> GetLeaderboard()
         {
-            var leaderboard = await _dbContext.GameRecords
-                .OrderByDescending(g => g.WinTimes)
-                .Take(10) // 限制返回前10名
-                .ToListAsync();
-
-            var result = new List<LeaderboardEntry>();
-            int rank = 1;
-            int lastScore = -1;
-            int lastRank = 0;
-
-            foreach (var record in leaderboard)
+            // 使用工厂创建DbContext
+            using (var dbContext = await _dbContextFactory.CreateDbContextAsync())
             {
-                if (record.WinTimes != lastScore)
+                var leaderboard = await dbContext.GameRecords
+                    .OrderByDescending(g => g.WinTimes)
+                    .Take(10) // 限制返回前10名
+                    .ToListAsync();
+
+                var result = new List<LeaderboardEntry>();
+                int rank = 1;
+                int lastScore = -1;
+                int lastRank = 0;
+
+                foreach (var record in leaderboard)
                 {
-                    lastRank = rank;
-                    lastScore = record.WinTimes;
+                    if (record.WinTimes != lastScore)
+                    {
+                        lastRank = rank;
+                        lastScore = record.WinTimes;
+                    }
+
+                    result.Add(new LeaderboardEntry
+                    {
+                        UserId = record.UserId,
+                        UserName = record.UserName,
+                        WinTimes = record.WinTimes,
+                        Rank = lastRank
+                    });
+
+                    rank++;
                 }
 
-                result.Add(new LeaderboardEntry
-                {
-                    UserId = record.UserId,
-                    UserName = record.UserName,
-                    WinTimes = record.WinTimes,
-                    Rank = lastRank
-                });
-
-                rank++;
+                return result;
             }
-
-            return result;
         }
 
         //public async Task StartMatch()//实现房间匹配
@@ -186,6 +201,8 @@ namespace ChessGame.Server.Hubs
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
     }
+
+    
     // 响应模型
     public class LoginResponse
     {
