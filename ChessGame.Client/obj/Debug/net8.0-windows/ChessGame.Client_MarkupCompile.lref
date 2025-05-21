@@ -1,15 +1,18 @@
 ﻿
 
-FD:\Alpha\ChessGame.Client\ChessBoard.xaml;;
-FD:\Alpha\ChessGame.Client\testWindow.xaml;;
-FD:\Alpha\ChessGame.Client\Views\AlreadyhavePiece.xaml;;
-FD:\Alpha\ChessGame.Client\Views\GameView.xaml;;
-FD:\Alpha\ChessGame.Client\Views\GameViewAI.xaml;;
-FD:\Alpha\ChessGame.Client\Views\illegalMove.xaml;;
-FD:\Alpha\ChessGame.Client\Views\login.xaml;;
-FD:\Alpha\ChessGame.Client\Views\Lose.xaml;;
-FD:\Alpha\ChessGame.Client\Views\MainWindow.xaml;;
-FD:\Alpha\ChessGame.Client\Views\RankingList.xaml;;
-FD:\Alpha\ChessGame.Client\Views\ReturnTest.xaml;;
-FD:\Alpha\ChessGame.Client\Views\Win.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\ChessBoard.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\testWindow.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\AlreadyhavePiece.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\GameView.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\GameViewAI.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\illegalMove.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\login.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\Lose.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\MainWindow.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\NoRankingList.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\RankingList.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\ReturnTest.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\Win.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\GameisOver.xaml;;
+FD:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\Views\OutofRange.xaml;;
 

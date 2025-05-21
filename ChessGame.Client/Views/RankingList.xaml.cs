@@ -105,6 +105,11 @@ namespace ChessGame.Client.Views
                 if (_viewModel.Players.Count == 0)
                 {
                     MessageBox.Show("暂无排行榜数据", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    /*NoRankingList noRankingList = new NoRankingList
+                    {
+                        Owner = this
+                    };
+                    noRankingList.Show();*/
                 }
             }
             catch (Exception ex)

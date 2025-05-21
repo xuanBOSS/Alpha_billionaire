@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 D:\Alpha\ChessGame.Client\App.xaml
-121452770813
+15555930218
 41931609565
-19-644393231
+221281312539
 346-2025609153
-ChessBoard.xaml;testWindow.xaml;Views\AlreadyhavePiece.xaml;Views\GameView.xaml;Views\GameViewAI.xaml;Views\illegalMove.xaml;Views\login.xaml;Views\Lose.xaml;Views\MainWindow.xaml;Views\RankingList.xaml;Views\ReturnTest.xaml;Views\Win.xaml;
+ChessBoard.xaml;testWindow.xaml;Views\AlreadyhavePiece.xaml;Views\GameisOver.xaml;Views\GameView.xaml;Views\GameViewAI.xaml;Views\illegalMove.xaml;Views\login.xaml;Views\Lose.xaml;Views\MainWindow.xaml;Views\NoRankingList.xaml;Views\OutofRange.xaml;Views\RankingList.xaml;Views\ReturnTest.xaml;Views\Win.xaml;
 
 True
 
