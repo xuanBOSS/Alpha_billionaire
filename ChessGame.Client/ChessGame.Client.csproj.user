@@ -11,6 +11,9 @@
     <Compile Update="Views\AlreadyhavePiece.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\GameisOver.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\GameView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -27,6 +30,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NoRankingList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OutofRange.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\RankingList.xaml.cs">

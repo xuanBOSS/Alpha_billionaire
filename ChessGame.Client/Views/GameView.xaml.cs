@@ -751,7 +751,7 @@ namespace ChessGame.Client.Views
             // 用户点击取消或关闭，不做任何操作
         }
 
-        //放置棋子失败，禁手点
+        //禁手点
         private void Is_illegalMove()
         {
             illegalMove illegalMovet = new illegalMove
@@ -760,10 +760,28 @@ namespace ChessGame.Client.Views
             };
         }
 
-        //放置棋子失败，该位置已经有棋子
+        //该位置已经有棋子
         private void Is_AlreadyhavePiece()
         {
             AlreadyhavePiece AlreadyhavePiece = new AlreadyhavePiece
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+        }
+
+        //超出棋盘范围
+        private void Is_OutofRange()
+        {
+            OutofRange OutofRange = new OutofRange
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+        }
+
+        //游戏已经结束
+        private void Is_GameOver()
+        {
+            GameisOver GameisOver = new GameisOver
             {
                 Owner = this //设置所有者窗口主窗口中央
             };
