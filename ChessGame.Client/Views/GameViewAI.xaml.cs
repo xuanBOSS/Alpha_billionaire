@@ -765,6 +765,24 @@ namespace ChessGame.Client.Views
             };
         }
 
+        //超出棋盘范围
+        private void Is_OutofRange()
+        {
+            OutofRange OutofRange = new OutofRange
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+        }
+
+        //游戏已经结束
+        private void Is_GameOver()
+        {
+            GameisOver GameisOver = new GameisOver
+            {
+                Owner = this //设置所有者窗口主窗口中央
+            };
+        }
+
         //如果游戏胜利
         private void Is_Win()
         {
