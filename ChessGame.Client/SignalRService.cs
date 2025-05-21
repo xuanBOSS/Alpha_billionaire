@@ -39,7 +39,8 @@ namespace ChessGame.Client
         {
             // 创建与 SignalR Hub 的连接
             _connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:7101/gamehub") // SignalR 服务器的 URL
+                //.WithUrl("https://localhost:7101/gamehub") // SignalR 服务器的 URL
+                .WithUrl("http://localhost:5000/gamehub")
                 .WithAutomaticReconnect()
                 .Build();
 
@@ -60,21 +61,7 @@ namespace ChessGame.Client
         // 启动 SignalR 连接
         public async Task StartConnectionAsync()
         {
-            //try
-            //{
-            //    if (_connection.State == HubConnectionState.Disconnected)
-            //    {
-            //        await _connection.StartAsync();
-            //        Console.WriteLine("SignalR连接成功!");
-            //        OnConnectionStateChanged?.Invoke(true);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine($"连接失败: {ex.Message}");
-            //    OnError?.Invoke($"连接服务器失败: {ex.Message}");
-            //    OnConnectionStateChanged?.Invoke(false);
-            //}
+            
             try
             {
                 if (_connection.State == HubConnectionState.Disconnected)
@@ -318,6 +305,8 @@ namespace ChessGame.Client
                 OnError?.Invoke($"发送消息失败: {ex.Message}");
             }
         }
+
+        //注册AI胜率变化的事件
 
         //如果采用这种方式发送消息，客户端不会等待服务端的回应
         // 发送消息到所有连接的客户端

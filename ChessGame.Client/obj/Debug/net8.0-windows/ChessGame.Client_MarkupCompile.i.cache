@@ -16,5 +16,5 @@ D:\Alpha\ChessGame.Client\App.xaml
 346-2025609153
 ChessBoard.xaml;testWindow.xaml;Views\AlreadyhavePiece.xaml;Views\GameView.xaml;Views\GameViewAI.xaml;Views\illegalMove.xaml;Views\login.xaml;Views\Lose.xaml;Views\MainWindow.xaml;Views\RankingList.xaml;Views\ReturnTest.xaml;Views\Win.xaml;
 
-False
+True
 

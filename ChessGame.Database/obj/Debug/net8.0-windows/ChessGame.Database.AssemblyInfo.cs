@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChessGame.Database")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+395d941bf6421674859725d4118e90445d931b42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b375b163572c295477039873fb6a813f7b25b5d")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChessGame.Database")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChessGame.Database")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
