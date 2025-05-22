@@ -617,3 +617,9 @@ D:\Alpha\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\refint\Ches
 D:\Alpha\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ChessGame.Client.pdb
 D:\Alpha\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ChessGame.Client.genruntimeconfig.cache
 D:\Alpha\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\ref\ChessGame.Client.dll
+D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\MatchRequest.g.cs
+D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\MatchSuccess.g.cs
+D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\WhiteMatch.g.cs
+D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\MatchRequest.baml
+D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\MatchSuccess.baml
+D:\大二下课程\软件构造基础\五子棋\Alpha_billionaire\ChessGame.Client\obj\Debug\net8.0-windows\Views\WhiteMatch.baml

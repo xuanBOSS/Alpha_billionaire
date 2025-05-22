@@ -47,6 +47,9 @@
     <Compile Update="Views\Win.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\WhiteMatch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="testWindow.xaml">
