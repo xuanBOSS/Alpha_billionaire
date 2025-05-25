@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="source\bomb.png" />
+    <None Remove="source\picture1.png" />
+    <None Remove="source\picture2.png" />
+    <None Remove="source\picture3.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="source\bomb.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="source\picture1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="source\picture2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="source\picture3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChessGame.AI\ChessGame.AI.csproj" />
+    <ProjectReference Include="..\ChessGame.GameLogic\ChessGame.GameLogic.csproj" />
+  </ItemGroup>
+
+
+  <!-- 彻底阻止本项目所有类型的配置文件被发布 -->
+  <ItemGroup>
+    <Content Update="appsettings.json" CopyToOutputDirectory="Never" />
+    <Content Update="appsettings.Development.json" CopyToOutputDirectory="Never" />
+    <EmbeddedResource Update="appsettings.json" CopyToOutputDirectory="Never" />
+    <EmbeddedResource Update="appsettings.Development.json" CopyToOutputDirectory="Never" />
+    <None Update="appsettings.json" CopyToOutputDirectory="Never" />
+    <None Update="appsettings.Development.json" CopyToOutputDirectory="Never" />
+  </ItemGroup>
+
+</Project>

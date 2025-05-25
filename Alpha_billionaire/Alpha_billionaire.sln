@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alpha_billionaire", "Alpha_billionaire.csproj", "{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessGame.Server", "..\ChessGame.Server\ChessGame.Server.csproj", "{9F2AC4F5-8BD0-41FB-98BE-2BD2DB1B1E27}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessGame.GameLogic", "..\ChessGame.GameLogic\ChessGame.GameLogic.csproj", "{94744AFE-2EA0-4449-9A9E-6B50155E7DB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessGame.AI", "..\ChessGame.AI\ChessGame.AI.csproj", "{EE7519BD-94FD-40E3-B0B1-74062102FF09}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessGame.Database", "..\ChessGame.Database\ChessGame.Database.csproj", "{2AC4E382-6C30-4FE1-9612-BCF459C27D0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessGame.Client", "..\ChessGame.Client\ChessGame.Client.csproj", "{DDF8EFBB-AF16-42DC-83FE-4274891E3831}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testLogic", "..\testLogic\testLogic.csproj", "{C3FC02D1-2A19-40AB-88AD-2113CC6A5797}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6146DC1D-4BFE-4B1E-A88C-25CC54297D45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F2AC4F5-8BD0-41FB-98BE-2BD2DB1B1E27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F2AC4F5-8BD0-41FB-98BE-2BD2DB1B1E27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F2AC4F5-8BD0-41FB-98BE-2BD2DB1B1E27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F2AC4F5-8BD0-41FB-98BE-2BD2DB1B1E27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94744AFE-2EA0-4449-9A9E-6B50155E7DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94744AFE-2EA0-4449-9A9E-6B50155E7DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94744AFE-2EA0-4449-9A9E-6B50155E7DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94744AFE-2EA0-4449-9A9E-6B50155E7DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE7519BD-94FD-40E3-B0B1-74062102FF09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE7519BD-94FD-40E3-B0B1-74062102FF09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE7519BD-94FD-40E3-B0B1-74062102FF09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE7519BD-94FD-40E3-B0B1-74062102FF09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AC4E382-6C30-4FE1-9612-BCF459C27D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC4E382-6C30-4FE1-9612-BCF459C27D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC4E382-6C30-4FE1-9612-BCF459C27D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AC4E382-6C30-4FE1-9612-BCF459C27D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDF8EFBB-AF16-42DC-83FE-4274891E3831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF8EFBB-AF16-42DC-83FE-4274891E3831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF8EFBB-AF16-42DC-83FE-4274891E3831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF8EFBB-AF16-42DC-83FE-4274891E3831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3FC02D1-2A19-40AB-88AD-2113CC6A5797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3FC02D1-2A19-40AB-88AD-2113CC6A5797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3FC02D1-2A19-40AB-88AD-2113CC6A5797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3FC02D1-2A19-40AB-88AD-2113CC6A5797}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC7A9B31-43BB-4BD1-BCBC-401895301A94}
+	EndGlobalSection
+EndGlobal

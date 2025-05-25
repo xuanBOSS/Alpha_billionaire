@@ -1,0 +1,22 @@
+﻿<Window x:Class="ChessGame.Client.Views.WhiteMatch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChessGame.Client.Views"
+        mc:Ignorable="d"
+        Title="WhiteMatch" Height="200" Width="300"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height = "1*" />
+            <RowDefinition Height = "1*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text = "匹配成功！你是白方" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "24" 
+       HorizontalAlignment="Center" Margin="0,45,0,0"/>
+        <TextBlock Grid.Row="1" Text = "正在进入房间..." FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "24" 
+               HorizontalAlignment="Center" VerticalAlignment = "Top"/>
+    </Grid>
+</Window>

@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!-- 在最前面强制生效 -->
+  <ItemGroup>
+    <Content Update="..\​**​\appsettings.json" CopyToOutputDirectory="Never" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alpha_billionaire\Alpha_billionaire.csproj" />
+    <ProjectReference Include="..\ChessGame.AI\ChessGame.AI.csproj" />
+    <ProjectReference Include="..\ChessGame.Database\ChessGame.Database.csproj" />
+    <ProjectReference Include="..\ChessGame.GameLogic\ChessGame.GameLogic.csproj" />
+  </ItemGroup>
+
+<!-- 新增：控制配置文件发布行为 -->
+  <ItemGroup>
+    <!-- 阻止其他项目的 appsettings.json 被复制到发布目录 -->
+    <Content Update="..\​**​\appsettings.json" CopyToOutputDirectory="Never" />
+    <Content Update="..\​**​\appsettings.Development.json" CopyToOutputDirectory="Never" />
+    
+    <!-- 确保当前项目的 appsettings.json 正常发布 -->
+    <Content Update="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Update="appsettings.Development.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

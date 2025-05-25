@@ -1,0 +1,85 @@
+﻿<Window x:Class="ChessGame.Client.Views.illegalMove"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChessGame.Client.Views"
+        mc:Ignorable="d"
+        Title="illegalMove" Height="200" Width="300"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <!-- 定义按钮样式 -->
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <!-- 默认背景色 -->
+            <Setter Property="Background" Value="Cornsilk"/>
+            <!-- 文字颜色 -->
+            <Setter Property="Foreground" Value="DarkGoldenrod"/>
+            <!-- 边框颜色 -->
+            <Setter Property="BorderBrush" Value="DarkGoldenrod"/>
+            <!-- 边框厚度 -->
+            <Setter Property="BorderThickness" Value="1"/>
+            <!-- 字体大小 -->
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" CornerRadius="10" 
+                 Background="{TemplateBinding Background}"
+                 BorderBrush="{TemplateBinding BorderBrush}"
+                 BorderThickness="{TemplateBinding BorderThickness}">
+                            <Border.Effect>
+                                <!-- 阴影 -->
+                                <DropShadowEffect Color="Black" Direction="270" ShadowDepth="3" BlurRadius="5" Opacity="0.3"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- 鼠标悬停效果 -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Wheat"/>
+                                <Setter Property="BorderBrush" Value="DarkGoldenrod"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" Direction="270" ShadowDepth="4" BlurRadius="5" Opacity="0.3"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <!-- 鼠标按下效果 -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="Wheat"/>
+                                <Setter Property="BorderBrush" Value="Tan"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" Direction="270" ShadowDepth="4" BlurRadius="5" Opacity="0.3"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height = "1*" />
+            <RowDefinition Height = "1*" />
+            <RowDefinition Height = "1*" />
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Grid.Row="0" Text = "放置失败！此为禁手点" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "16"
+           HorizontalAlignment="Center" VerticalAlignment = "Bottom"/>
+        <TextBlock Grid.Row="1" Text = "请重新选择位置" FontFamily="FZYaoTi" Foreground="Sienna" FontSize = "16" Margin="0,0,0,20"
+                   HorizontalAlignment="Center" VerticalAlignment = "Center"/>
+
+        <Button Grid.Row="2" Style="{StaticResource ModernButtonStyle}" Height = "35" Width = "70" 
+                Content = "确认" FontFamily="FZYaoTi" FontSize = "18"
+                VerticalAlignment = "Top" HorizontalAlignment = "Center" Click = "OKButton_Click"/>
+
+    </Grid>
+</Window>
