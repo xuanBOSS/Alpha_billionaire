@@ -14,7 +14,7 @@ namespace ChessGame.AI
         private readonly AIHelper helper;
         private readonly Random random = new Random();
 
-        public AlphaBetaAI(int boardSize = 14, int searchDepth = 3)
+        public AlphaBetaAI(int boardSize = 15, int searchDepth = 4)
         {
             this.boardSize = boardSize;
             this.searchDepth = searchDepth;
@@ -24,26 +24,107 @@ namespace ChessGame.AI
         // 获取AI的下一步最佳落子
         public (int x, int y) GetNextMove(Board board, MineMap mineMap, int aiColor)
         {
+            //// 更新地雷概率推理
+            //helper.UpdateMineProbabilities(mineMap.numbers);
+
+            //// 生成并评估所有可能的落子
+            //List<(int x, int y, double score)> candidateMoves = GeneratePossibleMoves(board, mineMap, aiColor);
+
+            //// 如果没有合法落子，返回(-1, -1)
+            //if (candidateMoves.Count == 0)
+            //    return (-1, -1);
+
+            //// 从评分最高的几个落子点中选择最佳落子
+            //List<(int x, int y, int score)> bestMoves = new List<(int x, int y, int score)>();
+
+            //// 限制搜索的候选落子数，提高效率
+            //int candidateCount = Math.Min(7, candidateMoves.Count);
+
+            //for (int i = 0; i < candidateCount; i++)
+            //{
+            //    var move = candidateMoves[i];
+
+            //    // 模拟落子
+            //    Board tempBoard = board.Clone();
+            //    tempBoard.SetCell(move.x, move.y, (PlayerColor)aiColor);
+
+            //    // 检查是否会爆炸
+            //    if (helper.WillExplodeMine(mineMap, move.x, move.y))
+            //    {
+            //        (tempBoard, _) = helper.SimulateExplosion(tempBoard, move.x, move.y, aiColor);
+            //    }
+
+            //    // 执行Alpha-Beta搜索
+            //    int moveScore = AlphaBeta(tempBoard, mineMap, searchDepth - 1, int.MinValue, int.MaxValue, false, aiColor);
+
+            //    bestMoves.Add((move.x, move.y, moveScore));
+            //}
+
+            //// 选择评分最高的落子
+            //var bestMove = bestMoves.OrderByDescending(m => m.score).First();
+
+            //// 如果有多个同分最高的落子，随机选择其中一个以增加多样性
+            //var topMoves = bestMoves.Where(m => m.score == bestMove.score).ToList();
+            //if (topMoves.Count > 1)
+            //{
+            //    var randomMove = topMoves[random.Next(topMoves.Count)];
+            //    return (randomMove.x, randomMove.y);
+            //}
+
+            //return (bestMove.x, bestMove.y);
             // 更新地雷概率推理
             helper.UpdateMineProbabilities(mineMap.numbers);
 
             // 生成并评估所有可能的落子
-            List<(int x, int y, double score)> candidateMoves = GeneratePossibleMoves(board, mineMap, aiColor);
+            var possibleMoves = helper.GetPossibleMoves(board, aiColor);
+            if (possibleMoves.Count == 0) return (-1, -1);
 
-            // 如果没有合法落子，返回(-1, -1)
-            if (candidateMoves.Count == 0)
-                return (-1, -1);
+            List<(int x, int y, double finalScore)> evaluatedMoves = new List<(int x, int y, double finalScore)>();
 
-            // 从评分最高的几个落子点中选择最佳落子
-            List<(int x, int y, int score)> bestMoves = new List<(int x, int y, int score)>();
-
-            // 限制搜索的候选落子数，提高效率
-            int candidateCount = Math.Min(7, candidateMoves.Count);
-
-            for (int i = 0; i < candidateCount; i++)
+            // 对每个可能的落子进行综合评估
+            foreach (var move in possibleMoves)
             {
-                var move = candidateMoves[i];
+                // 获取综合评估
+                var (score, winRate, confidence) = helper.EvaluateMoveComprehensive(board, mineMap, move.x, move.y, aiColor);
 
+                // 如果是禁手位置，跳过
+                if (score == double.MinValue)
+                    continue;
+
+                // 根据置信度混合评分和胜率
+                double finalScore;
+                if (confidence > 0.7)
+                {
+                    // 高置信度：主要依靠评分（更精确）
+                    finalScore = score * 0.8 + winRate * 10000 * 0.2;
+                }
+                else if (confidence > 0.4)
+                {
+                    // 中等置信度：平衡考虑
+                    finalScore = score * 0.5 + winRate * 10000 * 0.5;
+                }
+                else
+                {
+                    // 低置信度：主要依靠胜率（更稳健）
+                    finalScore = score * 0.2 + winRate * 10000 * 0.8;
+                }
+
+                evaluatedMoves.Add((move.x, move.y, finalScore));
+            }
+
+            // 如果没有合法落子，返回随机位置
+            if (evaluatedMoves.Count == 0)
+            {
+                return helper.GetRandomLegalMove(board, aiColor);
+            }
+
+            // 选择最佳候选进行Alpha-Beta搜索
+            var bestCandidates = evaluatedMoves.OrderByDescending(m => m.finalScore).Take(7).ToList();
+
+            List<(int x, int y, double score)> searchResults = new List<(int x, int y, double score)>();
+
+            foreach (var move in bestCandidates)
+            {
                 // 模拟落子
                 Board tempBoard = board.Clone();
                 tempBoard.SetCell(move.x, move.y, (PlayerColor)aiColor);
@@ -54,28 +135,27 @@ namespace ChessGame.AI
                     (tempBoard, _) = helper.SimulateExplosion(tempBoard, move.x, move.y, aiColor);
                 }
 
-                // 执行Alpha-Beta搜索
-                int moveScore = AlphaBeta(tempBoard, mineMap, searchDepth - 1, int.MinValue, int.MaxValue, false, aiColor);
-
-                bestMoves.Add((move.x, move.y, moveScore));
+                // 使用Alpha-Beta搜索评估这个位置的价值
+                double searchScore = AlphaBeta(tempBoard, mineMap, searchDepth - 1, double.MinValue, double.MaxValue, false, aiColor);
+                searchResults.Add((move.x, move.y, searchScore));
             }
 
-            // 选择评分最高的落子
-            var bestMove = bestMoves.OrderByDescending(m => m.score).First();
+            // 选择搜索结果最好的落子
+            var finalBest = searchResults.OrderByDescending(m => m.score).First();
 
-            // 如果有多个同分最高的落子，随机选择其中一个以增加多样性
-            var topMoves = bestMoves.Where(m => m.score == bestMove.score).ToList();
+            // 如果有多个同等评分的落子，随机选择其中一个
+            var topMoves = searchResults.Where(m => Math.Abs(m.score - finalBest.score) < 100).ToList();
             if (topMoves.Count > 1)
             {
                 var randomMove = topMoves[random.Next(topMoves.Count)];
                 return (randomMove.x, randomMove.y);
             }
 
-            return (bestMove.x, bestMove.y);
+            return (finalBest.x, finalBest.y);
         }
 
         // Alpha-Beta剪枝搜索算法
-        private int AlphaBeta(Board board, MineMap mineMap, int depth, int alpha, int beta, bool isMaximizing, int playerColor)
+        private double AlphaBeta(Board board, MineMap mineMap, int depth, double alpha, double beta, bool isMaximizing, int playerColor)
         {
             // 终止条件
             if (depth == 0 || helper.IsGameOver(board))
@@ -95,23 +175,93 @@ namespace ChessGame.AI
                 return helper.EvaluateBoard(board, mineMap, playerColor);
             }
 
-            // 对落子进行初步评估和排序，提高剪枝效率
-            List<(int x, int y, double score)> sortedMoves = new List<(int x, int y, double score)>();
-            foreach (var move in possibleMoves)
-            {
-                double score = helper.EvaluateMoveHeuristic(board, mineMap, move.x, move.y, currentColor);
-                sortedMoves.Add((move.x, move.y, score));
-            }
+            //// 对落子进行初步评估和排序，提高剪枝效率
+            //List<(int x, int y, double score)> sortedMoves = new List<(int x, int y, double score)>();
+            //foreach (var move in possibleMoves)
+            //{
+            //    double score = helper.EvaluateMoveHeuristic(board, mineMap, move.x, move.y, currentColor);
+            //    sortedMoves.Add((move.x, move.y, score));
+            //}
 
-            // 根据当前玩家正反排序
-            if (isMaximizing)
-                sortedMoves = sortedMoves.OrderByDescending(m => m.score).ToList();
-            else
-                sortedMoves = sortedMoves.OrderBy(m => m.score).ToList();
+            //// 根据当前玩家正反排序
+            //if (isMaximizing)
+            //    sortedMoves = sortedMoves.OrderByDescending(m => m.score).ToList();
+            //else
+            //    sortedMoves = sortedMoves.OrderBy(m => m.score).ToList();
+
+            //if (isMaximizing)
+            //{
+            //    int maxEval = int.MinValue;
+
+            //    foreach (var move in sortedMoves)
+            //    {
+            //        // 模拟落子
+            //        Board tempBoard = board.Clone();
+            //        tempBoard.SetCell(move.x, move.y, (PlayerColor)currentColor);
+
+            //        // 检查是否会爆炸
+            //        if (helper.WillExplodeMine(mineMap, move.x, move.y))
+            //        {
+            //            (tempBoard, _) = helper.SimulateExplosion(tempBoard, move.x, move.y, currentColor);
+            //        }
+
+            //        // 递归搜索
+            //        int eval = AlphaBeta(tempBoard, mineMap, depth - 1, alpha, beta, false, playerColor);
+            //        maxEval = Math.Max(maxEval, eval);
+            //        alpha = Math.Max(alpha, eval);
+
+            //        // Alpha-Beta剪枝
+            //        if (beta <= alpha)
+            //            break;
+            //    }
+
+            //    return maxEval;
+            //}
+            //else
+            //{
+            //    int minEval = int.MaxValue;
+
+            //    foreach (var move in sortedMoves)
+            //    {
+            //        // 模拟落子
+            //        Board tempBoard = board.Clone();
+            //        tempBoard.SetCell(move.x, move.y, (PlayerColor)currentColor);
+
+            //        // 检查是否会爆炸
+            //        if (helper.WillExplodeMine(mineMap, move.x, move.y))
+            //        {
+            //            (tempBoard, _) = helper.SimulateExplosion(tempBoard, move.x, move.y, currentColor);
+            //        }
+
+            //        // 递归搜索
+            //        int eval = AlphaBeta(tempBoard, mineMap, depth - 1, alpha, beta, true, playerColor);
+            //        minEval = Math.Min(minEval, eval);
+            //        beta = Math.Min(beta, eval);
+
+            //        // Alpha-Beta剪枝
+            //        if (beta <= alpha)
+            //            break;
+            //    }
+
+            //    return minEval;
+
+            //}
+            // 对落子进行启发式排序，提高剪枝效率
+            var sortedMoves = possibleMoves
+                .Select(move => new
+                {
+                    Move = move,
+                    Score = helper.EvaluateMoveHeuristic(board, mineMap, move.x, move.y, currentColor)
+                })
+                .Where(m => m.Score != double.MinValue) // 排除禁手位置
+                .OrderByDescending(m => isMaximizing ? m.Score : -m.Score)
+                .Take(Math.Min(10, possibleMoves.Count)) // 限制搜索宽度
+                .Select(m => m.Move)
+                .ToList();
 
             if (isMaximizing)
             {
-                int maxEval = int.MinValue;
+                double maxEval = double.MinValue;
 
                 foreach (var move in sortedMoves)
                 {
@@ -126,7 +276,7 @@ namespace ChessGame.AI
                     }
 
                     // 递归搜索
-                    int eval = AlphaBeta(tempBoard, mineMap, depth - 1, alpha, beta, false, playerColor);
+                    double eval = AlphaBeta(tempBoard, mineMap, depth - 1, alpha, beta, false, playerColor);
                     maxEval = Math.Max(maxEval, eval);
                     alpha = Math.Max(alpha, eval);
 
@@ -139,7 +289,7 @@ namespace ChessGame.AI
             }
             else
             {
-                int minEval = int.MaxValue;
+                double minEval = double.MaxValue;
 
                 foreach (var move in sortedMoves)
                 {
@@ -154,7 +304,7 @@ namespace ChessGame.AI
                     }
 
                     // 递归搜索
-                    int eval = AlphaBeta(tempBoard, mineMap, depth - 1, alpha, beta, true, playerColor);
+                    double eval = AlphaBeta(tempBoard, mineMap, depth - 1, alpha, beta, true, playerColor);
                     minEval = Math.Min(minEval, eval);
                     beta = Math.Min(beta, eval);
 
@@ -177,8 +327,16 @@ namespace ChessGame.AI
 
             foreach (var move in possibleMoves)
             {
+                //double score = helper.EvaluateMoveHeuristic(board, mineMap, move.x, move.y, playerColor);
+                //moves.Add((move.x, move.y, score));
+                // 使用启发式函数评估每个落子
                 double score = helper.EvaluateMoveHeuristic(board, mineMap, move.x, move.y, playerColor);
-                moves.Add((move.x, move.y, score));
+
+                // 排除禁手位置
+                if (score != double.MinValue)
+                {
+                    moves.Add((move.x, move.y, score));
+                }
             }
 
             // 按初步评分排序
@@ -232,7 +390,7 @@ namespace ChessGame.AI
         // 在指定深度运行Alpha-Beta搜索
         private (int x, int y) RunAlphaBetaSearch(Board board, MineMap mineMap, int aiColor, int depth, List<(int x, int y, double score)> candidateMoves)
         {
-            List<(int x, int y, int score)> bestMoves = new List<(int x, int y, int score)>();
+            List<(int x, int y, double score)> bestMoves = new List<(int x, int y, double score)>();
 
             // 限制搜索的候选落子数
             int candidateCount = Math.Min(7, candidateMoves.Count);
@@ -252,7 +410,7 @@ namespace ChessGame.AI
                 }
 
                 // 执行Alpha-Beta搜索
-                int moveScore = AlphaBeta(tempBoard, mineMap, depth - 1, int.MinValue, int.MaxValue, false, aiColor);
+                double moveScore = AlphaBeta(tempBoard, mineMap, depth - 1, int.MinValue, int.MaxValue, false, aiColor);
 
                 bestMoves.Add((move.x, move.y, moveScore));
             }
