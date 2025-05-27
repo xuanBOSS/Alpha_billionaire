@@ -180,6 +180,7 @@ namespace ChessGame.Server.Controllers
         // 离开房间
         public async Task ExitRoom(string connectionId)
         {
+            Console.WriteLine("Exit Room");
             AIRoom airoom = FindRoomByPlayer(connectionId);
             if (airoom == null) return;
 
@@ -338,9 +339,12 @@ namespace ChessGame.Server.Controllers
         {
             try
             {
+
                 Console.WriteLine("AI开始落子");
 
                 AIRoom airoom = FindRoomByPlayer(connectionId);//找到请求玩家所在的房间
+
+                if (airoom.GameManager.IsGameOver) return;
 
                 var transferData = airoom.GameManager.MineMap.GetTransferData();
                 if (transferData == null)

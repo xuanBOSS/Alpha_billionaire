@@ -55,7 +55,8 @@ namespace ChessGame.Client
             _connection = new HubConnectionBuilder()
                 //.WithUrl("https://localhost:7101/gamehub") // SignalR 服务器的 URL
                 //.WithUrl("http://localhost:5000/gamehub")
-                .WithUrl("http://192.168.108.115:5000/gamehub")
+                //.WithUrl("http://192.168.108.115:5000/gamehub")
+                .WithUrl("http://192.168.183.115:5000/gamehub")
                 //.WithAutomaticReconnect()
                 .Build();
 
@@ -658,7 +659,7 @@ namespace ChessGame.Client
         {
             try
             {
-                await _connection.InvokeAsync("ExitAIGame");
+                await _connection.InvokeAsync("ExitAIRoom");
             }
             catch (Exception ex)
             {

@@ -32,8 +32,11 @@ namespace ChessGame.Client.Views
         
         public MainWindow(SignalRService.UserInfo userInfo = null)
         {
+            
+
             // 先设置数据，再初始化组件
             _signalRService = App.ServiceProvider.GetRequiredService<SignalRService>();
+            
             _currentUser = userInfo ?? _signalRService.CurrentUser;
 
             if (_currentUser == null)
@@ -70,6 +73,12 @@ namespace ChessGame.Client.Views
                 }
             });
         
+        }
+
+        //退出房间
+        private async void ExitRoom()
+        {
+            await _signalRService.ExitAIGame();
         }
 
         private void OnUserInfoUpdated(SignalRService.UserInfo updatedUser)
@@ -121,6 +130,8 @@ namespace ChessGame.Client.Views
         //选择人机模式
         private async void ManMachineMode_Click(object sender, RoutedEventArgs e)
         {
+            ExitRoom();//如果房间管理系统中，有当前玩家房间的数据，先清除房间
+
             //小窗口设置在当前窗口中间
             matchRequest.Owner = this;
 

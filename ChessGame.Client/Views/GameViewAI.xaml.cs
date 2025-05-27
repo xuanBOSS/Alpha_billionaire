@@ -128,6 +128,8 @@ namespace ChessGame.Client.Views
 
                         PlacePiece(x, y, color);
                         HandleMineExplosion(x, y);
+
+                        Application.Current.Dispatcher.Invoke(askAIMove);//玩家落子信息显示后请求ai落子
                     }
                 });
 
@@ -136,10 +138,10 @@ namespace ChessGame.Client.Views
                 //MineisBomb
                 //);
 
-                if (result)
+                /*if (result)
                 {
                     Application.Current.Dispatcher.Invoke(askAIMove);//玩家落子信息显示后请求ai落子
-                }
+                }*/
                 //Application.Current.Dispatcher.Invoke(askAIMove);//玩家落子信息显示后请求ai落子
 
                 //// 在接收到消息时更新 UI
@@ -1159,6 +1161,7 @@ namespace ChessGame.Client.Views
         // 点击退出游戏按钮，弹出确认小窗口
         private void Return_Click(object sender, RoutedEventArgs e)
         {
+            ExitRoom();
             ShowReturnTest();
         }
 
@@ -1174,10 +1177,26 @@ namespace ChessGame.Client.Views
 
             if (ReturnTest.DialogResult == true)
             {
+                //离开房间
+                ExitRoom();
+
+
+                // 创建并显示MainWindow
+                // 登录成功，打开主界面并传递用户信息
+                /*var mainWindow = new MainWindow();
+                mainWindow.Show();*/
+
                 // 用户点击确定
                 this.Close(); // 关闭当前窗口
+
             }
             // 用户点击取消或关闭，不做任何操作
+        }
+
+        //退出房间
+        private async void ExitRoom()
+        {
+            await _signalRService.ExitAIGame();
         }
 
         // 禁手点

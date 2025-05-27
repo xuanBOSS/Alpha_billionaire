@@ -239,7 +239,7 @@ namespace ChessGame.Server.Controllers
             await _hubContext.Clients.Group(room.RoomID).SendAsync("MapInfo", transferData);
             Console.WriteLine($"地图数据已发送到房间 {room.RoomID}");
 
-            string msg;
+            string msg = "";
             bool result = room.DealPiece(x, y, connectionId, out msg);
 
             int color = 0;

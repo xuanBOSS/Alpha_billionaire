@@ -906,6 +906,7 @@ namespace ChessGame.Client.Views
             {
                 Owner = this //设置所有者窗口主窗口中央
             };
+            illegalMovet.ShowDialog();
         }
 
         //该位置已经有棋子
@@ -915,6 +916,7 @@ namespace ChessGame.Client.Views
             {
                 Owner = this //设置所有者窗口主窗口中央
             };
+            AlreadyhavePiece.ShowDialog();
         }
 
         //超出棋盘范围
@@ -924,6 +926,7 @@ namespace ChessGame.Client.Views
             {
                 Owner = this //设置所有者窗口主窗口中央
             };
+            OutofRange.ShowDialog();
         }
 
         //游戏已经结束
