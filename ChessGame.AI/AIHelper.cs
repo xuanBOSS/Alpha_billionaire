@@ -12,10 +12,10 @@ namespace ChessGame.AI
     {
         // 棋盘评分参数
         public const int FIVE_IN_A_ROW = 100000;  // 五子连珠
-        public const int OPEN_FOUR = 10000;       // 活四
-        public const int FOUR = 1000;             // 冲四
-        public const int OPEN_THREE = 1500;       // 活三
-        public const int THREE = 100;             // 眠三
+        public const int OPEN_FOUR = 50000;       // 活四
+        public const int FOUR = 30000;             // 冲四
+        public const int OPEN_THREE = 20000;       // 活三
+        public const int THREE = 500;             // 眠三
         public const int OPEN_TWO = 100;          // 活二
         public const int TWO = 10;                // 眠二
         public const int MINE_RISK = -500;        // 地雷风险惩罚
@@ -36,6 +36,274 @@ namespace ChessGame.AI
             ResetMineProbabilities();
             this.myShapesCache = new Dictionary<string, int>();
             this.opponentShapesCache = new Dictionary<string, int>();
+        }
+
+
+        // 新增：检查是否有必胜点
+        public bool HasWinningMove(Board board, int playerColor, out (int x, int y) winMove)
+        {
+            winMove = (-1, -1);
+
+            // 检查自己是否有必胜点
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board.GetCell(i, j) == PlayerColor.None)
+                    {
+                        // 检查是否是禁手位置
+                        if (playerColor == 1 && IsForbiddenMove(board, i, j, playerColor))
+                            continue;
+
+                        // 模拟自己在此落子
+                        Board tempBoard = board.Clone();
+                        tempBoard.SetCell(i, j, (PlayerColor)playerColor);
+
+                        // 检查是否形成五连
+                        if (HasFiveInARow(tempBoard, i, j, playerColor))
+                        {
+                            winMove = (i, j);
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        // 新增：检查是否有紧急威胁需要防守
+        public bool HasImmediateThreat(Board board, int playerColor, out (int x, int y) defenseMove)
+        {
+            defenseMove = (-1, -1);
+            int opponentColor = playerColor == 1 ? 2 : 1;
+
+            List<(int x, int y, int priority)> threats = new List<(int x, int y, int priority)>();
+
+            // 检查对手是否有威胁点
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board.GetCell(i, j) == PlayerColor.None)
+                    {
+                        // 检查是否是禁手位置（对我方而言）
+                        if (playerColor == 1 && IsForbiddenMove(board, i, j, playerColor))
+                            continue;
+
+                        // 模拟对手在此落子
+                        Board tempBoard = board.Clone();
+                        tempBoard.SetCell(i, j, (PlayerColor)opponentColor);
+
+                        // 检查威胁等级
+                        int threatLevel = EvaluateThreatLevel(tempBoard, i, j, opponentColor);
+
+                        if (threatLevel > 0)
+                        {
+                            threats.Add((i, j, threatLevel));
+                        }
+                    }
+                }
+            }
+
+            // 按威胁等级排序，优先防守最高威胁
+            if (threats.Count > 0)
+            {
+                var highestThreat = threats.OrderByDescending(t => t.priority).First();
+                defenseMove = (highestThreat.x, highestThreat.y);
+                return highestThreat.priority >= 5; // 只有高威胁才需要立即防守
+            }
+
+            return false;
+        }
+
+        // 新增：评估威胁等级
+        private int EvaluateThreatLevel(Board board, int x, int y, int playerColor)
+        {
+            // 检查是否形成五连（最高威胁）
+            if (HasFiveInARow(board, x, y, playerColor))
+                return 10;
+
+            // 检查是否形成有效的活四（次高威胁）
+            if (IsValidOpenFourAtPosition(board, x, y, playerColor))
+                return 9;
+
+            // 检查是否形成有效的冲四
+            if (IsValidFourAtPosition(board, x, y, playerColor))
+                return 7;
+
+            // 检查是否形成有效的活三
+            if (IsValidOpenThreeAtPosition(board, x, y, playerColor))
+                return 5;
+
+            // 检查是否形成有效的眠三
+            if (IsValidThreeAtPosition(board, x, y, playerColor))
+                return 3;
+
+            return 0;
+        }
+
+        // 新增：检查是否形成活四
+        public bool IsValidOpenFourAtPosition(Board board, int x, int y, int playerColor)
+        {
+            int[][] directions = new int[][]
+            {
+                new int[] { 1, 0 }, new int[] { 0, 1 },
+                new int[] { 1, 1 }, new int[] { 1, -1 }
+            };
+
+            foreach (var dir in directions)
+            {
+                if (CountConsecutive(board, x, y, dir[0], dir[1], playerColor) == 4)
+                {
+                    if (IsValidOpenFourPattern(board, x, y, dir[0], dir[1], playerColor))
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        // 新增：检查是否形成冲四
+        public bool IsValidFourAtPosition(Board board, int x, int y, int playerColor)
+        {
+            int[][] directions = new int[][]
+            {
+                new int[] { 1, 0 }, new int[] { 0, 1 },
+                new int[] { 1, 1 }, new int[] { 1, -1 }
+            };
+
+            foreach (var dir in directions)
+            {
+                if (CountConsecutive(board, x, y, dir[0], dir[1], playerColor) == 4)
+                {
+                    if (IsValidFourPattern(board, x, y, dir[0], dir[1], playerColor))
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        // 新增：检查是否形成活三
+        public bool IsValidOpenThreeAtPosition(Board board, int x, int y, int playerColor)
+        {
+            int[][] directions = new int[][]
+            {
+                new int[] { 1, 0 }, new int[] { 0, 1 },
+                new int[] { 1, 1 }, new int[] { 1, -1 }
+            };
+
+            foreach (var dir in directions)
+            {
+                if (CountConsecutive(board, x, y, dir[0], dir[1], playerColor) == 3)
+                {
+                    if (IsValidOpenThreePattern(board, x, y, dir[0], dir[1], playerColor))
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        // 新增：检查是否形成眠三
+        private bool IsValidThreeAtPosition(Board board, int x, int y, int playerColor)
+        {
+            int[][] directions = new int[][]
+            {
+                new int[] { 1, 0 }, new int[] { 0, 1 },
+                new int[] { 1, 1 }, new int[] { 1, -1 }
+            };
+
+            foreach (var dir in directions)
+            {
+                if (CountConsecutive(board, x, y, dir[0], dir[1], playerColor) == 3)
+                {
+                    if (IsValidThreePattern(board, x, y, dir[0], dir[1], playerColor))
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        // 新增：检查是否形成活四
+        public bool HasOpenFour(Board board, int x, int y, int playerColor)
+        {
+            int[][] directions = new int[][]
+            {
+                new int[] { 1, 0 }, new int[] { 0, 1 },
+                new int[] { 1, 1 }, new int[] { 1, -1 }
+            };
+
+            foreach (var dir in directions)
+            {
+                int count = CountConsecutive(board, x, y, dir[0], dir[1], playerColor);
+                bool leftOpen = IsOpenEnd(board, x, y, -dir[0], -dir[1], playerColor);
+                bool rightOpen = IsOpenEnd(board, x, y, dir[0], dir[1], playerColor);
+
+                if (count == 4 && leftOpen && rightOpen)
+                    return true;
+            }
+            return false;
+        }
+
+        // 新增：检查是否形成冲四
+        public bool HasFour(Board board, int x, int y, int playerColor)
+        {
+            int[][] directions = new int[][]
+            {
+                new int[] { 1, 0 }, new int[] { 0, 1 },
+                new int[] { 1, 1 }, new int[] { 1, -1 }
+            };
+
+            foreach (var dir in directions)
+            {
+                int count = CountConsecutive(board, x, y, dir[0], dir[1], playerColor);
+                bool leftOpen = IsOpenEnd(board, x, y, -dir[0], -dir[1], playerColor);
+                bool rightOpen = IsOpenEnd(board, x, y, dir[0], dir[1], playerColor);
+
+                if (count == 4 && (leftOpen || rightOpen))
+                    return true;
+            }
+            return false;
+        }
+
+        // 新增：检查是否形成活三
+        public bool HasOpenThree(Board board, int x, int y, int playerColor)
+        {
+            int[][] directions = new int[][]
+            {
+                new int[] { 1, 0 }, new int[] { 0, 1 },
+                new int[] { 1, 1 }, new int[] { 1, -1 }
+            };
+
+            foreach (var dir in directions)
+            {
+                int count = CountConsecutive(board, x, y, dir[0], dir[1], playerColor);
+                bool leftOpen = IsOpenEnd(board, x, y, -dir[0], -dir[1], playerColor);
+                bool rightOpen = IsOpenEnd(board, x, y, dir[0], dir[1], playerColor);
+
+                if (count == 3 && leftOpen && rightOpen)
+                    return true;
+            }
+            return false;
+        }
+
+        // 新增：检查是否形成眠三
+        private bool HasThree(Board board, int x, int y, int playerColor)
+        {
+            int[][] directions = new int[][]
+            {
+                new int[] { 1, 0 }, new int[] { 0, 1 },
+                new int[] { 1, 1 }, new int[] { 1, -1 }
+            };
+
+            foreach (var dir in directions)
+            {
+                int count = CountConsecutive(board, x, y, dir[0], dir[1], playerColor);
+                bool leftOpen = IsOpenEnd(board, x, y, -dir[0], -dir[1], playerColor);
+                bool rightOpen = IsOpenEnd(board, x, y, dir[0], dir[1], playerColor);
+
+                if (count == 3 && (leftOpen || rightOpen))
+                    return true;
+            }
+            return false;
         }
 
         // 重置地雷概率数组
@@ -407,6 +675,7 @@ namespace ChessGame.AI
                    board.GetCell(nx, ny) == PlayerColor.None;
         }
 
+
         // 新增：判断是否是序列的起始点
         private bool IsStartOfSequence(Board board, int x, int y, int dx, int dy, int playerColor)
         {
@@ -467,35 +736,48 @@ namespace ChessGame.AI
             return score;
         }
 
-        // 新增：综合评估落子
+        // 新增：综合评估落子（使用有效棋型）
         public (double score, double winRate, double confidence) EvaluateMoveComprehensive(Board board, MineMap mineMap, int x, int y, int playerColor)
         {
-            // 1. 计算传统评分
-            double rawScore = EvaluateMoveHeuristic(board, mineMap, x, y, playerColor);
+            // 检查是否是禁手位置
+            if (playerColor == 1 && IsForbiddenMove(board, x, y, playerColor))
+            {
+                return (double.MinValue, 0.0, 1.0);
+            }
 
-            // 如果是禁手位置，直接返回最低分数
-            if (rawScore == double.MinValue)
-                return (double.MinValue, 0.01, 1.0);
-
-            // 2. 模拟落子后计算胜率
+            // 模拟落子
             Board tempBoard = board.Clone();
             tempBoard.SetCell(x, y, (PlayerColor)playerColor);
 
-            if (WillExplodeMine(mineMap, x, y))
+            // 检查是否会爆炸
+            bool willExplode = WillExplodeMine(mineMap, x, y);
+            if (willExplode)
             {
                 (tempBoard, _) = SimulateExplosion(tempBoard, x, y, playerColor);
             }
 
+            // 计算基础评分（使用有效棋型评估）
+            double baseScore = EvaluateValidPatternScore(tempBoard, x, y, playerColor);
+
+            // 计算胜率（使用修正后的胜率计算）
             double winRate = CalculateWinProbability(tempBoard, mineMap, playerColor);
 
-            // 3. 计算置信度（基于局面复杂度）
-            double confidence = CalculateConfidence(tempBoard, mineMap);
+            // 计算置信度
+            double confidence = CalculateConfidence(tempBoard, mineMap, x, y);
 
-            return (rawScore, winRate, confidence);
+            // 地雷风险调整
+            if (willExplode)
+            {
+                baseScore *= 0.7; // 降低爆炸位置的评分
+                confidence *= 0.8; // 降低置信度
+            }
+
+            return (baseScore, winRate, confidence);
         }
 
+
         // 新增：计算决策置信度
-        private double CalculateConfidence(Board board, MineMap mineMap)
+        private double CalculateConfidence(Board board, MineMap mineMap, int x, int y)
         {
             int totalPieces = 0;
             int criticalShapes = 0; // 活四、冲四等关键棋型数量
@@ -541,15 +823,406 @@ namespace ChessGame.AI
             foreach (var dir in directions)
             {
                 int count = CountConsecutive(board, x, y, dir[0], dir[1], playerColor);
-                bool leftOpen = IsOpenEnd(board, x, y, -dir[0], -dir[1], playerColor);
-                bool rightOpen = IsOpenEnd(board, x, y, dir[0], dir[1], playerColor);
 
-                // 检查是否是活四、冲四、活三
-                if (count >= 4 || (count == 3 && (leftOpen && rightOpen)))
+                // 只检查有效的关键棋型
+                if (count >= 4)
+                {
+                    if (IsValidFourPattern(board, x, y, dir[0], dir[1], playerColor))
+                        return true;
+                }
+                else if (count == 3)
+                {
+                    if (IsValidOpenThreePattern(board, x, y, dir[0], dir[1], playerColor))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+
+        // 评估特定位置落子的棋型分数
+        private double EvaluateValidShapeScore(Board board, int x, int y, int playerColor)
+        {
+            double score = 0;
+
+            // 四个方向：水平、垂直、右斜、左斜
+            int[][] directions = new int[][]
+            {
+                new int[] { 1, 0 },  // 水平
+                new int[] { 0, 1 },  // 垂直
+                new int[] { 1, 1 },  // 右斜
+                new int[] { 1, -1 }  // 左斜
+            };
+
+            foreach (var dir in directions)
+            {
+                // 分析该方向的有效棋型
+                double shapeScore = EvaluateValidDirectionShape(board, x, y, dir[0], dir[1], playerColor);
+                score += shapeScore;
+            }
+
+            return score;
+        }
+
+        // 评估一个方向的棋型
+        private double EvaluateValidDirectionShape(Board board, int x, int y, int dx, int dy, int playerColor)
+        {
+            // 计算连续棋子数
+            int count = CountConsecutive(board, x, y, dx, dy, playerColor);
+
+            // 根据连子数评分，但只给有效棋型打分
+            if (count >= 5) return FIVE_IN_A_ROW;
+
+            if (count == 4)
+            {
+                if (IsValidOpenFourPattern(board, x, y, dx, dy, playerColor))
+                    return OPEN_FOUR;
+                else if (IsValidFourPattern(board, x, y, dx, dy, playerColor))
+                    return FOUR;
+                else
+                    return 50; // 被完全阻挡的四子给低分
+            }
+
+            if (count == 3)
+            {
+                if (IsValidOpenThreePattern(board, x, y, dx, dy, playerColor))
+                    return OPEN_THREE;
+                else if (IsValidThreePattern(board, x, y, dx, dy, playerColor))
+                    return THREE;
+                else
+                    return 20; // 被完全阻挡的三子给低分
+            }
+
+            if (count == 2)
+            {
+                // 检查两端是否为开放状态
+                bool leftOpen = IsOpenEnd(board, x, y, -dx, -dy, playerColor);
+                bool rightOpen = IsOpenEnd(board, x, y, dx, dy, playerColor);
+
+                if (leftOpen && rightOpen) return OPEN_TWO;
+                if (leftOpen || rightOpen) return TWO;
+            }
+
+            return 0;
+        }
+
+        // 新增：评估有效棋型的分数
+        private double EvaluateValidPatternScore(Board board, int x, int y, int playerColor)
+        {
+            double score = 0;
+
+            // 四个方向
+            int[][] directions = new int[][]
+            {
+                new int[] { 1, 0 }, new int[] { 0, 1 },
+                new int[] { 1, 1 }, new int[] { 1, -1 }
+            };
+
+            foreach (var dir in directions)
+            {
+                int count = CountConsecutive(board, x, y, dir[0], dir[1], playerColor);
+
+                if (count >= 2)
+                {
+                    // 检查这个连珠是否有效（不被完全阻挡）
+                    if (IsValidPattern(board, x, y, dir[0], dir[1], playerColor, count))
+                    {
+                        switch (count)
+                        {
+                            case 2:
+                                score += 10;
+                                break;
+                            case 3:
+                                // 只有真正的活三才给高分
+                                if (IsValidOpenThreePattern(board, x, y, dir[0], dir[1], playerColor))
+                                    score += 100;
+                                else
+                                    score += 20; // 被阻挡的三子给低分
+                                break;
+                            case 4:
+                                // 只有真正的活四或冲四才给高分
+                                if (IsValidFourPattern(board, x, y, dir[0], dir[1], playerColor))
+                                    score += 1000;
+                                else
+                                    score += 50; // 被完全阻挡的四子给低分
+                                break;
+                            case 5:
+                                score += 10000; // 五子连珠
+                                break;
+                        }
+                    }
+                }
+            }
+
+            return score;
+        }
+
+        // 新增：检查棋型是否有效（不被完全阻挡）
+        private bool IsValidPattern(Board board, int x, int y, int dx, int dy, int playerColor, int count)
+        {
+            if (count >= 5) return true; // 五子连珠总是有效的
+
+            // 找到连珠的两端
+            var (leftEnd, rightEnd) = FindPatternEnds(board, x, y, dx, dy, playerColor, count);
+
+            // 检查两端是否至少有一端可以扩展
+            bool leftCanExtend = CanExtendAtPosition(board, leftEnd.x - dx, leftEnd.y - dy);
+            bool rightCanExtend = CanExtendAtPosition(board, rightEnd.x + dx, rightEnd.y + dy);
+
+            return leftCanExtend || rightCanExtend;
+        }
+
+        // 新增：检查是否是有效的活三棋型
+        private bool IsValidOpenThreePattern(Board board, int x, int y, int dx, int dy, int playerColor)
+        {
+            var (leftEnd, rightEnd) = FindPatternEnds(board, x, y, dx, dy, playerColor, 3);
+
+            // 活三需要两端都可以扩展
+            bool leftCanExtend = CanExtendAtPosition(board, leftEnd.x - dx, leftEnd.y - dy);
+            bool rightCanExtend = CanExtendAtPosition(board, rightEnd.x + dx, rightEnd.y + dy);
+
+            if (!leftCanExtend || !rightCanExtend) return false;
+
+            // 进一步检查扩展后是否能形成活四
+            return CanFormOpenFourFromThree(board, x, y, dx, dy, playerColor);
+        }
+
+        // 新增：检查是否是有效的四子棋型
+        private bool IsValidFourPattern(Board board, int x, int y, int dx, int dy, int playerColor)
+        {
+            var (leftEnd, rightEnd) = FindPatternEnds(board, x, y, dx, dy, playerColor, 4);
+
+            // 四子至少需要一端可以扩展成五
+            bool leftCanExtend = CanExtendAtPosition(board, leftEnd.x - dx, leftEnd.y - dy);
+            bool rightCanExtend = CanExtendAtPosition(board, rightEnd.x + dx, rightEnd.y + dy);
+
+            return leftCanExtend || rightCanExtend;
+        }
+
+        // 新增：检查是否是有效的三子棋型
+        private bool IsValidThreePattern(Board board, int x, int y, int dx, int dy, int playerColor)
+        {
+            var (leftEnd, rightEnd) = FindPatternEnds(board, x, y, dx, dy, playerColor, 3);
+
+            // 三子至少需要一端可以扩展
+            bool leftCanExtend = CanExtendAtPosition(board, leftEnd.x - dx, leftEnd.y - dy);
+            bool rightCanExtend = CanExtendAtPosition(board, rightEnd.x + dx, rightEnd.y + dy);
+
+            return leftCanExtend || rightCanExtend;
+        }
+
+        // 新增：检查是否是有效的活四棋型
+        private bool IsValidOpenFourPattern(Board board, int x, int y, int dx, int dy, int playerColor)
+        {
+            var (leftEnd, rightEnd) = FindPatternEnds(board, x, y, dx, dy, playerColor, 4);
+
+            // 活四需要两端都可以扩展成五
+            bool leftCanExtend = CanExtendAtPosition(board, leftEnd.x - dx, leftEnd.y - dy);
+            bool rightCanExtend = CanExtendAtPosition(board, rightEnd.x + dx, rightEnd.y + dy);
+
+            return leftCanExtend && rightCanExtend;
+        }
+
+        // 新增：检查三子是否能形成活四
+        private bool CanFormOpenFourFromThree(Board board, int x, int y, int dx, int dy, int playerColor)
+        {
+            var (leftEnd, rightEnd) = FindPatternEnds(board, x, y, dx, dy, playerColor, 3);
+
+            // 检查左端扩展
+            int leftExtX = leftEnd.x - dx;
+            int leftExtY = leftEnd.y - dy;
+            if (CanExtendAtPosition(board, leftExtX, leftExtY))
+            {
+                // 模拟扩展，检查是否能形成活四
+                Board tempBoard = board.Clone();
+                tempBoard.SetCell(leftExtX, leftExtY, (PlayerColor)playerColor);
+                if (IsValidFourPattern(tempBoard, leftExtX, leftExtY, dx, dy, playerColor))
+                    return true;
+            }
+
+            // 检查右端扩展
+            int rightExtX = rightEnd.x + dx;
+            int rightExtY = rightEnd.y + dy;
+            if (CanExtendAtPosition(board, rightExtX, rightExtY))
+            {
+                // 模拟扩展，检查是否能形成活四
+                Board tempBoard = board.Clone();
+                tempBoard.SetCell(rightExtX, rightExtY, (PlayerColor)playerColor);
+                if (IsValidFourPattern(tempBoard, rightExtX, rightExtY, dx, dy, playerColor))
                     return true;
             }
 
             return false;
+        }
+
+        // 新增：找到棋型的两端
+        private ((int x, int y) leftEnd, (int x, int y) rightEnd) FindPatternEnds(Board board, int x, int y, int dx, int dy, int playerColor, int expectedCount)
+        {
+            PlayerColor color = playerColor == 1 ? PlayerColor.Black : PlayerColor.White;
+
+            int leftX = x, leftY = y;
+            int rightX = x, rightY = y;
+
+            // 向左找边界
+            for (int i = 1; i < expectedCount; i++)
+            {
+                int nx = x - i * dx;
+                int ny = y - i * dy;
+
+                if (IsValidPosition(nx, ny) && board.GetCell(nx, ny) == color)
+                {
+                    leftX = nx;
+                    leftY = ny;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            // 向右找边界
+            for (int i = 1; i < expectedCount; i++)
+            {
+                int nx = x + i * dx;
+                int ny = y + i * dy;
+
+                if (IsValidPosition(nx, ny) && board.GetCell(nx, ny) == color)
+                {
+                    rightX = nx;
+                    rightY = ny;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return ((leftX, leftY), (rightX, rightY));
+        }
+
+        // 新增：检查位置是否可以扩展
+        private bool CanExtendAtPosition(Board board, int x, int y)
+        {
+            return IsValidPosition(x, y) && board.GetCell(x, y) == PlayerColor.None;
+        }
+
+        // 新增：检查位置是否有效
+        private bool IsValidPosition(int x, int y)
+        {
+            return x >= 0 && x < boardSize && y >= 0 && y < boardSize;
+        }
+
+        // 新增：计算有效的活四数量
+        private int CountValidOpenFours(Board board, int playerColor)
+        {
+            int count = 0;
+            PlayerColor color = playerColor == 1 ? PlayerColor.Black : PlayerColor.White;
+
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board.GetCell(i, j) == color)
+                    {
+                        // 检查四个方向
+                        int[][] directions = new int[][]
+                        {
+                            new int[] { 1, 0 }, new int[] { 0, 1 },
+                            new int[] { 1, 1 }, new int[] { 1, -1 }
+                        };
+
+                        foreach (var dir in directions)
+                        {
+                            if (CountConsecutive(board, i, j, dir[0], dir[1], playerColor) == 4)
+                            {
+                                if (IsValidOpenFourPattern(board, i, j, dir[0], dir[1], playerColor))
+                                {
+                                    count++;
+                                    break; // 避免重复计算同一个四子
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return count / 4; // 每个活四会被计算4次，所以除以4
+        }
+
+        // 新增：计算有效的冲四数量
+        private int CountValidFours(Board board, int playerColor)
+        {
+            int count = 0;
+            PlayerColor color = playerColor == 1 ? PlayerColor.Black : PlayerColor.White;
+
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board.GetCell(i, j) == color)
+                    {
+                        // 检查四个方向
+                        int[][] directions = new int[][]
+                        {
+                            new int[] { 1, 0 }, new int[] { 0, 1 },
+                            new int[] { 1, 1 }, new int[] { 1, -1 }
+                        };
+
+                        foreach (var dir in directions)
+                        {
+                            if (CountConsecutive(board, i, j, dir[0], dir[1], playerColor) == 4)
+                            {
+                                if (IsValidFourPattern(board, i, j, dir[0], dir[1], playerColor) &&
+                                    !IsValidOpenFourPattern(board, i, j, dir[0], dir[1], playerColor))
+                                {
+                                    count++;
+                                    break; // 避免重复计算同一个四子
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return count / 4; // 每个冲四会被计算4次，所以除以4
+        }
+
+        // 新增：计算有效的活三数量
+        private int CountValidOpenThrees(Board board, int playerColor)
+        {
+            int count = 0;
+            PlayerColor color = playerColor == 1 ? PlayerColor.Black : PlayerColor.White;
+
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board.GetCell(i, j) == color)
+                    {
+                        // 检查四个方向
+                        int[][] directions = new int[][]
+                        {
+                            new int[] { 1, 0 }, new int[] { 0, 1 },
+                            new int[] { 1, 1 }, new int[] { 1, -1 }
+                        };
+
+                        foreach (var dir in directions)
+                        {
+                            if (CountConsecutive(board, i, j, dir[0], dir[1], playerColor) == 3)
+                            {
+                                if (IsValidOpenThreePattern(board, i, j, dir[0], dir[1], playerColor))
+                                {
+                                    count++;
+                                    break; // 避免重复计算同一个三子
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return count / 3; // 每个活三会被计算3次，所以除以3
         }
 
         // 评估特定位置落子的棋型分数
@@ -703,6 +1376,7 @@ namespace ChessGame.AI
 
             return false;
         }
+       
         // 添加一个获取随机合法落子的方法
         public (int x, int y) GetRandomLegalMove(Board board, int playerColor)
         {
@@ -858,68 +1532,203 @@ namespace ChessGame.AI
             return moves;
         }
 
-        //// 计算当前局面对指定玩家的胜率估计
-        //public double CalculateWinProbability(Board board, MineMap mineMap, int playerColor)
-        //{
-        //    int totalScore = EvaluateBoard(board, mineMap, playerColor);
-
-        //    // 使用sigmoid函数将评分转换为0-1之间的胜率
-        //    double winProbability = 1.0 / (1.0 + Math.Exp(-totalScore * 0.0001));
-
-        //    return winProbability;
-        //}
-
         // 改进的胜率计算方法
         public double CalculateWinProbability(Board board, MineMap mineMap, int playerColor)
         {
-            // 清除缓存如果棋盘或玩家颜色发生变化
-            if (lastCachedBoard == null || !board.Equals(lastCachedBoard) || lastCacheColor != playerColor)
-            {
-                myShapesCache.Clear();
-                opponentShapesCache.Clear();
-                lastCachedBoard = board.Clone();
-                lastCacheColor = playerColor;
-            }
-
-            int opponentColor = playerColor == 1 ? 2 : 1;
-
-            // 1. 检查即时胜负
+            // 检查游戏是否已结束
             if (IsGameOver(board))
             {
-                // 检查谁获胜
-                if (HasPlayerWon(board, playerColor))
-                    return 1.0; // 我方获胜
-                else if (HasPlayerWon(board, opponentColor))
-                    return 0.0; // 对方获胜
-                else
-                    return 0.5; // 平局
+                var winner = GetWinner(board);
+                if (winner == playerColor) return 1.0;
+                if (winner != 0) return 0.0;
+                return 0.5; // 平局
             }
 
-            // 2. 统计棋型
-            var myShapes = CountAllShapes(board, playerColor);
-            var opponentShapes = CountAllShapes(board, opponentColor);
+            // 计算双方的有效威胁数量
+            double myScore = CalculateValidPositionalScore(board, playerColor);
+            double opponentScore = CalculateValidPositionalScore(board, playerColor == 1 ? 2 : 1);
 
-            // 3. 计算基础评分
-            double myScore = CalculateShapeScore(myShapes);
-            double opponentScore = CalculateShapeScore(opponentShapes);
+            // 检查是否有必胜点
+            if (HasWinningMove(board, playerColor, out _))
+                return 0.95; // 几乎必胜，但留一点余地
 
-            // 4. 考虑威胁和机会
-            double threatBonus = CalculateThreatBonus(myShapes, opponentShapes);
-            double positionBonus = CalculatePositionBonus(board, playerColor);
-            double mineRisk = CalculateMineRisk(board, mineMap, playerColor);
+            if (HasWinningMove(board, playerColor == 1 ? 2 : 1, out _))
+                return 0.05; // 几乎必败
 
-            // 5. 综合计算
-            double totalMyScore = myScore + threatBonus + positionBonus - mineRisk;
-            double totalOpponentScore = opponentScore;
+            // 检查有效的活四威胁
+            int myValidOpenFours = CountValidOpenFours(board, playerColor);
+            int opponentValidOpenFours = CountValidOpenFours(board, playerColor == 1 ? 2 : 1);
 
-            // 6. 转换为胜率
-            double scoreDiff = totalMyScore - totalOpponentScore;
+            if (myValidOpenFours > 0 && opponentValidOpenFours == 0)
+                return 0.9;
+            if (opponentValidOpenFours > 0 && myValidOpenFours == 0)
+                return 0.1;
 
-            // 使用改进的sigmoid函数
-            double winProbability = 1.0 / (1.0 + Math.Exp(-scoreDiff * 0.0002));
+            // 检查有效的冲四威胁
+            int myValidFours = CountValidFours(board, playerColor);
+            int opponentValidFours = CountValidFours(board, playerColor == 1 ? 2 : 1);
+
+            if (myValidFours > 0 && opponentValidFours == 0)
+                return 0.8;
+            if (opponentValidFours > 0 && myValidFours == 0)
+                return 0.2;
+
+            // 检查有效的活三威胁
+            int myValidOpenThrees = CountValidOpenThrees(board, playerColor);
+            int opponentValidOpenThrees = CountValidOpenThrees(board, playerColor == 1 ? 2 : 1);
+
+            // 基于有效威胁数量计算胜率
+            double threatAdvantage = (myValidOpenFours * 4 + myValidFours * 2 + myValidOpenThrees * 1) -
+                                   (opponentValidOpenFours * 4 + opponentValidFours * 2 + opponentValidOpenThrees * 1);
+
+            // 基于位置评分计算胜率
+            double scoreAdvantage = myScore - opponentScore;
+
+            // 综合威胁优势和位置优势
+            double totalAdvantage = threatAdvantage * 1000 + scoreAdvantage;
+
+            // 使用sigmoid函数将优势转换为胜率
+            double winRate = 1.0 / (1.0 + Math.Exp(-totalAdvantage / 5000.0));
 
             // 确保胜率在合理范围内
-            return Math.Max(0.01, Math.Min(0.99, winProbability));
+            return Math.Max(0.05, Math.Min(0.95, winRate));
+        }
+
+        // 新增：计算有效的位置评分（排除被阻挡的棋型）
+        private double CalculateValidPositionalScore(Board board, int playerColor)
+        {
+            double score = 0;
+            PlayerColor color = playerColor == 1 ? PlayerColor.Black : PlayerColor.White;
+
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board.GetCell(i, j) == color)
+                    {
+                        // 只计算有效棋型的分数
+                        score += EvaluateValidPatternScore(board, i, j, playerColor);
+                    }
+                }
+            }
+
+            return score;
+        }
+
+        // 新增：获取获胜者
+        private int GetWinner(Board board)
+        {
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    PlayerColor stone = board.GetCell(i, j);
+                    if (stone != PlayerColor.None)
+                    {
+                        int playerColor = stone == PlayerColor.Black ? 1 : 2;
+                        if (HasFiveInARow(board, i, j, playerColor))
+                            return playerColor;
+                    }
+                }
+            }
+            return 0; // 没有获胜者
+        }
+
+        // 新增：计算单个玩家的综合评分
+        private double CalculatePlayerTotalScore(Board board, MineMap mineMap, int playerColor)
+        {
+            // 1. 统计棋型
+            var shapes = CountAllShapes(board, playerColor);
+
+            // 2. 计算基础棋型评分
+            double shapeScore = CalculateShapeScore(shapes);
+
+            // 3. 计算位置优势
+            double positionScore = CalculatePositionBonus(board, playerColor);
+
+            // 4. 计算地雷风险（负分）
+            double mineRisk = CalculateMineRisk(board, mineMap, playerColor);
+
+            // 5. 计算威胁和机会评分
+            double threatScore = CalculateIndividualThreatScore(shapes);
+
+            // 6. 计算连接性评分（棋子之间的配合）
+            double connectivityScore = CalculateConnectivityScore(board, playerColor);
+
+            // 7. 综合评分，使用权重
+            double totalScore = shapeScore * 1.0 +           // 棋型权重最高
+                               threatScore * 1.2 +           // 威胁评分权重较高
+                               positionScore * 0.3 +         // 位置评分权重较低
+                               connectivityScore * 0.5 -     // 连接性评分
+                               mineRisk * 0.8;               // 地雷风险
+
+            // 确保评分为正数（用于相对比较）
+            return Math.Max(1.0, totalScore + 1000); // 加基础分确保为正
+        }
+
+        // 新增：计算个体威胁评分（不依赖对手）
+        private double CalculateIndividualThreatScore(Dictionary<string, int> shapes)
+        {
+            double score = 0;
+
+            // 根据棋型的威胁程度给分
+            score += shapes["five"] * 10000;        // 已经获胜
+            score += shapes["open_four"] * 5000;    // 必胜威胁
+            score += shapes["four"] * 1000;         // 强威胁
+            score += shapes["open_three"] * 800;    // 中等威胁
+            score += shapes["three"] * 200;         // 轻微威胁
+
+            // 多重威胁的组合奖励
+            if (shapes["open_three"] >= 2)
+                score += 2000; // 双活三
+
+            if (shapes["four"] >= 2)
+                score += 3000; // 双冲四
+
+            if (shapes["open_four"] >= 1)
+                score += 8000; // 活四几乎必胜
+
+            return score;
+        }
+
+        // 新增：计算棋子连接性评分
+        private double CalculateConnectivityScore(Board board, int playerColor)
+        {
+            double score = 0;
+            PlayerColor color = playerColor == 1 ? PlayerColor.Black : PlayerColor.White;
+
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board.GetCell(i, j) == color)
+                    {
+                        // 检查周围8个方向的友方棋子
+                        int friendlyNeighbors = 0;
+                        for (int dx = -1; dx <= 1; dx++)
+                        {
+                            for (int dy = -1; dy <= 1; dy++)
+                            {
+                                if (dx == 0 && dy == 0) continue;
+
+                                int nx = i + dx;
+                                int ny = j + dy;
+
+                                if (nx >= 0 && nx < boardSize && ny >= 0 && ny < boardSize &&
+                                    board.GetCell(nx, ny) == color)
+                                {
+                                    friendlyNeighbors++;
+                                }
+                            }
+                        }
+
+                        // 连接的棋子越多，评分越高
+                        score += friendlyNeighbors * 10;
+                    }
+                }
+            }
+
+            return score;
         }
 
         // 检查玩家是否获胜
@@ -1059,21 +1868,25 @@ namespace ChessGame.AI
         {
             double bonus = 0;
 
-            // 如果对手有活四，我方必须防守
+            // 防守评分：对手威胁越大，我方压力越大
             if (opponentShapes["open_four"] > 0)
-                bonus -= 5000;
+                bonus -= 8000; // 对手活四，极度危险
 
-            // 如果对手有多个冲四，危险
             if (opponentShapes["four"] > 1)
-                bonus -= 2000;
+                bonus -= 3000; // 对手多个冲四
 
-            // 如果我方有多个活三，优势很大
-            if (myShapes["open_three"] > 1)
-                bonus += 3000;
+            if (opponentShapes["open_three"] > 1)
+                bonus -= 1500; // 对手多个活三
 
-            // 如果我方有活四，几乎必胜
+            // 进攻评分：我方威胁越大，优势越大
             if (myShapes["open_four"] > 0)
-                bonus += 8000;
+                bonus += 10000; // 我方活四，几乎必胜
+
+            if (myShapes["four"] > 1)
+                bonus += 4000; // 我方多个冲四
+
+            if (myShapes["open_three"] > 1)
+                bonus += 2000; // 我方多个活三
 
             return bonus;
         }
@@ -1122,6 +1935,8 @@ namespace ChessGame.AI
 
             return risk;
         }
+
+
 
     }
 }
